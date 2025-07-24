@@ -1,23 +1,25 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import reactLogo from '../assesets/skills/react.png';
-import typeScriptLogo from '../assesets/skills/typescript.png';
-import javaScriptLogo from '../assesets/skills/javascript.png';
-import tailwindLogo from '../assesets/skills/tailwindcss.png';
-import viteLogo from '../assesets/skills/vite.png';
-import htmlLogo from '../assesets/skills/html5.png';
-import cssLogo from '../assesets/skills/css3.png';
-import gitLogo from '../assesets/skills/gitlogo.png';
-import dockerLogo from '../assesets/skills/dockermain.png';
-import awsLogo from '../assesets/skills/aws.png';
-import figmaLogo from '../assesets/skills/figma.png';
-import flaskLogo from '../assesets/skills/Flask.png';
-import pyLogo from '../assesets/skills/Python.png';
-import javaLogo from '../assesets/skills/Java.png'
-import mongoLogo from '../assesets/skills/MongoDB.png';
-import postgreLogo from '../assesets/skills/PostgresSQL.png';
-import redisLogo from '../assesets/skills/Redis.png';
+import type { Variants } from 'framer-motion';
+import reactLogo from '../assets/skills/react.png';
+import typeScriptLogo from '../assets/skills/typescript.png';
+import javaScriptLogo from '../assets/skills/javascript.png';
+import tailwindLogo from '../assets/skills/tailwindcss.png';
+import viteLogo from '../assets/skills/vite.png';
+import htmlLogo from '../assets/skills/html5.png';
+import cssLogo from '../assets/skills/css3.png';
+import gitLogo from '../assets/skills/gitlogo.png';
+import dockerLogo from '../assets/skills/dockermain.png';
+import awsLogo from '../assets/skills/aws.png';
+import figmaLogo from '../assets/skills/figma.png';
+import flaskLogo from '../assets/skills/Flask.png';
+import pyLogo from '../assets/skills/Python.png';
+import javaLogo from '../assets/skills/Java.png';
+import mongoLogo from '../assets/skills/MongoDB.png';
+import postgreLogo from '../assets/skills/PostgresSQL.png';
+import redisLogo from '../assets/skills/Redis.png';
+
 
 interface Skill {
   name: string;
@@ -90,60 +92,61 @@ const Skills: React.FC = () => {
     : skillData.filter((skill) => skill.category === activeCategory);
 
   // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
+  const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
-  };
+  },
+};
 
-  const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 30,
-      scale: 0.9,
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.9,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+      duration: 0.6,
     },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-        duration: 0.6,
-      },
-    },
-  };
+  },
+};
 
-  const cardHoverVariants = {
-    hover: {
-      scale: 1.05,
-      y: -8,
-      rotateY: 5,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-      },
+const cardHoverVariants: Variants = {
+  hover: {
+    scale: 1.05,
+    y: -8,
+    rotateY: 5,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20,
     },
-  };
+  },
+};
 
-  const iconVariants = {
-    hover: {
-      scale: 1.15,
-      rotate: [0, -5, 5, 0],
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10,
-      },
+const iconVariants: Variants = {
+  hover: {
+    scale: 1.15,
+    rotate: [0, -5, 5, 0],
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 10,
     },
-  };
+  },
+};
+
 
   return (
     <section id="skills" ref={sectionRef} className="scroll-my-24 py-16 sm:py-20 lg:py-24 px-4 max-w-7xl mx-auto">

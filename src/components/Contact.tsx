@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, ExternalLink } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import Lottie from "lottie-react";
-import animationData from "../assesets/animations/buy-online.json";
+import animationData from "../assets/animations/buy-online.json";
 import { FaXTwitter } from 'react-icons/fa6'; // 
 
 const Contact: React.FC = () => {

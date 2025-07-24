@@ -1,8 +1,9 @@
 // src/components/NotFound.tsx
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-import animation404 from '../assesets/animations/Error404.json';
+import animation404 from '../assets/animations/Error404.json';
 export const NotFound = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-slate-50 px-4 text-center">

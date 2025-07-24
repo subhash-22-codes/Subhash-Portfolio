@@ -3,111 +3,105 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Download, ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import Lottie from 'lottie-react';
-import animationData from '../assesets/animations/Animation.json';
+import animationData from '../assets/animations/Animation.json';
  // adjust path as needed
+import type { Variants } from 'framer-motion';
 
 // Motion variants for different animations
-const motionVariants = {
-  // Slide from right for name
-  slideFromRight: {
-    hidden: { 
-      opacity: 0, 
-      x: 100,
-      filter: 'blur(4px)'
-    },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      filter: 'blur(0px)',
-      transition: { 
-        duration: 0.8, 
-        ease: [0.25, 0.1, 0.25, 1],
-        delay: 0.2
-      } 
-    }
+const slideFromRight: Variants = {
+  hidden: { 
+    opacity: 0, 
+    x: 100,
+    filter: 'blur(4px)'
   },
-
-  // Fade in up for other content
-  fadeInUp: {
-    hidden: { 
-      opacity: 0, 
-      y: 30,
-      filter: 'blur(2px)'
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      filter: 'blur(0px)',
-      transition: { 
-        duration: 0.6, 
-        ease: [0.25, 0.1, 0.25, 1] 
-      } 
-    }
-  },
-
-  // Bubbly pop animation for social icons
-  bubblePop: {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.3,
-      y: 20
-    },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      y: 0,
-      transition: { 
-        type: "spring",
-        stiffness: 400,
-        damping: 20,
-        mass: 0.8
-      } 
-    }
-  },
-
-  // Stagger container
-  staggerContainer: {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { 
-        staggerChildren: 0.15, 
-        delayChildren: 0.3 
-      } 
-    }
-  },
-
-  // Social icons stagger container
-  socialStagger: {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { 
-        staggerChildren: 0.2, 
-        delayChildren: 1.2 
-      } 
-    }
-  },
-
-  // Image container animation
-  imageReveal: {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.8,
-      rotateY: -20
-    },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      rotateY: 0,
-      transition: { 
-        duration: 1,
-        ease: [0.25, 0.1, 0.25, 1],
-        delay: 0.5
-      } 
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    filter: 'blur(0px)',
+    transition: { 
+      duration: 0.8, 
+      ease: [0.25, 0.1, 0.25, 1],
+      delay: 0.2
     }
   }
 };
+
+const fadeInUp: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30,
+    filter: 'blur(2px)'
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { 
+      duration: 0.6, 
+      ease: [0.25, 0.1, 0.25, 1] 
+    }
+  }
+};
+
+const bubblePop: Variants = {
+  hidden: { 
+    opacity: 0, 
+    scale: 0.3,
+    y: 20
+  },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    y: 0,
+    transition: { 
+      type: "spring",
+      stiffness: 400,
+      damping: 20,
+      mass: 0.8
+    }
+  }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1, 
+    transition: { 
+      staggerChildren: 0.15, 
+      delayChildren: 0.3 
+    }
+  }
+};
+
+const socialStagger: Variants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1, 
+    transition: { 
+      staggerChildren: 0.2, 
+      delayChildren: 1.2 
+    }
+  }
+};
+
+const imageReveal: Variants = {
+  hidden: { 
+    opacity: 0, 
+    scale: 0.8,
+    rotateY: -20
+  },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    rotateY: 0,
+    transition: { 
+      duration: 1,
+      ease: [0.25, 0.1, 0.25, 1],
+      delay: 0.5
+    }
+  }
+};
+
 
 // Typing effect hook
 const useTypingEffect = (text: string, speed: number = 100, startDelay: number = 0) => {
@@ -248,14 +242,14 @@ const Hero: React.FC = () => {
           {/* Left side: Content */}
           <motion.div
             ref={contentRef}
-            variants={motionVariants.staggerContainer}
+            variants={staggerContainer}
             initial="hidden"
             animate={contentInView ? "visible" : "hidden"}
             className="text-center lg:text-left order-2 lg:order-1"
           >
             {/* Name - Slide from right */}
             <motion.div 
-              variants={motionVariants.slideFromRight}
+              variants={slideFromRight}
               className="mb-6"
             >
               <h1 className="font-montserrat font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-6 leading-tight tracking-tight">
@@ -265,7 +259,7 @@ const Hero: React.FC = () => {
 
             {/* Subtitle with typing effect */}
             <motion.div
-              variants={motionVariants.fadeInUp}
+              variants={fadeInUp}
               className="mb-8"
             >
               <p className="font-arvo text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-primary)] leading-relaxed">
@@ -289,7 +283,7 @@ const Hero: React.FC = () => {
 
             {/* Action buttons */}
             <motion.div
-              variants={motionVariants.fadeInUp}
+              variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start items-center mb-12"
             >
               <motion.button
@@ -324,7 +318,7 @@ const Hero: React.FC = () => {
 
             {/* Social icons - Bubbly animation */}
             <motion.div 
-              variants={motionVariants.socialStagger}
+              variants={socialStagger}
               initial="hidden"
               animate={contentInView ? "visible" : "hidden"}
               className="flex justify-center lg:justify-start gap-4 sm:gap-6"
@@ -335,7 +329,7 @@ const Hero: React.FC = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={motionVariants.bubblePop}
+                  variants={bubblePop}
                   className="p-3 sm:p-4 glass-card hover:bg-[var(--accent-primary)] hover:bg-opacity-10 transition-all duration-300 interactive group"
                   whileHover={{ 
                     scale: 1.1, 
@@ -355,7 +349,7 @@ const Hero: React.FC = () => {
 
 <div ref={imageRef} className="flex justify-center lg:justify-end order-1 lg:order-2">
   <motion.div
-    variants={motionVariants.imageReveal}
+    variants={imageReveal}
     initial="hidden"
     animate={imageInView ? "visible" : "hidden"}
     className="relative w-full max-w-[350px] sm:max-w-[400px] lg:max-w-[450px] aspect-square"

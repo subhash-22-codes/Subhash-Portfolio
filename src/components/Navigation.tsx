@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-
+import type { Variants } from 'framer-motion';
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -56,32 +56,47 @@ const Navigation: React.FC = () => {
     }
   }, []);
 
-  const transition = {
-    type: 'spring' as const,
-    stiffness: 200,
-    damping: 24,
-  };
+ const transition = {
+  type: 'spring' as const,
+  stiffness: 200,
+  damping: 24,
+};
 
-  const navVariants = {
-    hidden: { y: -80, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition },
-  };
+const navVariants: Variants = {
+  hidden: { y: -80, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition,
+  },
+};
 
-  const mobileMenuVariants = {
-    hidden: { opacity: 0, height: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      height: 'auto',
-      scale: 1,
-      transition: { duration: 0.3, ease: 'easeOut', staggerChildren: 0.05 },
+ const mobileMenuVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    height: 0,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    height: 'auto',
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: 'easeOut',
+      staggerChildren: 0.05,
     },
-    exit: {
-      opacity: 0,
-      height: 0,
-      scale: 0.95,
-      transition: { duration: 0.2, ease: 'easeInOut' },
+  },
+  exit: {
+    opacity: 0,
+    height: 0,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+      ease: 'easeInOut',
     },
-  };
+  },
+};
 
   return (
     <>
