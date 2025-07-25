@@ -9,7 +9,7 @@ interface Achievement {
   description: string;
   date: string;
   type: string;
-  icon: LucideIcon; // This supports icons like <Trophy />, <Award />
+  icon: LucideIcon; 
   color: string;
   qrCode: string;
 }
@@ -45,14 +45,14 @@ const Resume: React.FC = () => {
 
   const achievements = [
     {
-      title: 'Winner @ HackAPTS 2024',
-      description: 'First place in the annual hackathon for building an innovative AI-powered healthcare solution',
-      date: 'March 2024',
-      type: 'Hackathon',
-      icon: Trophy,
-      color: '#FFD700',
-      qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://hackathon-cert.example.com/2024-winner'
-    },
+  title: 'Winner @ HackAPTS 2025 - Top 1%',
+  description: 'Secured 3rd place out of 300+ participants in HackAPTS 2025, a premier state-level hackathon by GeeksforGeeks ANITS Chapter. Built an innovative AI-powered healthcare solution under the theme of real-world problem solving. Recognized for technical depth, feasibility, and creativity.',
+  date: 'January 2025',
+  type: 'Hackathon',
+  icon: Trophy,
+  color: '#FFD700',
+  qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://anits.pod.ai/pages/certificate/skgYfC'
+ },
     {
       title: 'CCNA Certified',
       description: 'Cisco Certified Network Associate - Routing and Switching',
