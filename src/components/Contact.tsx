@@ -77,7 +77,7 @@ const Contact: React.FC = () => {
     {
       icon: ExternalLink,
       label: 'Portfolio',
-      url: 'https://subhash.dev',
+      url: '',
       color: '#333333'
     }
   ];
