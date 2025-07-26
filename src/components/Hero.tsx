@@ -7,21 +7,18 @@ import animationData from '../assets/animations/Animation.json';
  // adjust path as needed
 import type { Variants } from 'framer-motion';
 
-// Motion variants for different animations
+// Simplified motion variants - minimal GPU usage
 const slideFromRight: Variants = {
   hidden: { 
     opacity: 0, 
-    x: 100,
-    filter: 'blur(4px)'
+    x: 50
   },
   visible: { 
     opacity: 1, 
     x: 0,
-    filter: 'blur(0px)',
     transition: { 
-      duration: 0.8, 
-      ease: [0.25, 0.1, 0.25, 1],
-      delay: 0.2
+      duration: 0.5, 
+      ease: "easeOut"
     }
   }
 };
@@ -29,35 +26,26 @@ const slideFromRight: Variants = {
 const fadeInUp: Variants = {
   hidden: { 
     opacity: 0, 
-    y: 30,
-    filter: 'blur(2px)'
-  },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { 
-      duration: 0.6, 
-      ease: [0.25, 0.1, 0.25, 1] 
-    }
-  }
-};
-
-const bubblePop: Variants = {
-  hidden: { 
-    opacity: 0, 
-    scale: 0.3,
     y: 20
   },
   visible: { 
     opacity: 1, 
-    scale: 1,
     y: 0,
     transition: { 
-      type: "spring",
-      stiffness: 400,
-      damping: 20,
-      mass: 0.8
+      duration: 0.4, 
+      ease: "easeOut"
+    }
+  }
+};
+
+const fadeIn: Variants = {
+  hidden: { 
+    opacity: 0
+  },
+  visible: { 
+    opacity: 1,
+    transition: { 
+      duration: 0.4
     }
   }
 };
@@ -67,8 +55,8 @@ const staggerContainer: Variants = {
   visible: { 
     opacity: 1, 
     transition: { 
-      staggerChildren: 0.15, 
-      delayChildren: 0.3 
+      staggerChildren: 0.1, 
+      delayChildren: 0.2 
     }
   }
 };
@@ -78,8 +66,8 @@ const socialStagger: Variants = {
   visible: { 
     opacity: 1, 
     transition: { 
-      staggerChildren: 0.2, 
-      delayChildren: 1.2 
+      staggerChildren: 0.1, 
+      delayChildren: 0.6 
     }
   }
 };
@@ -87,21 +75,17 @@ const socialStagger: Variants = {
 const imageReveal: Variants = {
   hidden: { 
     opacity: 0, 
-    scale: 0.8,
-    rotateY: -20
+    scale: 0.95
   },
   visible: { 
     opacity: 1, 
     scale: 1,
-    rotateY: 0,
     transition: { 
-      duration: 1,
-      ease: [0.25, 0.1, 0.25, 1],
-      delay: 0.5
+      duration: 0.6,
+      ease: "easeOut"
     }
   }
 };
-
 
 // Typing effect hook
 const useTypingEffect = (text: string, speed: number = 100, startDelay: number = 0) => {
@@ -142,24 +126,24 @@ const useTypingEffect = (text: string, speed: number = 100, startDelay: number =
 const Hero: React.FC = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ 
     threshold: 0.1, 
-    triggerOnce: false 
+    triggerOnce: true 
   });
   
   const { ref: contentRef, inView: contentInView } = useInView({ 
     threshold: 0.2, 
-    triggerOnce: false
+    triggerOnce: true
   });
   
   const { ref: imageRef, inView: imageInView } = useInView({ 
     threshold: 0.3, 
-    triggerOnce: false 
+    triggerOnce: true 
   });
 
   // Typing effect for subtitle
   const { displayText: typedSubtitle, isComplete } = useTypingEffect(
     'real apps that work.', 
     80, 
-    1000 // Start after 1 second
+    800 // Start after 0.8 second
   );
 
   const scrollToProjects = () => {
@@ -202,39 +186,11 @@ const Hero: React.FC = () => {
       ref={heroRef}
       id="hero"
       className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20"
-      style={{ 
-        contentVisibility: 'auto', 
-        containIntrinsicSize: '100vh',
-        contain: 'layout style paint'
-      }}
     >
-      {/* Performance-optimized background effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none will-change-transform">
-        <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-[var(--accent-primary)]/8 to-[var(--highlight)]/6 blur-3xl"
-          animate={heroInView ? {
-            scale: [1, 1.1, 1],
-            opacity: [0.8, 1, 0.8]
-          } : {}}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-[var(--highlight)]/6 to-[var(--accent-primary)]/8 blur-3xl"
-          animate={heroInView ? {
-            scale: [1, 1.2, 1],
-            opacity: [0.6, 0.9, 0.6]
-          } : {}}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-        />
+      {/* Simplified background effects - static gradients */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-[var(--accent-primary)]/6 to-[var(--highlight)]/4 blur-3xl opacity-70" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-[var(--highlight)]/4 to-[var(--accent-primary)]/6 blur-3xl opacity-60" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto">
@@ -267,11 +223,11 @@ const Hero: React.FC = () => {
                 <span className="gradient-text font-bold">
                   {typedSubtitle}
                   <motion.span
-                    animate={{ opacity: [1, 0, 1] }}
+                    animate={{ opacity: [1, 0] }}
                     transition={{
-                      duration: 1,
+                      duration: 0.8,
                       repeat: isComplete ? 0 : Infinity,
-                      ease: "easeInOut"
+                      repeatType: "reverse"
                     }}
                     className="ml-1"
                   >
@@ -288,11 +244,9 @@ const Hero: React.FC = () => {
             >
               <motion.button
                 onClick={scrollToProjects}
-                className="btn-primary font-poppins text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 interactive flex items-center gap-3 w-full sm:w-auto justify-center"
+                className="btn-primary font-poppins text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 interactive flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-200"
                 whileHover={{ 
-                  scale: 1.02, 
-                  y: -2,
-                  boxShadow: "0 8px 32px rgba(244, 223, 200, 0.4)"
+                  y: -1
                 }}
                 whileTap={{ scale: 0.98 }}
                 aria-label="View my work and projects"
@@ -303,10 +257,9 @@ const Hero: React.FC = () => {
 
               <motion.button
                 onClick={downloadResume}
-                className="btn-secondary font-poppins text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 interactive flex items-center gap-3 w-full sm:w-auto justify-center"
+                className="btn-secondary font-poppins text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 interactive flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-200"
                 whileHover={{ 
-                  scale: 1.02, 
-                  y: -2
+                  y: -1
                 }}
                 whileTap={{ scale: 0.98 }}
                 aria-label="Download my resume PDF"
@@ -316,7 +269,7 @@ const Hero: React.FC = () => {
               </motion.button>
             </motion.div>
 
-            {/* Social icons - Bubbly animation */}
+            {/* Social icons - Simple fade in */}
             <motion.div 
               variants={socialStagger}
               initial="hidden"
@@ -329,81 +282,75 @@ const Hero: React.FC = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={bubblePop}
-                  className="p-3 sm:p-4 glass-card hover:bg-[var(--accent-primary)] hover:bg-opacity-10 transition-all duration-300 interactive group"
+                  variants={fadeIn}
+                  className="p-3 sm:p-4 glass-card hover:bg-[var(--accent-primary)] hover:bg-opacity-10 transition-all duration-200 interactive group"
                   whileHover={{ 
-                    scale: 1.1, 
-                    y: -4,
-                    rotate: [0, -5, 5, 0],
-                    transition: { duration: 0.3 }
+                    y: -2
                   }}
-                  whileTap={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.95 }}
                   aria-label={ariaLabel}
                   tabIndex={0}
                 >
-                  <Icon size={24} className="text-[var(--highlight)] group-hover:text-black transition-colors duration-300" />
+                  <Icon size={24} className="text-[var(--highlight)] group-hover:text-black transition-colors duration-200" />
                 </motion.a>
               ))}
             </motion.div>
           </motion.div>
 
-<div ref={imageRef} className="flex justify-center lg:justify-end order-1 lg:order-2">
-  <motion.div
-    variants={imageReveal}
-    initial="hidden"
-    animate={imageInView ? "visible" : "hidden"}
-    className="relative w-full max-w-[350px] sm:max-w-[400px] lg:max-w-[450px] aspect-square"
-  >
-    {/* Glow effect */}
-    <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/20 to-[var(--highlight)]/15 rounded-full blur-2xl scale-110" />
-    
-    {/* Main container */}
-    <div className="relative glass-card p-4 sm:p-6 rounded-3xl overflow-hidden h-full">
-      <Suspense fallback={
-        <div className="w-full h-full bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--highlight)]/5 rounded-2xl animate-pulse" />
-      }>
-        <Lottie
-          animationData={animationData}
-          loop
-          autoplay
-          className="w-full h-full"
-        />
-      </Suspense>
-      
-      <motion.div 
-        className="absolute bottom-4 left-4 right-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={imageInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-      >
-      
-          <p className="text-sm font-poppins text-center gradient-text font-semibold">
-            Building the Future
-          </p>
-        
-      </motion.div>
-    </div>
-  </motion.div>
-</div>
-
+          <div ref={imageRef} className="flex justify-center lg:justify-end order-1 lg:order-2">
+            <motion.div
+              variants={imageReveal}
+              initial="hidden"
+              animate={imageInView ? "visible" : "hidden"}
+              className="relative w-full max-w-[350px] sm:max-w-[400px] lg:max-w-[450px] aspect-square"
+            >
+              {/* Simplified glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/15 to-[var(--highlight)]/10 rounded-full blur-2xl scale-110" />
+              
+              {/* Main container */}
+              <div className="relative glass-card p-4 sm:p-6 rounded-3xl overflow-hidden h-full">
+                <Suspense fallback={
+                  <div className="w-full h-full bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--highlight)]/5 rounded-2xl animate-pulse" />
+                }>
+                  <Lottie
+                    animationData={animationData}
+                    loop
+                    autoplay
+                    className="w-full h-full"
+                  />
+                </Suspense>
+                
+                <motion.div 
+                  className="absolute bottom-4 left-4 right-4"
+                  initial={{ opacity: 0 }}
+                  animate={imageInView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                >
+                  <p className="text-sm font-poppins text-center gradient-text font-semibold">
+                    Building the Future
+                  </p>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
+      {/* Simplified scroll indicator */}
       <motion.div
         className="hidden sm:flex absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0, y: 20 }}
-        animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ delay: 2, duration: 0.6 }}
+        initial={{ opacity: 0 }}
+        animate={heroInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ delay: 1, duration: 0.4 }}
       >
         <div className="w-6 h-10 border-2 border-[var(--highlight)] rounded-full flex justify-center relative">
           <motion.div
             className="w-1 h-3 bg-[var(--highlight)] rounded-full mt-2"
             animate={heroInView ? {
-              y: [0, 16, 0],
-              opacity: [1, 0.3, 1]
+              y: [0, 12, 0]
             } : {}}
             transition={{
-              duration: 2,
+              duration: 1.5,
               repeat: Infinity,
               ease: "easeInOut"
             }}
