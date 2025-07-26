@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #131D4F;
-  --bg-secondary: #1F1E3D;
+  --bg-primary: black;
+  --bg-secondary: black;
   --accent-primary: #F4DFC8;
   --text-primary: #FAF6F0;
   --highlight: #F4EAE0;

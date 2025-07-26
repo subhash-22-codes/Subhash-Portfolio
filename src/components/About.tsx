@@ -8,17 +8,17 @@ const About: React.FC = () => {
   // Use intersection observer for better performance
   const { ref: aboutRef, inView: aboutInView } = useInView({
     threshold: 0.1,
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   const { ref: contentRef, inView: contentInView } = useInView({
     threshold: 0.2,
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   const { ref: statsRef, inView: statsInView } = useInView({
     threshold: 0.3,
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   const stats = [
@@ -28,29 +28,66 @@ const About: React.FC = () => {
     { icon: Zap, number: '24/7', label: 'Problem Solver' },
   ];
 
+  // Minimal motion variants
   const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1],
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
     },
-  },
-};
+  };
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
+  const staggerContainer: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
     },
-  },
-};
+  };
 
+  const slideInLeft: Variants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const slideInRight: Variants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const statCardVariants: Variants = {
+    hidden: { opacity: 0, y: 10, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  };
 
   return (
     <section 
@@ -58,23 +95,10 @@ const staggerContainer: Variants = {
       id="about" 
       className="relative py-20 px-4 lg:py-32 overflow-hidden"
     >
-      {/* Simplified Background Elements */}
-      <div className="absolute inset-0 pointer-events-none will-change-transform">
-        <div
-          className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-[var(--accent-primary)]/4 to-transparent rounded-full blur-3xl"
-          style={{
-            animation: aboutInView ? 'float 18s ease-in-out infinite' : 'none',
-            transform: 'translateZ(0)',
-          }}
-        />
-        <div
-          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-bl from-[var(--highlight)]/3 to-transparent rounded-full blur-3xl"
-          style={{
-            animation: aboutInView ? 'float 22s ease-in-out infinite reverse' : 'none',
-            animationDelay: '4s',
-            transform: 'translateZ(0)',
-          }}
-        />
+      {/* Static Background Elements - No animation for better performance */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-[var(--accent-primary)]/6 to-transparent rounded-full blur-3xl opacity-70" />
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-bl from-[var(--highlight)]/4 to-transparent rounded-full blur-3xl opacity-60" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -98,92 +122,74 @@ const staggerContainer: Variants = {
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
           {/* Left Content */}
-          <div ref={contentRef} className="relative">
-            <div 
-              className="accent-card p-8 md:p-10 lg:p-12 relative overflow-hidden"
-              style={{
-                opacity: contentInView ? 1 : 0,
-                transform: contentInView ? 'translateX(0)' : 'translateX(-20px)',
-                transition: 'all 0.8s ease',
-              }}
-            >
-              {/* Subtle card background animation */}
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-white/2 to-transparent rounded-[20px]"
-                style={{
-                  opacity: contentInView ? 0.5 : 0,
-                  transition: 'opacity 2s ease 0.5s',
-                }}
-              />
+          <motion.div 
+            ref={contentRef}
+            variants={slideInLeft}
+            initial="hidden"
+            animate={contentInView ? "visible" : "hidden"}
+            className="relative"
+          >
+            <div className="accent-card p-8 md:p-10 lg:p-12 relative overflow-hidden">
+              {/* Subtle static background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/3 to-transparent rounded-[20px] opacity-50" />
               
               <div className="relative z-10">
-                <h3
+                <motion.h3
+                  variants={fadeInUp}
                   className="font-arvo font-bold text-2xl md:text-3xl lg:text-4xl mb-8 leading-tight"
-                  style={{
-                    opacity: contentInView ? 1 : 0,
-                    transform: contentInView ? 'translateY(0)' : 'translateY(15px)',
-                    transition: 'all 0.6s ease 0.2s',
-                  }}
                 >
                   Passionate Developer & Problem Solver
-                </h3>
+                </motion.h3>
                 
-                <div className="space-y-6 text-base md:text-lg lg:text-xl leading-relaxed">
+                <motion.div 
+                  variants={staggerContainer}
+                  className="space-y-6 text-base md:text-lg lg:text-xl leading-relaxed"
+                >
                   {[
                     "I'm a full-stack developer who enjoys crafting real, impactful applications. I take complex ideas and turn them into clean, functional, and user-friendly experiences.",
                     "My expertise lies in modern JavaScript frameworks, Python backends, and cloud infrastructure. I focus on writing clean, maintainable code and delivering solid UI/UX that actually makes sense.",
                     "Outside of work, I'm constantly exploring new technologies, contributing to open-source, and staying sharp through hands-on projects and community interactions."
                   ].map((text, index) => (
-                    <p
+                    <motion.p
                       key={index}
-                      style={{
-                        opacity: contentInView ? 1 : 0,
-                        transform: contentInView ? 'translateY(0)' : 'translateY(10px)',
-                        transition: `all 0.6s ease ${0.4 + index * 0.1}s`,
-                      }}
+                      variants={fadeInUp}
                     >
                       {text}
-                    </p>
+                    </motion.p>
                   ))}
-                </div>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Stats Grid */}
-          <div 
+          <motion.div 
             ref={statsRef}
+            variants={slideInRight}
+            initial="hidden"
+            animate={statsInView ? "visible" : "hidden"}
             className="grid grid-cols-2 gap-6 lg:gap-8"
-            style={{
-              opacity: statsInView ? 1 : 0,
-              transform: statsInView ? 'translateX(0)' : 'translateX(20px)',
-              transition: 'all 0.8s ease',
-            }}
           >
             {stats.map(({ icon: Icon, number, label }, index) => (
               <motion.div
                 key={label}
-                className="performance-card p-6 lg:p-8 text-center group cursor-pointer relative will-change-transform"
+                variants={statCardVariants}
+                custom={index}
+                className="performance-card p-6 lg:p-8 text-center group cursor-pointer relative transition-all duration-200"
                 whileHover={{
-                  scale: 1.02,
-                  y: -2,
+                  y: -3,
                   transition: { duration: 0.2, ease: "easeOut" },
                 }}
                 whileTap={{ scale: 0.98 }}
-                style={{
-                  opacity: statsInView ? 1 : 0,
-                  transform: statsInView ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.95)',
-                  transition: `all 0.6s ease ${0.2 + index * 0.1}s`,
-                }}
               >
-                {/* Hover gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/2 to-[var(--highlight)]/2 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Subtle hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/3 to-[var(--highlight)]/2 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                 
                 <div className="relative z-10">
                   <motion.div
                     whileHover={{ 
-                      rotate: [0, -3, 3, 0],
-                      transition: { duration: 0.4 }
+                      scale: 1.05,
+                      transition: { duration: 0.2 }
                     }}
                   >
                     <Icon
@@ -201,11 +207,11 @@ const staggerContainer: Variants = {
                   </div>
                 </div>
 
-                {/* Subtle border animation */}
-                <div className="absolute inset-0 rounded-[20px] border border-[var(--accent-primary)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Minimal border highlight */}
+                <div className="absolute inset-0 rounded-[20px] border border-[var(--accent-primary)]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
