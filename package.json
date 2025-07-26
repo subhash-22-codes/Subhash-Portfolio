@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
+    "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^10.16.16",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.344.0",
