@@ -1,150 +1,42 @@
-import React, { useState, useEffect, Suspense } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import { Download, ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import Lottie from 'lottie-react';
 import animationData from '../assets/animations/Animation.json';
- // adjust path as needed
-import type { Variants } from 'framer-motion';
-
-// Simplified motion variants - minimal GPU usage
-const slideFromRight: Variants = {
-  hidden: { 
-    opacity: 0, 
-    x: 50
-  },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: { 
-      duration: 0.5, 
-      ease: "easeOut"
-    }
-  }
-};
-
-const fadeInUp: Variants = {
-  hidden: { 
-    opacity: 0, 
-    y: 20
-  },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      duration: 0.4, 
-      ease: "easeOut"
-    }
-  }
-};
-
-const fadeIn: Variants = {
-  hidden: { 
-    opacity: 0
-  },
-  visible: { 
-    opacity: 1,
-    transition: { 
-      duration: 0.4
-    }
-  }
-};
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { 
-      staggerChildren: 0.1, 
-      delayChildren: 0.2 
-    }
-  }
-};
-
-const socialStagger: Variants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { 
-      staggerChildren: 0.1, 
-      delayChildren: 0.6 
-    }
-  }
-};
-
-const imageReveal: Variants = {
-  hidden: { 
-    opacity: 0, 
-    scale: 0.95
-  },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { 
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-};
-
-// Typing effect hook
-const useTypingEffect = (text: string, speed: number = 100, startDelay: number = 0) => {
-  const [displayText, setDisplayText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
-    
-    const startTyping = () => {
-      let i = 0;
-      const typeNextChar = () => {
-        if (i <= text.length) {
-          setDisplayText(text.slice(0, i));
-          i++;
-          timeout = setTimeout(typeNextChar, speed);
-        } else {
-          setIsComplete(true);
-        }
-      };
-      typeNextChar();
-    };
-
-    const startTimeout = setTimeout(startTyping, startDelay);
-    
-    return () => {
-      clearTimeout(timeout);
-      clearTimeout(startTimeout);
-    };
-  }, [text, speed, startDelay]);
-
-  return { displayText, isComplete };
-};
-
-// Lazy loading wrapper for the image placeholder
 
 const Hero: React.FC = () => {
-  const { ref: heroRef, inView: heroInView } = useInView({ 
-    threshold: 0.1, 
-    triggerOnce: true 
-  });
   
-  const { ref: contentRef, inView: contentInView } = useInView({ 
-    threshold: 0.2, 
-    triggerOnce: true
-  });
+  const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
   
-  const { ref: imageRef, inView: imageInView } = useInView({ 
-    threshold: 0.3, 
-    triggerOnce: true 
-  });
+  // Parallax effects
+  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  
+  // Mouse tracking
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 25, stiffness: 700 };
+  const mouseXSpring = useSpring(mouseX, springConfig);
+  const mouseYSpring = useSpring(mouseY, springConfig);
 
-  // Typing effect for subtitle
-  const { displayText: typedSubtitle, isComplete } = useTypingEffect(
-    'real apps that work.', 
-    80, 
-    800 // Start after 0.8 second
-  );
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        mouseX.set(x);
+        mouseY.set(y);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
 
   const scrollToProjects = () => {
     const projectsElement = document.querySelector('#projects');
@@ -164,199 +56,226 @@ const Hero: React.FC = () => {
     { 
       icon: Github, 
       href: 'https://github.com/subhash-22-codes', 
-      label: 'GitHub Profile',
-      ariaLabel: 'Visit my GitHub profile'
+      label: 'GitHub',
+      color: 'hover:bg-gray-900 hover:text-white hover:border-gray-900',
+      brandColor: '#24292e'
     },
     { 
       icon: Linkedin, 
       href: 'https://www.linkedin.com/in/subhash-yaganti-a8b3b626a/', 
-      label: 'LinkedIn Profile',
-      ariaLabel: 'Connect with me on LinkedIn'
+      label: 'LinkedIn',
+      color: 'hover:bg-blue-600 hover:text-white hover:border-blue-600',
+      brandColor: '#0077b5'
     },
     { 
       icon: Mail, 
       href: 'mailto:subashyagantisubbu@gmail.com', 
-      label: 'Send Email',
-      ariaLabel: 'Send me an email'
+      label: 'Email',
+      color: 'hover:bg-red-500 hover:text-white hover:border-red-500',
+      brandColor: '#ef4444'
     }
   ];
 
   return (
-    <section
-      ref={heroRef}
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20"
+    <section 
+      ref={containerRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Simplified background effects - static gradients */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-[var(--accent-primary)]/6 to-[var(--highlight)]/4 blur-3xl opacity-70" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-[var(--highlight)]/4 to-[var(--accent-primary)]/6 blur-3xl opacity-60" />
-      </div>
+      {/* Subtle Background Elements */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none"
+        style={{ y: y1 }}
+      >
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-secondary/5 rounded-full blur-3xl" />
+      </motion.div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left side: Content */}
-          <motion.div
-            ref={contentRef}
-            variants={staggerContainer}
-            initial="hidden"
-            animate={contentInView ? "visible" : "hidden"}
-            className="text-center lg:text-left order-2 lg:order-1"
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto px-6 py-20">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left Content */}
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Name - Slide from right */}
+            {/* Greeting */}
             <motion.div 
-              variants={slideFromRight}
-              className="mb-6"
+              className="space-y-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h1 className="font-montserrat font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-6 leading-tight tracking-tight">
-                <span className="gradient-text">Subhash Yaganti</span>
+              <p className="text-accent-primary font-mono text-lg">
+                Hi there, I'm
+              </p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
+                <span className="text-accent-primary font-poppins">Subhash</span>
+                <br />
+                <span className="text-white font-poppins">Yaganti</span>
               </h1>
             </motion.div>
 
-            {/* Subtitle with typing effect */}
-            <motion.div
-              variants={fadeInUp}
-              className="mb-8"
+            {/* Subtitle */}
+            <motion.div 
+              className="space-y-2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <p className="font-arvo text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-primary)] leading-relaxed">
-                Full Stack Developer who loves building{' '}
-                <span className="gradient-text font-bold">
-                  {typedSubtitle}
-                  <motion.span
-                    animate={{ opacity: [1, 0] }}
-                    transition={{
-                      duration: 0.8,
-                      repeat: isComplete ? 0 : Infinity,
-                      repeatType: "reverse"
-                    }}
-                    className="ml-1"
-                  >
-                    |
-                  </motion.span>
-                </span>
+              <p className="text-xl sm:text-2xl md:text-3xl text-text-secondary font-poppins">
+                Full Stack Developer
+              </p>
+              <p className="text-base sm:text-lg text-text-muted max-w-2xl font-poppins">
+                Crafting digital experiences with clean code and innovative solutions. 
+                From concept to deployment, I bring ideas to life.
               </p>
             </motion.div>
 
-            {/* Action buttons */}
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start items-center mb-12"
+            {/* CTA Buttons */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 pt-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <motion.button
+              <button 
                 onClick={scrollToProjects}
-                className="btn-primary font-poppins text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 interactive flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-200"
-                whileHover={{ 
-                  y: -1
-                }}
-                whileTap={{ scale: 0.98 }}
-                aria-label="View my work and projects"
+                className="btn-primary group"
               >
-                View My Work
-                <ArrowDown size={20} />
-              </motion.button>
-
-              <motion.button
+                <span className="flex items-center gap-2">
+                  View My Work
+                  <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+                </span>
+              </button>
+              
+              <button 
                 onClick={downloadResume}
-                className="btn-secondary font-poppins text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 interactive flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-200"
-                whileHover={{ 
-                  y: -1
-                }}
-                whileTap={{ scale: 0.98 }}
-                aria-label="Download my resume PDF"
+                className="btn-secondary group"
               >
-                <Download size={20} />
-                Download Resume
-              </motion.button>
+                <span className="flex items-center gap-2">
+                  <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  Download Resume
+                </span>
+              </button>
             </motion.div>
 
-            {/* Social icons - Simple fade in */}
+            {/* Social Links */}
             <motion.div 
-              variants={socialStagger}
-              initial="hidden"
-              animate={contentInView ? "visible" : "hidden"}
-              className="flex justify-center lg:justify-start gap-4 sm:gap-6"
+              className="flex gap-4 pt-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
             >
-              {socialLinks.map(({ icon: Icon, href, label, ariaLabel }) => (
+              {socialLinks.map(({ icon: Icon, href, label, color, brandColor }) => (
                 <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={fadeIn}
-                  className="p-3 sm:p-4 glass-card hover:bg-[var(--accent-primary)] hover:bg-opacity-10 transition-all duration-200 interactive group"
+                  className={`social-link ${color} transition-all duration-300 ease-in-out`}
                   whileHover={{ 
-                    y: -2
+                    scale: 1.15, 
+                    y: -6,
+                    transition: { duration: 0.2 }
                   }}
                   whileTap={{ scale: 0.95 }}
-                  aria-label={ariaLabel}
-                  tabIndex={0}
+                  aria-label={label}
+                  style={{
+                    '--brand-color': brandColor
+                  } as React.CSSProperties}
                 >
-                  <Icon size={24} className="text-[var(--highlight)] group-hover:text-black transition-colors duration-200" />
+                  <Icon className="w-6 h-6" />
                 </motion.a>
               ))}
             </motion.div>
           </motion.div>
 
-          <div ref={imageRef} className="flex justify-center lg:justify-end order-1 lg:order-2">
-            <motion.div
-              variants={imageReveal}
-              initial="hidden"
-              animate={imageInView ? "visible" : "hidden"}
-              className="relative w-full max-w-[350px] sm:max-w-[400px] lg:max-w-[450px] aspect-square"
+          {/* Right Animation */}
+          <motion.div 
+            className="flex justify-center lg:justify-end"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.div 
+              className="relative"
+              style={{ y: y2 }}
             >
-              {/* Simplified glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/15 to-[var(--highlight)]/10 rounded-full blur-2xl scale-110" />
+              {/* Subtle Glow Effect */}
+              <div className="absolute inset-0 bg-accent-primary/10 rounded-full blur-3xl scale-110" />
               
-              {/* Main container */}
-              <div className="relative glass-card p-4 sm:p-6 rounded-3xl overflow-hidden h-full">
-                <Suspense fallback={
-                  <div className="w-full h-full bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--highlight)]/5 rounded-2xl animate-pulse" />
-                }>
-                  <Lottie
-                    animationData={animationData}
-                    loop
-                    autoplay
+              {/* Main Container */}
+              <div className="relative glass-card p-6 sm:p-8 rounded-3xl overflow-hidden">
+                <div className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 relative">
+                  <Lottie 
+                    animationData={animationData} 
+                    loop={true}
                     className="w-full h-full"
                   />
-                </Suspense>
+                </div>
                 
+                {/* Bottom Text */}
                 <motion.div 
                   className="absolute bottom-4 left-4 right-4"
                   initial={{ opacity: 0 }}
-                  animate={imageInView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ delay: 0.8, duration: 0.4 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1, duration: 0.5 }}
                 >
-                  <p className="text-sm font-poppins text-center gradient-text font-semibold">
+                  <p className="text-sm font-mono text-center text-accent-primary font-semibold">
                     Building the Future
                   </p>
                 </motion.div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.5 }}
+          style={{ opacity }}
+        >
+          <motion.button 
+            onClick={scrollToProjects}
+            className="group"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <div className="w-6 h-10 border-2 border-accent-primary rounded-full flex justify-center relative">
+              <motion.div
+                className="w-1 h-3 bg-accent-primary rounded-full mt-2"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+            <p className="text-xs text-text-muted mt-2 text-center group-hover:text-accent-primary transition-colors">
+              Scroll
+            </p>
+          </motion.button>
+        </motion.div>
       </div>
 
-      {/* Simplified scroll indicator */}
-      <motion.div
-        className="hidden sm:flex absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={heroInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 1, duration: 0.4 }}
-      >
-        <div className="w-6 h-10 border-2 border-[var(--highlight)] rounded-full flex justify-center relative">
-          <motion.div
-            className="w-1 h-3 bg-[var(--highlight)] rounded-full mt-2"
-            animate={heroInView ? {
-              y: [0, 12, 0]
-            } : {}}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </div>
-      </motion.div>
+      {/* Mouse Follower (Desktop Only) */}
+      {isHovered && (
+        <motion.div
+          className="fixed top-0 left-0 w-4 h-4 bg-accent-primary/30 rounded-full pointer-events-none z-50 mix-blend-difference"
+          style={{
+            x: mouseXSpring,
+            y: mouseYSpring,
+          }}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0 }}
+        />
+      )}
     </section>
   );
 };

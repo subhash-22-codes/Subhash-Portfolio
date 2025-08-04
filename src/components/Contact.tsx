@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Github, Linkedin, ExternalLink } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import Lottie from "lottie-react";
 import animationData from "../assets/animations/buy-online.json";
-import { FaXTwitter } from 'react-icons/fa6'; // 
+import { FaXTwitter } from 'react-icons/fa6';
 
 const Contact: React.FC = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-    rootMargin: '50px 0px',
-  });
-
   const [state, handleSubmit] = useForm("mjkreble");
   const [formData, setFormData] = useState({
     name: '',
@@ -37,337 +30,291 @@ const Contact: React.FC = () => {
   const contactInfo = [
     {
       icon: Mail,
-      label: 'Email',
+      title: 'Email',
       value: 'subashyagantisubbu@gmail.com',
-      link: 'mailto:subashyagantisubbu@gmail.com'
+      link: 'mailto:subashyagantisubbu@gmail.com',
+      color: 'text-accent-primary'
     },
     {
       icon: Phone,
-      label: 'Phone',
+      title: 'Phone',
       value: '+91 9848074591',
-      link: 'tel:+919848074591'
+      link: 'tel:+919848074591',
+      color: 'text-accent-secondary'
     },
     {
       icon: MapPin,
-      label: 'Location',
+      title: 'Location',
       value: 'India, Hyderabad',
-      link: 'https://maps.google.com'
+      link: 'https://maps.google.com',
+      color: 'text-accent-tertiary'
     }
   ];
 
   const socialLinks = [
     {
       icon: Github,
+      href: 'https://github.com/subhash-22-codes',
       label: 'GitHub',
-      url: 'https://github.com/subhash-22-codes',
-      color: '#000000'
+      color: 'hover:bg-gray-900 hover:text-white hover:border-gray-900',
+      brandColor: '#24292e'
     },
     {
       icon: Linkedin,
+      href: 'https://www.linkedin.com/in/subhash-yaganti-a8b3b626a/',
       label: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/subhash-yaganti-a8b3b626a/',
-      color: '#0A66C2'
+      color: 'hover:bg-blue-600 hover:text-white hover:border-blue-600',
+      brandColor: '#0077b5'
     },
     {
-      icon: FaXTwitter ,
+      icon: FaXTwitter,
+      href: 'https://x.com/SYaganti44806',
       label: 'Twitter',
-      url: 'https://x.com/SYaganti44806',
-      color: '#000000'
+      color: 'hover:bg-black hover:text-white hover:border-black',
+      brandColor: '#000000'
     },
     {
       icon: ExternalLink,
+      href: '',
       label: 'Portfolio',
-      url: '',
-      color: '#333333'
+      color: 'hover:bg-accent-primary hover:text-bg-primary hover:border-accent-primary',
+      brandColor: '#64ffda'
     }
   ];
 
-  // Optimized spring transition config
-  const springTransition = {
-    type: 'spring' as const,
-    stiffness: 100,
-    damping: 20,
-  };
-
-  // Staggered animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: springTransition,
-    },
-  };
-
-  const slideInLeft = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: springTransition,
-    },
-  };
-
-  const slideInRight = {
-    hidden: { opacity: 0, x: 30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: springTransition,
-    },
-  };
-
   return (
-    <section 
-      id="contact" 
-      ref={ref} 
-      className="py-12 md:py-20 px-4 min-h-screen"
-      style={{ willChange: inView ? 'auto' : 'transform' }}
-    >
-      <div className="max-w-7xl mx-auto">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 relative">
+      <div className="container mx-auto px-4 sm:px-6">
+        
         {/* Header */}
-        <motion.div
+        <motion.div 
+          className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={springTransition}
-          className="text-center mb-12 md:mb-16"
-          style={{ willChange: inView ? 'auto' : 'transform' }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="font-montserrat font-bold text-3xl sm:text-4xl lg:text-5xl gradient-text mb-4 md:mb-6">
-            Let's Work Together
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 font-poppins">
+            Get In <span className="text-accent-primary">Touch</span>
           </h2>
-          <p className="font-poppins text-base sm:text-lg lg:text-xl text-[var(--highlight)] max-w-2xl mx-auto px-4">
-            Ready to bring your ideas to life? Let's discuss your project and see how we can collaborate.
+          <p className="text-lg sm:text-xl text-text-secondary max-w-3xl mx-auto font-poppins px-4">
+            Ready to start your next project? Let's discuss how I can help bring your ideas to life.
           </p>
-          <div className="w-16 md:w-20 h-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--highlight)] mx-auto rounded-full mt-4 md:mt-6" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+          
           {/* Contact Information */}
-          <motion.div
-            variants={slideInLeft}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="space-y-6 md:space-y-8"
-            style={{ willChange: 'transform' }}
+          <motion.div 
+            className="space-y-6 sm:space-y-8 order-2 lg:order-1"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <div>
-              <h3 className="font-arvo font-bold text-xl md:text-2xl text-[var(--accent-primary)] mb-4 md:mb-6">
-                Get In Touch
-              </h3>
-              <p className="font-poppins text-[var(--text-primary)] leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
-                I'm always excited to work on new projects and collaborate with talented people. 
-                Whether you have a project in mind or just want to chat about technology, 
-                feel free to reach out!
-              </p>
-            </div>
-
-            {/* Contact Details */}
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              className="space-y-4 md:space-y-6"
-            >
-              {contactInfo.map((info) => (
+            {/* Contact Info Cards */}
+            <div className="space-y-4 sm:space-y-6">
+              {contactInfo.map((info, index) => (
                 <motion.a
-                  key={info.label}
+                  key={info.title}
                   href={info.link}
-                  target={info.label === 'Location' ? '_blank' : undefined}
-                  rel={info.label === 'Location' ? 'noopener noreferrer' : undefined}
-                  variants={itemVariants}
-                  whileHover={{ 
-                    x: 5, 
-                    scale: 1.02,
-                    transition: { type: 'spring', stiffness: 400, damping: 25 }
-                  }}
-                  className="contact-item flex items-center gap-3 md:gap-4 p-3 md:p-4 glass-card hover:bg-white hover:bg-opacity-5 transition-all duration-300 interactive"
-                  style={{ 
-                    willChange: 'transform',
-                    backfaceVisibility: 'hidden'
-                  }}
+                  target={info.title === 'Location' ? '_blank' : undefined}
+                  rel={info.title === 'Location' ? 'noopener noreferrer' : undefined}
+                  className="glass-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4 group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -4, scale: 1.02 }}
                 >
-                  <div className="p-2 md:p-3 bg-[var(--accent-primary)] bg-opacity-10 rounded-full flex-shrink-0">
-                    <info.icon size={20} className="text-black md:w-6 md:h-6" />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-glass flex items-center justify-center group-hover:bg-accent-primary/10 transition-colors flex-shrink-0`}>
+                    <info.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${info.color}`} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="font-poppins font-medium text-[var(--text-primary)] text-sm md:text-base">
-                      {info.label}
-                    </div>
-                    <div className="font-poppins text-[var(--highlight)] text-sm md:text-base break-all">
-                      {info.value}
-                    </div>
+                    <div className="text-xs sm:text-sm text-text-muted font-poppins">{info.title}</div>
+                    <div className="text-sm sm:text-base text-white font-medium font-poppins break-words">{info.value}</div>
                   </div>
                 </motion.a>
               ))}
-            </motion.div>
+            </div>
 
             {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ ...springTransition, delay: 0.4 }}
-              className="pt-6 md:pt-8"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h4 className="font-arvo font-bold text-base md:text-lg text-[var(--text-primary)] mb-3 md:mb-4">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-white font-poppins">
                 Connect With Me
-              </h4>
-              <div className="flex gap-3 md:gap-4 flex-wrap">
+              </h3>
+              <div className="flex gap-3 sm:gap-4 flex-wrap">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.label}
-                    href={social.url}
+                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className={`social-link ${social.color} w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 ease-in-out`}
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{
-                      delay: 0.5 + index * 0.05,
-                      ...springTransition
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                    whileHover={{ 
+                      scale: 1.15, 
+                      y: -6,
+                      transition: { duration: 0.2 }
                     }}
-                    whileHover={{
-                      scale: 1.15,
-                      y: -3,
-                      transition: { type: 'spring', stiffness: 400, damping: 25 }
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                    className="social-link p-2 md:p-3 glass-card group hover:bg-[--hover-color] hover:bg-opacity-10 transition-all duration-300 interactive"
+                    whileTap={{ scale: 0.95 }}
+                    aria-label={social.label}
                     style={{
-                      '--hover-color': social.color,
-                      willChange: 'transform'
+                      '--brand-color': social.brandColor
                     } as React.CSSProperties}
                   >
-                    <social.icon
-                      size={20}
-                      className="transition-colors duration-300 text-[var(--highlight)] group-hover:text-[var(--accent-primary)] md:w-6 md:h-6"
-                    />
+                    <social.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </motion.a>
                 ))}
               </div>
             </motion.div>
+
+            {/* Additional Info */}
+            <motion.div
+              className="glass-card p-4 sm:p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-accent-primary font-poppins">
+                Let's Work Together
+              </h3>
+              <p className="text-text-secondary text-xs sm:text-sm leading-relaxed font-poppins">
+                I'm always open to discussing new opportunities, interesting projects, 
+                and creative ideas. Whether you have a question or just want to say hi, 
+                I'll try my best to get back to you!
+              </p>
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
-          <motion.div
-            variants={slideInRight}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            style={{ willChange: 'transform' }}
-            className="w-full"
+          <motion.div 
+            className="contact-form order-1 lg:order-2"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
             {!state.succeeded ? (
-              <form onSubmit={handleSubmit} className="glass-card w-full p-4 md:p-6 lg:p-8">
-                <h3 className="font-arvo font-bold text-xl md:text-2xl lg:text-3xl text-[var(--accent-primary)] mb-4 md:mb-6 text-center">
-                  Send a Message
+              <>
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-accent-primary font-poppins">
+                  Send Message
                 </h3>
-
-                <div className="space-y-4 md:space-y-6">
-                  {/* Name & Email */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block font-poppins font-medium text-[var(--text-primary)] mb-2 text-sm md:text-base">
+                
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                      <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
                         Name *
                       </label>
                       <input
                         type="text"
-                        id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="custom-input"
-                        placeholder="Your full name"
+                        className="input-modern w-full"
+                        placeholder="Your name"
                       />
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block font-poppins font-medium text-[var(--text-primary)] mb-2 text-sm md:text-base">
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                      <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
                         Email *
                       </label>
                       <input
                         type="email"
-                        id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="custom-input"
-                        placeholder="your@email.com"
+                        className="input-modern w-full"
+                        placeholder="your.email@example.com"
                       />
                       <ValidationError prefix="Email" field="email" errors={state.errors} />
-                    </div>
+                    </motion.div>
                   </div>
 
-                  {/* Subject */}
-                  <div>
-                    <label htmlFor="subject" className="block font-poppins font-medium text-[var(--text-primary)] mb-2 text-sm md:text-base">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
                       Subject *
                     </label>
                     <input
                       type="text"
-                      id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
-                      className="custom-input"
-                      placeholder="What's this about?"
+                      className="input-modern w-full"
+                      placeholder="Project inquiry"
                     />
-                  </div>
+                  </motion.div>
 
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="message" className="block font-poppins font-medium text-[var(--text-primary)] mb-2 text-sm md:text-base">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                  >
+                    <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
                       Message *
                     </label>
                     <textarea
-                      id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
                       required
-                      rows={5}
-                      className="custom-input resize-none min-h-[120px] md:min-h-[140px]"
-                      placeholder="Tell me about your project or what you'd like to discuss..."
+                      rows={4}
+                      className="input-modern w-full resize-none"
+                      placeholder="Tell me about your project..."
                     />
                     <ValidationError prefix="Message" field="message" errors={state.errors} />
-                  </div>
+                  </motion.div>
 
-                  {/* Submit Button */}
                   <motion.button
                     type="submit"
                     disabled={state.submitting}
-                    whileHover={!state.submitting ? {
-                      scale: 1.05,
-                      y: -2,
-                      transition: { type: 'spring', stiffness: 400, damping: 25 }
-                    } : {}}
-                    whileTap={!state.submitting ? { scale: 0.95 } : {}}
-                    className={`btn-primary w-full py-3 md:py-4 flex items-center justify-center gap-2 md:gap-3 text-sm md:text-base font-poppins ${
-                      state.submitting ? 'opacity-70 cursor-not-allowed' : ''
-                    }`}
-                    style={{ willChange: state.submitting ? 'auto' : 'transform' }}
+                    className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-3 sm:py-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     {state.submitting ? (
                       <>
-                        <div className="w-4 h-4 md:w-5 md:h-5 border-2 border-[var(--bg-primary)] border-t-transparent rounded-full animate-spin" />
+                        <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         Sending...
                       </>
                     ) : (
                       <>
+                        <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                         Send Message
-                        <Send size={18} className="md:w-5 md:h-5" />
                       </>
                     )}
                   </motion.button>
@@ -377,58 +324,41 @@ const Contact: React.FC = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={springTransition}
-                      className="text-center py-3 px-4 rounded-lg bg-red-500 bg-opacity-10 text-red-400 text-sm md:text-base font-poppins"
+                      transition={{ duration: 0.3 }}
+                      className="text-center py-3 px-4 rounded-lg bg-red-500 bg-opacity-10 text-red-400 text-xs sm:text-sm font-poppins"
                     >
                       ❌ Failed to send message. Please check the fields and try again.
                     </motion.div>
                   )}
-                </div>
-              </form>
+                </form>
+              </>
             ) : (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={springTransition}
-                className="success-card w-full p-4 md:p-6 lg:p-8 text-center flex flex-col items-center justify-center space-y-4 shadow-xl rounded-2xl"
+                className="text-center py-6 sm:py-8"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
               >
                 <Lottie
                   animationData={animationData}
                   loop={true}
                   autoplay={true}
-                  className="w-40 sm:w-52"
-                  />
-
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-arvo font-bold text-green-400">
+                  className="w-32 h-32 sm:w-40 sm:h-40 md:w-52 md:h-52 mx-auto mb-4 sm:mb-6"
+                />
+                <CheckCircle className="w-12 h-12 sm:w-16 sm:h-16 text-accent-primary mx-auto mb-3 sm:mb-4" />
+                <h4 className="text-lg sm:text-xl font-semibold mb-2 text-white font-poppins">
                   Thank you for reaching out! 💌
-                </h3>
-
-                <p className="font-poppins text-[var(--text-primary)] text-sm md:text-base lg:text-lg max-w-lg">
+                </h4>
+                <p className="text-text-secondary font-poppins text-sm sm:text-base">
                   I've received your message and will get back to you soon. Your interest means a lot — really!
                 </p>
-
-                <p className="font-poppins text-[var(--highlight)] text-xs md:text-sm italic">
+                <p className="text-text-muted text-xs sm:text-sm italic mt-3 sm:mt-4 font-poppins">
                   Explore my portfolio or connect with me on socials while you wait!
                 </p>
               </motion.div>
             )}
           </motion.div>
         </div>
-
-        {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ ...springTransition, delay: 0.6 }}
-          className="text-center mt-12 md:mt-20 pt-8 md:pt-12 border-t border-[var(--highlight)] border-opacity-20"
-        >
-          <p className="font-poppins text-[var(--highlight)] mb-2 md:mb-4 text-sm md:text-base">
-            Built with passion by Subhash Yaganti
-          </p>
-          <p className="font-poppins text-[var(--highlight)] text-xs md:text-sm opacity-70">
-            © 2025 Subhash Yaganti. All rights reserved.
-          </p>
-        </motion.footer>
       </div>
     </section>
   );

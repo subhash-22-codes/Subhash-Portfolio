@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Code, Globe, Database, Zap } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -10,234 +10,328 @@ interface Project {
   github: string;
   demo: string;
   images: string[];
+  category: 'frontend' | 'fullstack' | 'ai' | 'game';
+  featured: boolean;
 }
 
 const Projects: React.FC = () => {
-  // Single intersection observer for better performance
-  const { ref: sectionRef, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
-
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [activeFilter, setActiveFilter] = useState('all');
 
-  // Memoize projects data to prevent unnecessary re-renders
-  const projects: Project[] = useMemo(() => [
+  const projects: Project[] = [
       {
       id: 1,
       title: 'Tic Tac Toe',
-      description: 'A simple Tic Tac Toe game with responsive Tailwind UI/UX, built to learn React and TypeScript in a fun and practical way.',
-      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'JavaScript', 'HTML5'],
+      description: 'A modern, responsive Tic Tac Toe game built with React and TypeScript. Features smooth animations, game state management, and a clean UI design.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
       github: 'https://github.com/subhash-22-codes/Tic-Tac-Toe',
       demo: 'https://tic-tac-toe-bruh.netlify.app',
-      images: [
-        '/images/tic1.png',
-        '/images/tic2.png',
-        '/images/tic3.png',
-        '/images/tic4.png'
-      ]
+      images: ['/images/tic1.png', '/images/tic2.png', '/images/tic3.png', '/images/tic4.png'],
+      category: 'frontend',
+      featured: false
     },
-
       {
       id: 2,
       title: 'CodeX40',
-      description: 'A curated collection of 40+ most-asked company-specific coding questions. Each entry includes the problem, input/output format, constraints, and a link to solve it directly on LeetCode.',
-      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'HTML5'],
+      description: 'A curated collection of 40+ most-asked company-specific coding questions with detailed solutions and LeetCode integration.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
       github: 'https://github.com/subhash-22-codes/CodeX40',
       demo: 'https://code40learn40.netlify.app',
-      images: [
-        '/images/code1.png',
-        '/images/code2.png',
-        '/images/code3.png',
-        '/images/code4.png'
-      ]
+      images: ['/images/code1.png', '/images/code2.png', '/images/code3.png', '/images/code4.png'],
+      category: 'frontend',
+      featured: true
     },
         {
         id: 3,
         title: 'Justice Genie',
-        description: 'Understand your legal rights with real-time AI-powered legal assistance. Justice Genie helps users get instant answers, access legal quizzes, and explore case-based insights through a modern, responsive dashboard.',
-        tech: ['React', 'Javascript', 'Flask', 'MongoDB', 'Tailwind CSS', 'Google Gen AI', 'CSS3', 'HTML5','Chart.js', 'SMTP'],
+      description: 'AI-powered legal assistance platform providing real-time answers, legal quizzes, and case-based insights through an intuitive dashboard.',
+      tech: ['React', 'JavaScript', 'Flask', 'MongoDB', 'Google Gen AI', 'Chart.js'],
         github: 'Coming soon',
         demo: '',
-        images: [
-          '/images/jg1.png'
-        ]
-      },
-
+      images: ['/images/jg1.png'],
+      category: 'ai',
+      featured: true
+    },
       {
       id: 4,
       title: 'MemeGame',
-      description: 'A multiplayer meme challenge game where players join rooms, one becomes a judge, and others compete using memes. Includes chat, video reactions, multiple rounds, and real-time scoring with a leaderboard.',
-      tech: ['React', 'TypeScript', 'Socket.io', 'MongoDB', 'Flask', 'Tailwind CSS'],
-      github: '', // Add when ready
-      demo: '',   // Add when ready
-      images: [
-        '/images/meme1.png',
-        '/images/meme2.png',
-        '/images/meme3.png'
-      ]
+      description: 'Multiplayer meme challenge game with real-time chat, video reactions, multiple rounds, and dynamic scoring system.',
+      tech: ['React', 'TypeScript', 'Socket.io', 'MongoDB', 'Flask'],
+      github: '',
+      demo: '',
+      images: ['/images/meme1.png', '/images/meme2.png', '/images/meme3.png'],
+      category: 'game',
+      featured: false
     },
-
    {
   id: 5,
   title: 'DataPulse',
-  description: 'DataPulse is a full-stack real-time data monitoring and visualization platform designed to track metrics, ensure data integrity, and provide actionable insights through smart visualizations. It supports multiple data sources like CSV uploads, API integrations, and database connectors. Built with scalability in mind, it includes real-time alerts, data validation, and a modular workspace system for individuals or teams.',
-  tech: [
-    'React', 
-    'TypeScript', 
-    'Tailwind CSS',
-    'Framer Motion',
-    'Chart.js', 
-    'MongoDB', 
-    'PostgreSQL',
-    'Flask',
-    'Python', 
-    'WebSockets', 
-    'Redis', 
-    'Celery', 
-    'JWT Auth', 
-    'Docker',
-    'Formik + Yup',
-    'Zod'
-  ],
-  github: '', // Add when available
-  demo: '',   // Add when deployed
-  images: [
-    '/images/dp1.png'
-  ]
-}
+      description: 'Full-stack real-time data monitoring and visualization platform with multiple data sources, alerts, and modular workspace system.',
+      tech: ['React', 'TypeScript', 'MongoDB', 'PostgreSQL', 'Flask', 'Redis', 'Docker'],
+      github: '',
+      demo: '',
+      images: ['/images/dp1.png'],
+      category: 'fullstack',
+      featured: true
+    }
+  ];
 
-  ], []);
+  const filters = [
+    { key: 'all', label: 'All Projects', icon: Code },
+    { key: 'frontend', label: 'Frontend', icon: Globe },
+    { key: 'fullstack', label: 'Full Stack', icon: Database },
+    { key: 'ai', label: 'AI/ML', icon: Zap },
+    { key: 'game', label: 'Games', icon: Zap }
+  ];
 
-  // Memoized callbacks to prevent unnecessary re-renders
-  const openModal = useCallback((project: Project) => {
-    setSelectedProject(project);
-    setCurrentImageIndex(0);
-    document.body.style.overflow = 'hidden';
-  }, []);
+  const filteredProjects = activeFilter === 'all' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
 
-  const closeModal = useCallback(() => {
-    setSelectedProject(null);
-    setCurrentImageIndex(0);
-    document.body.style.overflow = 'unset';
-  }, []);
-
-  const nextImage = useCallback(() => {
+  const nextImage = () => {
     if (selectedProject) {
       setCurrentImageIndex((prev) => 
         prev === selectedProject.images.length - 1 ? 0 : prev + 1
       );
     }
-  }, [selectedProject]);
+  };
 
-  const prevImage = useCallback(() => {
+  const prevImage = () => {
     if (selectedProject) {
       setCurrentImageIndex((prev) => 
         prev === 0 ? selectedProject.images.length - 1 : prev - 1
       );
     }
-  }, [selectedProject]);
+  };
+
+  const openProject = (project: Project) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0);
+  };
+
+  const closeProject = () => {
+    setSelectedProject(null);
+    setCurrentImageIndex(0);
+  };
 
   return (
-    <section id="projects" className="py-20 px-4">
-      <div className="max-w-7xl mx-auto" ref={sectionRef}>
-        {/* Header Section */}
-        <div
-          className={`text-center mb-16 transition-all duration-700 ease-out ${
-            inView 
-              ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 translate-y-8'
-          }`}
+    <section id="projects" className="py-20 relative">
+      <div className="container mx-auto px-6">
+        
+        {/* Header */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="font-montserrat font-bold text-3xl md:text-5xl gradient-text mb-6">
-            Featured Projects
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins">
+            <span className="text-accent-primary">Featured</span> Projects
           </h2>
-          <p className="font-poppins text-lg md:text-xl text-[var(--highlight)] max-w-2xl mx-auto">
-            Here are some of my recent projects that showcase my skills in full-stack development
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto font-poppins">
+            A showcase of my latest work, featuring modern web applications, 
+            AI-powered solutions, and innovative digital experiences.
           </p>
-          <div className="w-20 h-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--highlight)] mx-auto rounded-full mt-6" />
-        </div>
+        </motion.div>
+
+        {/* Filters */}
+        <motion.div 
+          className="flex flex-wrap justify-center gap-4 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {filters.map(({ key, label, icon: Icon }) => (
+            <motion.button
+              key={key}
+              onClick={() => setActiveFilter(key)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                activeFilter === key
+                  ? 'bg-accent-primary text-bg-primary'
+                  : 'glass-card hover:bg-glass-highlight'
+              }`}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Icon className="w-4 h-4" />
+              {label}
+            </motion.button>
+          ))}
+        </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.div
               key={project.id}
-              project={project}
-              index={index}
-              inView={inView}
-              onClick={openModal}
-            />
+              className="project-card group cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -8 }}
+              onClick={() => openProject(project)}
+            >
+              {/* Project Image */}
+              <div className="relative overflow-hidden rounded-t-2xl">
+                <img
+                  src={project.images[0]}
+                  alt={project.title}
+                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                
+                {/* Featured Badge */}
+                {project.featured && (
+                  <div className="absolute top-4 left-4 bg-accent-primary text-bg-primary px-3 py-1 rounded-full text-xs font-semibold">
+                    Featured
+                  </div>
+                )}
+                
+                {/* Category Badge */}
+                <div className="absolute top-4 right-4 glass px-3 py-1 rounded-full text-xs font-medium">
+                  {project.category}
+                </div>
+              </div>
+
+              {/* Project Content */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-3 text-text-primary group-hover:text-accent-primary transition-colors font-poppins">
+                  {project.title}
+                </h3>
+                <p className="text-text-secondary text-sm mb-4 line-clamp-3 font-poppins">
+                  {project.description}
+                </p>
+                
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.slice(0, 4).map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-1 bg-glass rounded-md text-xs font-medium text-text-secondary font-poppins"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {project.tech.length > 4 && (
+                    <span className="px-2 py-1 bg-glass rounded-md text-xs font-medium text-text-secondary font-poppins">
+                      +{project.tech.length - 4}
+                    </span>
+                  )}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3">
+                  {project.github !== 'Coming soon' && project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-glass rounded-lg text-sm font-medium hover:bg-glass-highlight transition-colors font-poppins"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Github className="w-4 h-4" />
+                      Code
+                    </a>
+                  )}
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-accent-primary text-bg-primary rounded-lg text-sm font-medium hover:bg-accent-secondary transition-colors font-poppins"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Live Demo
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Project Modal */}
+      <AnimatePresence>
       {selectedProject && (
-        <div
-          className={`fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${
-            selectedProject ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-          onClick={closeModal}
-        >
-          <div
-            className={`glass-card max-w-4xl w-full max-h-[90vh] overflow-y-auto transition-all duration-300 ease-out ${
-              selectedProject ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-            }`}
+          <motion.div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeProject}
+          >
+            <motion.div
+              className="glass-strong max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-6">
-              <div className="flex justify-between items-start mb-6">
-                <h3 className="font-arvo font-bold text-2xl md:text-3xl gradient-text">
-                  {selectedProject.title}
-                </h3>
+              {/* Modal Header */}
+              <div className="p-6 border-b border-glass-border">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold text-accent-primary font-poppins">{selectedProject.title}</h3>
                 <button
-                  onClick={closeModal}
-                  className="p-2 hover:bg-[var(--accent-primary)] hover:bg-opacity-10 rounded-full transition-colors duration-200"
+                    onClick={closeProject}
+                    className="p-2 rounded-lg hover:bg-glass-highlight transition-colors"
                 >
-                  <X size={24} />
+                    <X className="w-6 h-6" />
                 </button>
+                </div>
               </div>
 
+              {/* Modal Content */}
+              <div className="p-6">
               {/* Image Gallery */}
               <div className="relative mb-6">
-                <div className="relative overflow-hidden rounded-xl">
+                  <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden">
                   <img
                     src={selectedProject.images[currentImageIndex]}
-                    alt={`${selectedProject.title} screenshot ${currentImageIndex + 1}`}
-                    className="w-full h-64 md:h-96 object-cover"
-                    loading="lazy"
+                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                      className="w-full h-full object-cover"
                   />
                   
+                    {/* Navigation Arrows */}
                   {selectedProject.images.length > 1 && (
                     <>
                       <button
                         onClick={prevImage}
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full transition-all duration-200"
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors"
                       >
-                        <ChevronLeft size={24} />
+                          <ChevronLeft className="w-6 h-6" />
                       </button>
                       <button
                         onClick={nextImage}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full transition-all duration-200"
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors"
                       >
-                        <ChevronRight size={24} />
+                          <ChevronRight className="w-6 h-6" />
                       </button>
                     </>
                   )}
                 </div>
 
+                  {/* Image Indicators */}
                 {selectedProject.images.length > 1 && (
                   <div className="flex justify-center gap-2 mt-4">
                     {selectedProject.images.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                          index === currentImageIndex
-                            ? 'bg-[var(--accent-primary)]'
-                            : 'bg-[var(--highlight)] bg-opacity-30'
+                          className={`w-2 h-2 rounded-full transition-colors ${
+                            index === currentImageIndex ? 'bg-accent-primary' : 'bg-glass-border'
                         }`}
                       />
                     ))}
@@ -245,19 +339,20 @@ const Projects: React.FC = () => {
                 )}
               </div>
 
-              <p className="font-poppins text-[var(--text-primary)] mb-6 leading-relaxed">
+                {/* Project Details */}
+                <div className="space-y-6">
+                  <p className="text-text-secondary leading-relaxed font-poppins">
                 {selectedProject.description}
               </p>
 
-              <div className="mb-6">
-                <h4 className="font-arvo font-bold text-lg mb-3 text-[var(--accent-primary)]">
-                  Technologies Used
-                </h4>
+                  {/* Tech Stack */}
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 font-poppins">Technologies Used</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-[var(--accent-primary)] bg-opacity-10 text-gray-600 rounded-full text-sm font-medium"
+                          className="px-3 py-1 bg-glass rounded-lg text-sm font-medium font-poppins"
                     >
                       {tech}
                     </span>
@@ -265,121 +360,39 @@ const Projects: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex gap-4">
+                  {/* Action Buttons */}
+                  <div className="flex gap-4 pt-4">
+                    {selectedProject.github !== 'Coming soon' && selectedProject.github && (
                 <a
                   href={selectedProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary flex items-center gap-2 transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98]"
+                        className="flex items-center gap-2 px-6 py-3 bg-glass rounded-xl font-medium hover:bg-glass-highlight transition-colors font-poppins"
                 >
-                  <Github size={20} />
+                        <Github className="w-5 h-5" />
                   View Code
                 </a>
+                    )}
+                    {selectedProject.demo && (
                 <a
                   href={selectedProject.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary flex items-center gap-2 transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98]"
+                        className="flex items-center gap-2 px-6 py-3 bg-accent-primary text-bg-primary rounded-xl font-medium hover:bg-accent-secondary transition-colors font-poppins"
                 >
-                  <ExternalLink size={20} />
+                        <ExternalLink className="w-5 h-5" />
                   Live Demo
                 </a>
+                    )}
               </div>
             </div>
           </div>
-        </div>
+            </motion.div>
+          </motion.div>
       )}
+      </AnimatePresence>
     </section>
   );
 };
-
-// Memoized ProjectCard component for better performance
-const ProjectCard: React.FC<{
-  project: Project;
-  index: number;
-  inView: boolean;
-  onClick: (project: Project) => void;
-}> = React.memo(({ project, index, inView, onClick }) => {
-  const handleClick = useCallback(() => {
-    onClick(project);
-  }, [project, onClick]);
-
-  const handleLinkClick = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-  }, []);
-
-  return (
-    <div
-      className={`glass-card p-6 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-2xl ${
-        inView 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-8'
-      }`}
-      onClick={handleClick}
-      style={{
-        transitionDelay: `${index * 100}ms`,
-      }}
-    >
-      <div className="relative overflow-hidden rounded-xl mb-6">
-        <img
-          src={project.images[0]}
-          alt={project.title}
-          className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent opacity-60" />
-      </div>
-
-      <h3 className="font-arvo font-bold text-xl md:text-2xl text-[var(--accent-primary)] mb-3">
-        {project.title}
-      </h3>
-
-      <p className="font-poppins text-[var(--text-primary)] mb-4 line-clamp-3">
-        {project.description}
-      </p>
-
-      <div className="flex flex-wrap gap-2 mb-6">
-        {project.tech.slice(0, 3).map((tech) => (
-          <span
-            key={tech}
-            className="px-3 py-1 bg-[var(--accent-primary)] bg-opacity-10 text-gray-600 rounded-full text-sm font-medium"
-          >
-            {tech}
-          </span>
-        ))}
-        {project.tech.length > 3 && (
-          <span className="px-3 py-1 bg-[var(--highlight)] bg-opacity-10 text-gray-600 rounded-full text-sm font-medium">
-            +{project.tech.length - 3} more
-          </span>
-        )}
-      </div>
-
-      <div className="flex gap-4">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-[var(--highlight)] hover:text-[var(--accent-primary)] transition-all duration-200 hover:scale-105"
-          onClick={handleLinkClick}
-        >
-          <Github size={18} />
-          <span className="font-medium">Code</span>
-        </a>
-        <a
-          href={project.demo}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-[var(--highlight)] hover:text-[var(--accent-primary)] transition-all duration-200 hover:scale-105"
-          onClick={handleLinkClick}
-        >
-          <ExternalLink size={18} />
-          <span className="font-medium">Demo</span>
-        </a>
-      </div>
-    </div>
-  );
-});
-
-ProjectCard.displayName = 'ProjectCard';
 
 export default Projects;
