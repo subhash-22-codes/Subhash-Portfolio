@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
 
   const downloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/Subhash_Resume_2025.pdf';
+    link.href = '/SubhashYagantiResume.pdf';
     link.download = 'Subhash_Yaganti_Resume.pdf';
     link.click();
   };
