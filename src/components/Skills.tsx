@@ -2,6 +2,28 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Globe, Database, Settings } from 'lucide-react';
 
+// ✅ Import all skill icons so Vite resolves them for deployment
+import reactIcon from '../assets/skills/react.png';
+import tsIcon from '../assets/skills/typescript.png';
+import jsIcon from '../assets/skills/javascript.png';
+import tailwindIcon from '../assets/skills/tailwindcss.png';
+import viteIcon from '../assets/skills/vite.png';
+import htmlIcon from '../assets/skills/html5.png';
+import cssIcon from '../assets/skills/css3.png';
+
+import flaskIcon from '../assets/skills/Flask.png';
+import pythonIcon from '../assets/skills/Python.png';
+import javaIcon from '../assets/skills/Java.png';
+
+import mongoIcon from '../assets/skills/MongoDB.png';
+import postgresIcon from '../assets/skills/PostgresSQL.png';
+import redisIcon from '../assets/skills/Redis.png';
+
+import gitIcon from '../assets/skills/gitlogo.png';
+import dockerIcon from '../assets/skills/dockermain.png';
+import awsIcon from '../assets/skills/aws.png';
+import figmaIcon from '../assets/skills/figma.png';
+
 interface Skill {
   name: string;
   category: 'frontend' | 'backend' | 'database' | 'tools';
@@ -14,39 +36,39 @@ const Skills: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
-const categories = [
+  const categories = [
     { key: 'all', name: 'All Skills', icon: Code, color: 'from-accent-primary to-accent-secondary' },
     { key: 'frontend', name: 'Frontend', icon: Globe, color: 'from-blue-400 to-cyan-400' },
     { key: 'backend', name: 'Backend', icon: Database, color: 'from-green-400 to-emerald-400' },
     { key: 'database', name: 'Database', icon: Database, color: 'from-purple-400 to-pink-400' },
     { key: 'tools', name: 'Tools', icon: Settings, color: 'from-orange-400 to-red-400' }
-];
+  ];
 
-const skillData: Skill[] = [
-  // Frontend
-    { name: 'React', category: 'frontend', icon: '/src/assets/skills/react.png', level: 90, color: '#61DAFB' },
-    { name: 'TypeScript', category: 'frontend', icon: '/src/assets/skills/typescript.png', level: 85, color: '#3178C6' },
-    { name: 'JavaScript', category: 'frontend', icon: '/src/assets/skills/javascript.png', level: 90, color: '#F7DF1E' },
-    { name: 'Tailwind CSS', category: 'frontend', icon: '/src/assets/skills/tailwindcss.png', level: 88, color: '#06B6D4' },
-    { name: 'Vite', category: 'frontend', icon: '/src/assets/skills/vite.png', level: 80, color: '#646CFF' },
-    { name: 'HTML5', category: 'frontend', icon: '/src/assets/skills/html5.png', level: 95, color: '#E34F26' },
-    { name: 'CSS3', category: 'frontend', icon: '/src/assets/skills/css3.png', level: 92, color: '#1572B6' },
-  
-  // Backend
-    { name: 'Flask', category: 'backend', icon: '/src/assets/skills/Flask.png', level: 85, color: '#000000' },
-    { name: 'Python', category: 'backend', icon: '/src/assets/skills/Python.png', level: 88, color: '#3776AB' },
-    { name: 'Java', category: 'backend', icon: '/src/assets/skills/Java.png', level: 75, color: '#ED8B00' },
-  
-  // Database
-    { name: 'MongoDB', category: 'database', icon: '/src/assets/skills/MongoDB.png', level: 82, color: '#47A248' },
-    { name: 'PostgreSQL', category: 'database', icon: '/src/assets/skills/PostgresSQL.png', level: 78, color: '#336791' },
-    { name: 'Redis', category: 'database', icon: '/src/assets/skills/Redis.png', level: 70, color: '#DC382D' },
-  
-  // Tools
-    { name: 'Git', category: 'tools', icon: '/src/assets/skills/gitlogo.png', level: 85, color: '#F05032' },
-    { name: 'Docker', category: 'tools', icon: '/src/assets/skills/dockermain.png', level: 75, color: '#2496ED' },
-    { name: 'AWS', category: 'tools', icon: '/src/assets/skills/aws.png', level: 70, color: '#FF9900' },
-    { name: 'Figma', category: 'tools', icon: '/src/assets/skills/figma.png', level: 65, color: '#F24E1E' }
+  const skillData: Skill[] = [
+    // Frontend
+    { name: 'React', category: 'frontend', icon: reactIcon, level: 90, color: '#61DAFB' },
+    { name: 'TypeScript', category: 'frontend', icon: tsIcon, level: 85, color: '#3178C6' },
+    { name: 'JavaScript', category: 'frontend', icon: jsIcon, level: 90, color: '#F7DF1E' },
+    { name: 'Tailwind CSS', category: 'frontend', icon: tailwindIcon, level: 88, color: '#06B6D4' },
+    { name: 'Vite', category: 'frontend', icon: viteIcon, level: 80, color: '#646CFF' },
+    { name: 'HTML5', category: 'frontend', icon: htmlIcon, level: 95, color: '#E34F26' },
+    { name: 'CSS3', category: 'frontend', icon: cssIcon, level: 92, color: '#1572B6' },
+
+    // Backend
+    { name: 'Flask', category: 'backend', icon: flaskIcon, level: 85, color: '#000000' },
+    { name: 'Python', category: 'backend', icon: pythonIcon, level: 88, color: '#3776AB' },
+    { name: 'Java', category: 'backend', icon: javaIcon, level: 75, color: '#ED8B00' },
+
+    // Database
+    { name: 'MongoDB', category: 'database', icon: mongoIcon, level: 82, color: '#47A248' },
+    { name: 'PostgreSQL', category: 'database', icon: postgresIcon, level: 78, color: '#336791' },
+    { name: 'Redis', category: 'database', icon: redisIcon, level: 70, color: '#DC382D' },
+
+    // Tools
+    { name: 'Git', category: 'tools', icon: gitIcon, level: 85, color: '#F05032' },
+    { name: 'Docker', category: 'tools', icon: dockerIcon, level: 75, color: '#2496ED' },
+    { name: 'AWS', category: 'tools', icon: awsIcon, level: 70, color: '#FF9900' },
+    { name: 'Figma', category: 'tools', icon: figmaIcon, level: 65, color: '#F24E1E' }
   ];
 
   const filteredSkills = activeCategory === 'all'
