@@ -308,11 +308,18 @@ const Resume: React.FC = () => {
 
                         {/* Certificate Image */}
                         <div className="xl:w-80 xl:flex-shrink-0">
-                          <img
-                            src={cert.certificateImage}
-                            alt={`${cert.title} Certificate`}
-                            className="certificate-image w-full h-48 sm:h-56 xl:h-64 object-cover"
-                          />
+                          <div className="glass-card p-3 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            <img
+                              src={cert.certificateImage}
+                              alt={`${cert.title} Certificate`}
+                              className="w-full h-48 sm:h-56 xl:h-64 object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                          </div>
                         </div>
                       </div>
                     </motion.div>

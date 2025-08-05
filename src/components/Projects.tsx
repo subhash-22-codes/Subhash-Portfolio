@@ -60,7 +60,7 @@ const Projects: React.FC = () => {
       tech: ['React', 'TypeScript', 'Socket.io', 'MongoDB', 'Flask'],
       github: '',
       demo: '',
-      images: ['/images/meme1.png', '/images/meme2.png', '/images/meme3.png'],
+      images: ['/images/meme1.png', '/images/meme2.png', '/images/meme3.png', '/images/meme4.png', '/images/meme5.png', '/images/meme6.png', '/images/meme7.png', '/images/meme8.png', '/images/meme9.png', '/images/meme10.png', '/images/meme11.png', '/images/meme12.png', '/images/meme13.png', '/images/meme14.png', '/images/meme15.png', '/images/meme16.png', '/images/meme17.png'],
       category: 'game',
       featured: false
     },
@@ -186,8 +186,12 @@ const Projects: React.FC = () => {
                 <img
                   src={project.images[0]}
                   alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-48 sm:h-56 md:h-64 object-cover object-center transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 
@@ -297,11 +301,15 @@ const Projects: React.FC = () => {
               <div className="p-6">
               {/* Image Gallery */}
               <div className="relative mb-6">
-                  <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden">
+                  <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden bg-gray-900">
                   <img
                     src={selectedProject.images[currentImageIndex]}
                       alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain object-center"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
                   />
                   
                     {/* Navigation Arrows */}
@@ -309,13 +317,13 @@ const Projects: React.FC = () => {
                     <>
                       <button
                         onClick={prevImage}
-                          className="absolute left-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors"
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors z-10"
                       >
                           <ChevronLeft className="w-6 h-6" />
                       </button>
                       <button
                         onClick={nextImage}
-                          className="absolute right-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors"
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors z-10"
                       >
                           <ChevronRight className="w-6 h-6" />
                       </button>
