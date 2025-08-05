@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="py-12 sm:py-16 md:py-20 relative">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         
         {/* Header */}
         <motion.div 

@@ -117,7 +117,7 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className="py-20 relative">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 max-w-7xl">
         
         {/* Header */}
         <motion.div 
