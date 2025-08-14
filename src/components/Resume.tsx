@@ -97,19 +97,26 @@ const Resume: React.FC = () => {
       period: 'July 2025 - Present',
       category: 'Leadership',
       description: 'Co-founded educational platform teaching Data Structures and Algorithms',
-      impact: '7.5K+ followers, 500K+ views, taught 10K+ students across Telangana',
+      impact: '8.5K+ followers, 600K+ views, taught 10K+ students across Telangana',
       link: 'https://instagram.com/gtech_dsa',
       profileImage: '/images/gtech_dsa.jpg',
       hasLink: true
     },
     {
-      title: 'Smart India Hackathon Team Leader',
-      organization: 'MRCET Internal Round',
-      period: '2024',
-      category: 'Leadership',
-      description: 'Led team in national-level hackathon competition (Team ID: 16129)',
-      impact: 'Successfully cleared internal rounds with innovative solution'
+      "title": "Smart India Hackathon 2024 – Team Leader",
+      "organization": "MRCET Internal Round",
+      "period": "2024",
+      "category": "Leadership",
+      "description": "Led a 6-member team, Think Tank Tribe, in the national-level Smart India Hackathon 2024 (Team ID: 16129) with the proposed solution 'Inclusive Learning App for Deaf and Mute' featuring two core modules: HandsLearn (learning platform) and SignSpeak (real-time sign language to text/speech converter).",
+      "impact": "Successfully cleared internal rounds by delivering a high-demand, socially impactful solution with government support potential, focusing on accessibility, cultural preservation, and scalable education.",
+      "highlights": [
+        "Proposed dual-module solution: HandsLearn for structured sign language learning using visual aids, games, and challenges; SignSpeak for gesture recognition and real-time translation to English/Gujarati text/speech.",
+        "Developed a technical approach leveraging AI, computer vision, and React-based frontend for user-friendly accessibility.",
+        "Addressed challenges like culturally relevant translations, user adoption, and technical integration with strategies like iterative development and pictorial representation.",
+        "Emphasized social inclusivity, economic empowerment, cultural promotion, and environmental sustainability."
+      ]
     },
+
     {
       title: 'Competitive Programming Excellence',
       organization: 'LeetCode & CodeChef',
