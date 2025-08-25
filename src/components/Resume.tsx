@@ -81,59 +81,57 @@ const Resume: React.FC = () => {
   ];
 
   const achievements = [
-    {
-      title: 'HackAPTS State-Level Hackathon Winner',
-      organization: 'GeeksforGeeks @ ANITS',
-      period: '2025',
-      category: 'Competition',
-      description: 'Won first place in state-level hackathon, ranking in top 1% of participants',
-      impact: 'Top 1% among 300+ participants',
-      certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC', // Replace with your actual certificate link
-      hasCredentials: true
-    },
-    {
-      title: 'GTech DSA Co-Founder & Content Creator',
-      organization: 'Instagram Tech Channel',
-      period: 'July 2025 - Present',
-      category: 'Leadership',
-      description: 'Co-founded educational platform teaching Data Structures and Algorithms',
-      impact: '8.5K+ followers, 600K+ views, taught 10K+ students across Telangana',
-      link: 'https://instagram.com/gtech_dsa',
-      profileImage: '/images/gtech_dsa.jpg',
-      hasLink: true
-    },
-    {
-      "title": "Smart India Hackathon 2024 – Team Leader",
-      "organization": "MRCET Internal Round",
-      "period": "2024",
-      "category": "Leadership",
-      "description": "Led a 6-member team, Think Tank Tribe, in the national-level Smart India Hackathon 2024 (Team ID: 16129) with the proposed solution 'Inclusive Learning App for Deaf and Mute' featuring two core modules: HandsLearn (learning platform) and SignSpeak (real-time sign language to text/speech converter).",
-      "impact": "Successfully cleared internal rounds by delivering a high-demand, socially impactful solution with government support potential, focusing on accessibility, cultural preservation, and scalable education.",
-      "highlights": [
-        "Proposed dual-module solution: HandsLearn for structured sign language learning using visual aids, games, and challenges; SignSpeak for gesture recognition and real-time translation to English/Gujarati text/speech.",
-        "Developed a technical approach leveraging AI, computer vision, and React-based frontend for user-friendly accessibility.",
-        "Addressed challenges like culturally relevant translations, user adoption, and technical integration with strategies like iterative development and pictorial representation.",
-        "Emphasized social inclusivity, economic empowerment, cultural promotion, and environmental sustainability."
-      ]
-    },
+  {
+    title: 'HackAPTS State-Level Hackathon Winner',
+    organization: 'GeeksforGeeks @ ANITS',
+    period: '2025',
+    category: 'Competition',
+    description: 'Won first place in state-level hackathon, ranking in top 1% of participants',
+    impact: 'Top 1% among 300+ participants',
+    certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
+    hasCredentials: true,
+    profileImage: '/images/hackapts.jpg' // Add the respective image
+  },
+  {
+    title: 'GTech DSA Co-Founder & Content Creator',
+    organization: 'Instagram Tech Channel',
+    period: 'July 2025 - Present',
+    category: 'Leadership',
+    description: 'Co-founded educational platform teaching Data Structures and Algorithms',
+    impact: '8.5K+ followers, 600K+ views, taught 10K+ students across Telangana',
+    link: 'https://instagram.com/gtech_dsa',
+    profileImage: '/images/gtech_dsa.jpg',
+    hasLink: true
+  },
+  {
+    title: "Smart India Hackathon 2024 – Team Leader",
+    organization: "MRCET Internal Round",
+    period: "2024",
+    category: "Leadership",
+    description: "Led a 6-member team with solution 'Inclusive Learning App for Deaf and Mute'.",
+    impact: "Cleared internal rounds with a socially impactful solution.",
+    profileImage: '/images/SIH.png'
+  },
+  {
+    title: 'Competitive Programming Excellence',
+    organization: 'LeetCode & CodeChef',
+    period: '2022 - Present',
+    category: 'Problem Solving',
+    description: 'Active problem solver with consistent performance',
+    impact: '120+ problems solved on LeetCode, active contributor on CodeChef',
+    profileImage: '/images/lc.png' // Add respective image
+  },
+  {
+    title: 'Class Representative',
+    organization: 'MRCET',
+    period: '2022 - 2024',
+    category: 'Leadership',
+    description: 'Elected class representative for 2 consecutive years',
+    impact: 'Led student initiatives and maintained communication between faculty and students',
+    profileImage: '/images/class_rep.jpeg' // Add respective image
+  }
+];
 
-    {
-      title: 'Competitive Programming Excellence',
-      organization: 'LeetCode & CodeChef',
-      period: '2022 - Present',
-      category: 'Problem Solving',
-      description: 'Active problem solver with consistent performance',
-      impact: '120+ problems solved on LeetCode, active contributor on CodeChef'
-    },
-    {
-      title: 'Class Representative',
-      organization: 'MRCET',
-      period: '2022 - 2024',
-      category: 'Leadership',
-      description: 'Elected class representative for 2 consecutive years',
-      impact: 'Led student initiatives and maintained communication between faculty and students'
-    }
-  ];
 
   const education = [
     {

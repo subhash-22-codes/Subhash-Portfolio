@@ -67,11 +67,20 @@ const Projects: React.FC = () => {
    {
   id: 5,
   title: 'DataPulse',
-      description: 'Full-stack real-time data monitoring and visualization platform with multiple data sources, alerts, and modular workspace system.',
-      tech: ['React', 'TypeScript', 'MongoDB', 'PostgreSQL', 'Flask', 'Redis', 'Docker'],
+      description: "Full-stack real-time data monitoring and visualization platform with support for multiple data sources (CSV uploads, simulated APIs, local DB). Includes real-time alerts, background processing, and a modular workspace system.",
+      tech:[
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "FastAPI",
+    "PostgreSQL",
+    "Celery",
+    "Redis",
+    "Docker"
+  ],
       github: '',
       demo: '',
-      images: ['/images/dp1.png'],
+      images: ['/images/dp1.png', '/images/dp2.png', '/images/dp3.png', '/images/dp4.png', '/images/dp5.png', '/images/dp6.png', '/images/dp7.png', '/images/dp8.png', '/images/dp9.png', '/images/dp10.png', '/images/dp11.png', '/images/dp12.png'],
       category: 'fullstack',
       featured: true
     }
