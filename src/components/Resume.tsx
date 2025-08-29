@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Calendar, MapPin, Building, GraduationCap, Award, Code, Globe, Trophy, Users, ExternalLink, Instagram } from 'lucide-react';
-
+import { Download, Calendar, MapPin, Building, GraduationCap, Award, Code, Globe, Trophy, Users, ExternalLink } from 'lucide-react';
+import { FaInstagram } from "react-icons/fa";
 const Resume: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'certifications' | 'education' | 'skills'>('certifications');
 
@@ -90,7 +90,7 @@ const Resume: React.FC = () => {
     impact: 'Top 1% among 300+ participants',
     certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
     hasCredentials: true,
-    profileImage: '/images/hackapts.jpg' // Add the respective image
+    profileImage: '/images/hackapts.jpg'
   },
   {
     title: 'GTech DSA Co-Founder & Content Creator',
@@ -101,6 +101,7 @@ const Resume: React.FC = () => {
     impact: '8.5K+ followers, 600K+ views, taught 10K+ students across Telangana',
     link: 'https://instagram.com/gtech_dsa',
     profileImage: '/images/gtech_dsa.jpg',
+    linkType: "instagram",
     hasLink: true
   },
   {
@@ -118,8 +119,11 @@ const Resume: React.FC = () => {
     period: '2022 - Present',
     category: 'Problem Solving',
     description: 'Active problem solver with consistent performance',
-    impact: '120+ problems solved on LeetCode, active contributor on CodeChef',
-    profileImage: '/images/lc.png' // Add respective image
+    impact: '150+ problems solved on LeetCode, active contributor on CodeChef',
+    profileImage: '/images/lc.png',
+    link: 'https://leetcode.com/u/SubhashY/', // ✅ Added here
+    hasLink: true,
+    linkType: "leetcode",
   },
   {
     title: 'Class Representative',
@@ -128,9 +132,10 @@ const Resume: React.FC = () => {
     category: 'Leadership',
     description: 'Elected class representative for 2 consecutive years',
     impact: 'Led student initiatives and maintained communication between faculty and students',
-    profileImage: '/images/class_rep.jpeg' // Add respective image
+    profileImage: '/images/class_rep.jpeg'
   }
 ];
+
 
 
   const education = [
@@ -402,11 +407,31 @@ const Resume: React.FC = () => {
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-3 py-2 bg-accent-secondary/20 text-accent-secondary rounded-lg text-sm font-medium hover:bg-accent-secondary/30 transition-colors"
                               >
-                                <Instagram className="w-4 h-4" />
-                                Visit Channel
+                                {/* Instagram */}
+                                {achievement.linkType === "instagram" && (
+                                  <>
+                                    <FaInstagram className="w-4 h-4 text-[#E4405F]" />
+                                    Visit Channel
+                                  </>
+                                )}
+
+                                {/* LeetCode */}
+                                {achievement.linkType === "leetcode" && (
+                                  <>
+                                    <img
+                                      src="/images/leetcode.png" // 👈 add leetcode logo here
+                                      alt="LeetCode"
+                                      className="w-4 h-4"
+                                    />
+                                    Visit Profile
+                                  </>
+                                )}
+
                                 <ExternalLink className="w-3 h-3" />
                               </a>
                             )}
+
+                            
                             {achievement.hasCredentials && (
                               <a
                                 href={achievement.certificateLink}
