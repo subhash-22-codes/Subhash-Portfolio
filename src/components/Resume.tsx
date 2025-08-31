@@ -98,7 +98,7 @@ const Resume: React.FC = () => {
     period: 'July 2025 - Present',
     category: 'Leadership',
     description: 'Co-founded educational platform teaching Data Structures and Algorithms',
-    impact: '8.5K+ followers, 600K+ views, taught 10K+ students across Telangana',
+    impact: '10.5K+ followers, 900K+ views, taught 10K+ students across Telangana',
     link: 'https://instagram.com/gtech_dsa',
     profileImage: '/images/gtech_dsa.jpg',
     linkType: "instagram",
