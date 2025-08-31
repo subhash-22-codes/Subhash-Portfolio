@@ -86,7 +86,7 @@ const Resume: React.FC = () => {
     organization: 'GeeksforGeeks @ ANITS',
     period: '2025',
     category: 'Competition',
-    description: 'Won first place in state-level hackathon, ranking in top 1% of participants',
+    description: 'Won state-level hackathon, ranking in top 1% of participants',
     impact: 'Top 1% among 300+ participants',
     certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
     hasCredentials: true,
