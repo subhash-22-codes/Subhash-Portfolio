@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Calendar, MapPin, Building, GraduationCap, Award, Code, Globe, Trophy, Users, ExternalLink } from 'lucide-react';
 import { FaInstagram } from "react-icons/fa";
+
 const Resume: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'certifications' | 'education' | 'skills'>('certifications');
+  const [activeTab, setActiveTab] = useState<'certifications' | 'achievements' | 'education' | 'skills'>('certifications');
 
   const certifications = [
     {
@@ -81,66 +82,62 @@ const Resume: React.FC = () => {
   ];
 
   const achievements = [
-{
-  title: 'HackAPTS State-Level Hackathon – 3rd Place',
-  organization: 'GeeksforGeeks @ ANITS',
-  period: '2025',
-  category: 'Competition',
-  description: 'Secured 3rd place at HackAPTS 2025, a premier state-level hackathon for AP & TS students. Solved challenging real-world DSA problems under the theme of Innovation and Problem Solving.',
-  impact: 'Ranked in the top 1% among 300+ participants.',
-  certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
-  hasCredentials: true,
-  profileImage: '/images/hackapts.jpg'
-},
-
-  {
-    title: 'GTech DSA Co-Founder & Content Creator',
-    organization: 'Instagram Tech Channel',
-    period: 'July 2025 - Present',
-    category: 'Leadership',
-    description: 'Co-founded educational platform teaching Data Structures and Algorithms',
-    impact: '10.5K+ followers, 900K+ views, taught 10K+ students across Telangana',
-    link: 'https://instagram.com/gtech_dsa',
-    profileImage: '/images/gtech_dsa.jpg',
-    linkType: "instagram",
-    hasLink: true
-  },
- {
-  title: "Smart India Hackathon 2024 – Team Leader",
-  organization: "MRCET Internal Round",
-  period: "2024",
-  category: "Leadership",
-  description: "Led a 6-member team with the solution 'Inclusive Learning App for Deaf and Mute'.",
-  impact: "Cleared internal rounds with a socially impactful solution.",
-  certificateLink: "/certificates/SIH_CERTIFICATE.pdf",
-  hasCredentials: true,
-  profileImage: "/images/SIH.png"
-}
-,
-  {
-    title: 'Competitive Programming Excellence',
-    organization: 'LeetCode & CodeChef',
-    period: '2022 - Present',
-    category: 'Problem Solving',
-    description: 'Active problem solver with consistent performance',
-    impact: '150+ problems solved on LeetCode, active contributor on CodeChef',
-    profileImage: '/images/lc.png',
-    link: 'https://leetcode.com/u/SubhashY/', // ✅ Added here
-    hasLink: true,
-    linkType: "leetcode",
-  },
-  {
-    title: 'Class Representative',
-    organization: 'MRCET',
-    period: '2022 - 2024',
-    category: 'Leadership',
-    description: 'Elected class representative for 2 consecutive years',
-    impact: 'Led student initiatives and maintained communication between faculty and students',
-    profileImage: '/images/class_rep.jpeg'
-  }
-];
-
-
+    {
+      title: 'HackAPTS State-Level Hackathon – 3rd Place',
+      organization: 'GeeksforGeeks @ ANITS',
+      period: '2025',
+      category: 'Competition',
+      description: 'Secured 3rd place at HackAPTS 2025, a premier state-level hackathon for AP & TS students. Solved challenging real-world DSA problems under the theme of Innovation and Problem Solving.',
+      impact: 'Ranked in the top 1% among 300+ participants.',
+      certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
+      hasCredentials: true,
+      profileImage: '/images/hackapts.jpg'
+    },
+    {
+      title: 'GTech DSA Co-Founder & Content Creator',
+      organization: 'Instagram Tech Channel',
+      period: 'July 2025 - Present',
+      category: 'Leadership',
+      description: 'Co-founded educational platform teaching Data Structures and Algorithms',
+      impact: '10.5K+ followers, 900K+ views, taught 10K+ students across Telangana',
+      link: 'https://instagram.com/gtech_dsa',
+      profileImage: '/images/gtech_dsa.jpg',
+      linkType: "instagram",
+      hasLink: true
+    },
+    {
+      title: "Smart India Hackathon 2024 – Team Leader",
+      organization: "MRCET Internal Round",
+      period: "2024",
+      category: "Leadership",
+      description: "Led a 6-member team with the solution 'Inclusive Learning App for Deaf and Mute'.",
+      impact: "Cleared internal rounds with a socially impactful solution.",
+      certificateLink: "/certificates/SIH_CERTIFICATE.pdf",
+      hasCredentials: true,
+      profileImage: "/images/SIH.png"
+    },
+    {
+      title: 'Competitive Programming Excellence',
+      organization: 'LeetCode & CodeChef',
+      period: '2022 - Present',
+      category: 'Problem Solving',
+      description: 'Active problem solver with consistent performance',
+      impact: '150+ problems solved on LeetCode, active contributor on CodeChef',
+      profileImage: '/images/lc.png',
+      link: 'https://leetcode.com/u/SubhashY/',
+      hasLink: true,
+      linkType: "leetcode",
+    },
+    {
+      title: 'Class Representative',
+      organization: 'MRCET',
+      period: '2022 - 2024',
+      category: 'Leadership',
+      description: 'Elected class representative for 2 consecutive years',
+      impact: 'Led student initiatives and maintained communication between faculty and students',
+      profileImage: '/images/class_rep.jpeg'
+    }
+  ];
 
   const education = [
     {
@@ -160,7 +157,7 @@ const Resume: React.FC = () => {
 
   const skills = {
     technical: [
-      { name: 'Python & Data Science', level: 90 },
+      { name: 'Python', level: 90 },
       { name: 'React & TypeScript', level: 88 },
       { name: 'Machine Learning & AI', level: 85 },
       { name: 'Data Structures & Algorithms', level: 92 },
@@ -175,6 +172,7 @@ const Resume: React.FC = () => {
 
   const tabs = [
     { key: 'certifications', label: 'Certifications', icon: Award },
+    { key: 'achievements', label: 'Achievements', icon: Trophy },
     { key: 'education', label: 'Education', icon: GraduationCap },
     { key: 'skills', label: 'Skills', icon: Code }
   ];
@@ -249,215 +247,219 @@ const Resume: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
+          {/* Certifications Tab */}
           {activeTab === 'certifications' && (
-            <div className="space-y-8 sm:space-y-12">
-              {/* Certifications Section */}
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3 px-2">
-                  <Award className="w-6 h-6 sm:w-8 sm:h-8 text-accent-primary" />
-                  Professional Certifications
-                </h3>
-                <div className="space-y-6 sm:space-y-8">
-                  {certifications.map((cert, index) => (
-                    <motion.div
-                      key={index}
-                      className="glass-card p-4 sm:p-6 lg:p-8"
-                      initial={{ opacity: 0, x: -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      whileHover={{ y: -4 }}
-                    >
-                      <div className="flex flex-col xl:flex-row gap-6">
-                        {/* Certificate Content */}
-                        <div className="flex-1">
-                          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 sm:mb-6">
-                            <div>
-                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
-                                <h4 className="text-xl sm:text-2xl font-bold text-accent-primary">
-                                  {cert.title}
-                                </h4>
-                                <span className="px-2 sm:px-3 py-1 bg-accent-primary/20 text-accent-primary rounded-full text-xs sm:text-sm font-medium w-fit">
-                                  {cert.category}
+            <div className="space-y-6 sm:space-y-8">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3 px-2">
+                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-accent-primary" />
+                Professional Certifications
+              </h3>
+              <div className="space-y-6 sm:space-y-8">
+                {certifications.map((cert, index) => (
+                  <motion.div
+                    key={index}
+                    className="glass-card p-4 sm:p-6 lg:p-8"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -4 }}
+                  >
+                    <div className="flex flex-col xl:flex-row gap-6">
+                      {/* Certificate Content */}
+                      <div className="flex-1">
+                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 sm:mb-6">
+                          <div>
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                              <h4 className="text-xl sm:text-2xl font-bold text-accent-primary">
+                                {cert.title}
+                              </h4>
+                              <span className="px-2 sm:px-3 py-1 bg-accent-primary/20 text-accent-primary rounded-full text-xs sm:text-sm font-medium w-fit">
+                                {cert.category}
+                              </span>
+                            </div>
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-text-secondary text-sm sm:text-base">
+                              <div className="flex items-center gap-2">
+                                <Building className="w-3 h-3 sm:w-4 sm:h-4" />
+                                {cert.issuer}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                                {cert.period}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="space-y-4">
+                          <ul className="space-y-2">
+                            {cert.description.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3 text-text-secondary text-sm sm:text-base">
+                                <div className="w-2 h-2 bg-accent-primary rounded-full mt-2 flex-shrink-0" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+
+                          <div className="pt-4">
+                            <h5 className="text-sm font-semibold text-white mb-3">Key Technologies:</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {cert.technologies.map((tech) => (
+                                <span
+                                  key={tech}
+                                  className="px-2 sm:px-3 py-1 bg-glass rounded-lg text-xs sm:text-sm font-medium text-text-secondary"
+                                >
+                                  {tech}
                                 </span>
-                              </div>
-                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-text-secondary text-sm sm:text-base">
-                                <div className="flex items-center gap-2">
-                                  <Building className="w-3 h-3 sm:w-4 sm:h-4" />
-                                  {cert.issuer}
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
-                                  {cert.period}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="space-y-4">
-                            <ul className="space-y-2">
-                              {cert.description.map((item, i) => (
-                                <li key={i} className="flex items-start gap-3 text-text-secondary text-sm sm:text-base">
-                                  <div className="w-2 h-2 bg-accent-primary rounded-full mt-2 flex-shrink-0" />
-                                  {item}
-                                </li>
                               ))}
-                            </ul>
-
-                            <div className="pt-4">
-                              <h5 className="text-sm font-semibold text-white mb-3">Key Technologies:</h5>
-                              <div className="flex flex-wrap gap-2">
-                                {cert.technologies.map((tech) => (
-                                  <span
-                                    key={tech}
-                                    className="px-2 sm:px-3 py-1 bg-glass rounded-lg text-xs sm:text-sm font-medium text-text-secondary"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
                             </div>
                           </div>
                         </div>
+                      </div>
 
-                        {/* Certificate Image */}
-                        <div className="xl:w-80 xl:flex-shrink-0">
-                          <div className="glass-card p-3 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                            <img
-                              src={cert.certificateImage}
-                              alt={`${cert.title} Certificate`}
-                              className="w-full h-48 sm:h-56 xl:h-64 object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.style.display = 'none';
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-                          </div>
+                      {/* Certificate Image */}
+                      <div className="xl:w-80 xl:flex-shrink-0">
+                        <div className="glass-card p-3 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                          <img
+                            src={cert.certificateImage}
+                            alt={`${cert.title} Certificate`}
+                            className="w-full h-48 sm:h-56 xl:h-64 object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Achievements Section */}
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3 px-2">
-                  <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-accent-secondary" />
-                  Achievements & Recognition
-                </h3>
-                <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                  {achievements.map((achievement, index) => (
-                    <motion.div
-                      key={index}
-                      className="glass-card p-4 sm:p-6"
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                    >
-                      <div className="flex flex-col sm:flex-row items-start gap-4">
-                        <div className="flex items-center gap-4 w-full sm:w-auto">
-                          <div className="p-2 sm:p-3 bg-accent-secondary/20 rounded-lg flex-shrink-0">
-                            {achievement.category === 'Competition' && <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-accent-secondary" />}
-                            {achievement.category === 'Leadership' && <Users className="w-5 h-5 sm:w-6 sm:h-6 text-accent-secondary" />}
-                            {achievement.category === 'Problem Solving' && <Code className="w-5 h-5 sm:w-6 sm:h-6 text-accent-secondary" />}
-                          </div>
-                          
-                          {/* GTech DSA Profile Image */}
-                          {achievement.profileImage && (
-                            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0">
-                              <img
-                                src={achievement.profileImage}
-                                alt="GTech DSA Profile"
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  // Fallback to default image if profile image fails to load
-                                  const target = e.target as HTMLImageElement;
-                                  target.src = 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=200';
-                                }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                        
-                        <div className="flex-1 w-full">
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                            <h4 className="text-base sm:text-lg font-bold text-white">{achievement.title}</h4>
-                            <span className="px-2 py-1 bg-accent-secondary/20 text-accent-secondary rounded text-xs font-medium w-fit">
-                              {achievement.category}
-                            </span>
-                          </div>
-                          <p className="text-text-secondary text-sm mb-2">
-                            {achievement.organization} • {achievement.period}
-                          </p>
-                          <p className="text-text-secondary text-sm mb-3">
-                            {achievement.description}
-                          </p>
-                          <div className="px-3 py-2 bg-glass rounded-lg mb-3">
-                            <p className="text-accent-secondary text-sm font-medium">
-                              Impact: {achievement.impact}
-                            </p>
-                          </div>
-                          
-                          {/* Action Buttons */}
-                          <div className="flex flex-wrap gap-2">
-                            {achievement.hasLink && (
-                              <a
-                                href={achievement.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-3 py-2 bg-accent-secondary/20 text-accent-secondary rounded-lg text-sm font-medium hover:bg-accent-secondary/30 transition-colors"
-                              >
-                                {/* Instagram */}
-                                {achievement.linkType === "instagram" && (
-                                  <>
-                                    <FaInstagram className="w-4 h-4 text-[#E4405F]" />
-                                    Visit Channel
-                                  </>
-                                )}
-
-                                {/* LeetCode */}
-                                {achievement.linkType === "leetcode" && (
-                                  <>
-                                    <img
-                                      src="/images/leetcode.png" // 👈 add leetcode logo here
-                                      alt="LeetCode"
-                                      className="w-4 h-4"
-                                    />
-                                    Visit Profile
-                                  </>
-                                )}
-
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            )}
-
-                            
-                            {achievement.hasCredentials && (
-                              <a
-                                href={achievement.certificateLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-3 py-2 bg-accent-primary/20 text-accent-primary rounded-lg text-sm font-medium hover:bg-accent-primary/30 transition-colors"
-                              >
-                                <Award className="w-4 h-4" />
-                                View Credentials
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           )}
 
+          {/* Achievements Tab */}
+          {activeTab === 'achievements' && (
+            <div className="space-y-6 sm:space-y-8">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3 px-2">
+                <img 
+                  src="/images/trophy.png" 
+                  alt="Trophy" 
+                  className="w-14 h-14 sm:w-14 sm:h-14 object-contain"
+                />
+                Achievements & Recognition
+              </h3>
+              <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                {achievements.map((achievement, index) => (
+                  <motion.div
+                    key={index}
+                    className="glass-card p-4 sm:p-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -4, scale: 1.02 }}
+                  >
+                    <div className="flex flex-col sm:flex-row items-start gap-4">
+                      <div className="flex items-center gap-4 w-full sm:w-auto">
+                        <div className="p-2 sm:p-3 bg-accent-secondary/20 rounded-lg flex-shrink-0">
+                          {achievement.category === 'Competition' && <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-accent-secondary" />}
+                          {achievement.category === 'Leadership' && <Users className="w-5 h-5 sm:w-6 sm:h-6 text-accent-secondary" />}
+                          {achievement.category === 'Problem Solving' && <Code className="w-5 h-5 sm:w-6 sm:h-6 text-accent-secondary" />}
+                        </div>
+                        
+                        {/* Profile Image */}
+                        {achievement.profileImage && (
+                          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0">
+                            <img
+                              src={achievement.profileImage}
+                              alt="Achievement Profile"
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                // Fallback to default image if profile image fails to load
+                                const target = e.target as HTMLImageElement;
+                                target.src = 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=200';
+                              }}
+                            />
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="flex-1 w-full">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                          <h4 className="text-base sm:text-lg font-bold text-white">{achievement.title}</h4>
+                          <span className="px-2 py-1 bg-accent-secondary/20 text-accent-secondary rounded text-xs font-medium w-fit">
+                            {achievement.category}
+                          </span>
+                        </div>
+                        <p className="text-text-secondary text-sm mb-2">
+                          {achievement.organization} • {achievement.period}
+                        </p>
+                        <p className="text-text-secondary text-sm mb-3">
+                          {achievement.description}
+                        </p>
+                        <div className="px-3 py-2 bg-glass rounded-lg mb-3">
+                          <p className="text-accent-secondary text-sm font-medium">
+                            Impact: {achievement.impact}
+                          </p>
+                        </div>
+                        
+                        {/* Action Buttons */}
+                        <div className="flex flex-wrap gap-2">
+                          {achievement.hasLink && (
+                            <a
+                              href={achievement.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-3 py-2 bg-accent-secondary/20 text-accent-secondary rounded-lg text-sm font-medium hover:bg-accent-secondary/30 transition-colors"
+                            >
+                              {/* Instagram */}
+                              {achievement.linkType === "instagram" && (
+                                <>
+                                  <FaInstagram className="w-4 h-4 text-[#E4405F]" />
+                                  Visit Channel
+                                </>
+                              )}
+
+                              {/* LeetCode */}
+                              {achievement.linkType === "leetcode" && (
+                                <>
+                                  <img
+                                    src="/images/leetcode.png"
+                                    alt="LeetCode"
+                                    className="w-4 h-4"
+                                  />
+                                  Visit Profile
+                                </>
+                              )}
+
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          )}
+
+                          {achievement.hasCredentials && (
+                            <a
+                              href={achievement.certificateLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-3 py-2 bg-accent-primary/20 text-accent-primary rounded-lg text-sm font-medium hover:bg-accent-primary/30 transition-colors"
+                            >
+                              <Award className="w-4 h-4" />
+                              View Credentials
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Education Tab */}
           {activeTab === 'education' && (
             <div className="space-y-6 sm:space-y-8">
               {education.map((edu, index) => (
@@ -517,6 +519,7 @@ const Resume: React.FC = () => {
             </div>
           )}
 
+          {/* Skills Tab */}
           {activeTab === 'skills' && (
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
               {/* Technical Skills */}
