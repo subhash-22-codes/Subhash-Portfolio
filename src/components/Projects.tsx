@@ -10,7 +10,7 @@ interface Project {
   github: string;
   demo: string;
   images: string[];
-  category: 'frontend' | 'fullstack' | 'ai' | 'game';
+  category: 'Web' | 'fullstack' | 'AI' | 'game';
   featured: boolean;
 }
 
@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
       github: 'https://github.com/subhash-22-codes/CodeX40',
       demo: 'https://code40learn40.netlify.app',
       images: ['/images/code1.png', '/images/code2.png', '/images/code3.png', '/images/code4.png'],
-      category: 'frontend',
+      category: 'Web',
       featured: true
     },
         {
@@ -52,8 +52,8 @@ const Projects: React.FC = () => {
               
         github: 'Coming soon',
         demo: '',
-      images: ['/images/jg1.png'],
-      category: 'ai',
+      images: ['/images/jg1.png','/images/jg2.png','/images/jg3.png','/images/jg4.png','/images/jg5.png','/images/jg6.png','/images/jg7.png','/images/jg8.png','/images/jg9.png'],
+      category: 'AI',
       featured: true
     },
       {
@@ -101,7 +101,7 @@ const Projects: React.FC = () => {
       github: 'https://github.com/subhash-22-codes/Dsa_Placement_series', // if repo public add link here
       demo: 'https://gtechdsa.netlify.app',
       images: ['/images/gtech1.png', '/images/gtech2.png', '/images/gtech3.png','/images/gtech4.png', '/images/gtech5.png'],
-      category: 'frontend',
+      category: 'Web',
       featured: true
     }
 
