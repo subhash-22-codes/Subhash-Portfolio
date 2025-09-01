@@ -81,17 +81,18 @@ const Resume: React.FC = () => {
   ];
 
   const achievements = [
-  {
-    title: 'HackAPTS State-Level Hackathon Winner',
-    organization: 'GeeksforGeeks @ ANITS',
-    period: '2025',
-    category: 'Competition',
-    description: 'Won state-level hackathon, ranking in top 1% of participants',
-    impact: 'Top 1% among 300+ participants',
-    certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
-    hasCredentials: true,
-    profileImage: '/images/hackapts.jpg'
-  },
+{
+  title: 'HackAPTS State-Level Hackathon – 3rd Place',
+  organization: 'GeeksforGeeks @ ANITS',
+  period: '2025',
+  category: 'Competition',
+  description: 'Secured 3rd place at HackAPTS 2025, a premier state-level hackathon for AP & TS students. Solved challenging real-world DSA problems under the theme of Innovation and Problem Solving.',
+  impact: 'Ranked in the top 1% among 300+ participants.',
+  certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
+  hasCredentials: true,
+  profileImage: '/images/hackapts.jpg'
+},
+
   {
     title: 'GTech DSA Co-Founder & Content Creator',
     organization: 'Instagram Tech Channel',
@@ -104,15 +105,18 @@ const Resume: React.FC = () => {
     linkType: "instagram",
     hasLink: true
   },
-  {
-    title: "Smart India Hackathon 2024 – Team Leader",
-    organization: "MRCET Internal Round",
-    period: "2024",
-    category: "Leadership",
-    description: "Led a 6-member team with solution 'Inclusive Learning App for Deaf and Mute'.",
-    impact: "Cleared internal rounds with a socially impactful solution.",
-    profileImage: '/images/SIH.png'
-  },
+ {
+  title: "Smart India Hackathon 2024 – Team Leader",
+  organization: "MRCET Internal Round",
+  period: "2024",
+  category: "Leadership",
+  description: "Led a 6-member team with the solution 'Inclusive Learning App for Deaf and Mute'.",
+  impact: "Cleared internal rounds with a socially impactful solution.",
+  certificateLink: "/certificates/SIH_CERTIFICATE.pdf",
+  hasCredentials: true,
+  profileImage: "/images/SIH.png"
+}
+,
   {
     title: 'Competitive Programming Excellence',
     organization: 'LeetCode & CodeChef',
