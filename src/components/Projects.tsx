@@ -46,7 +46,10 @@ const Projects: React.FC = () => {
         id: 3,
         title: 'Justice Genie',
       description: 'AI-powered legal assistance platform providing real-time answers, legal quizzes, and case-based insights through an intuitive dashboard.',
-      tech: ['React', 'JavaScript', 'Flask', 'MongoDB', 'Google Gen AI', 'Chart.js'],
+      tech: ['React (JSX)', 'Flask', 'MongoDB', 'Google Generative AI', 'Chart.js', 'Tailwind CSS', 'SMTP / Email Automation','PDF Generation & Reporting', 
+              'Speech Recognition & TTS', 'File Handling & Security','Multilingual Translation & NLP', 'Ant Design'], 
+              
+              
         github: 'Coming soon',
         demo: '',
       images: ['/images/jg1.png'],
