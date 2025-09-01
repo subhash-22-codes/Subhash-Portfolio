@@ -28,7 +28,7 @@ const Projects: React.FC = () => {
       github: 'https://github.com/subhash-22-codes/Tic-Tac-Toe',
       demo: 'https://tic-tac-toe-bruh.netlify.app',
       images: ['/images/tic1.png', '/images/tic2.png', '/images/tic3.png', '/images/tic4.png'],
-      category: 'frontend',
+      category: 'game',
       featured: false
     },
       {
@@ -56,8 +56,8 @@ const Projects: React.FC = () => {
       {
       id: 4,
       title: 'MemeGame',
-      description: 'Multiplayer meme challenge game with real-time chat, video reactions, multiple rounds, and dynamic scoring system.',
-      tech: ['React', 'TypeScript', 'Socket.io', 'MongoDB', 'Flask'],
+      description: 'Multiplayer meme challenge game where players join rooms, chat, and take turns as Judge. The Judge provides a funny sentence, others pick memes, and the Judge secretly scores them. Supports multiple rounds, rotating judges, dynamic scoring, and final leaderboard with fun stats.',
+      tech: ['React', 'TypeScript', 'Vite', 'Socket.io', 'MongoDB', 'Flask', 'JWT Authentication','Zustand', 'Tailwind CSS'],
       github: '',
       demo: '',
       images: ['/images/meme1.png', '/images/meme2.png', '/images/meme3.png', '/images/meme4.png', '/images/meme5.png', '/images/meme6.png', '/images/meme7.png', '/images/meme8.png', '/images/meme9.png', '/images/meme10.png', '/images/meme11.png', '/images/meme12.png', '/images/meme13.png', '/images/meme14.png', '/images/meme15.png', '/images/meme16.png', '/images/meme17.png'],
@@ -73,9 +73,15 @@ const Projects: React.FC = () => {
     "TypeScript",
     "Tailwind CSS",
     "FastAPI",
+    "SQLAlchemy",
+    "Pydantic",
+    "Alembic",
     "PostgreSQL",
     "Celery",
     "Redis",
+    "Google OAuth2",
+    "JWT Auth",
+    "SMTP",
     "Docker"
   ],
       github: '',
@@ -83,7 +89,19 @@ const Projects: React.FC = () => {
       images: ['/images/dp1.png', '/images/dp2.png', '/images/dp3.png', '/images/dp4.png', '/images/dp5.png', '/images/dp6.png', '/images/dp7.png', '/images/dp8.png', '/images/dp9.png', '/images/dp10.png', '/images/dp11.png', '/images/dp12.png'],
       category: 'fullstack',
       featured: true
+    },
+    {
+      id: 6,
+      title: 'GTech DSA Series',
+      description: 'An educational web app used by 5k+ learners for structured DSA practice. Features 30 handpicked LeetCode-style problems organized into 15 days with 10+ core patterns like Sliding Window, Two Pointers, Kadane’s Algorithm, and Binary Search. Actively shared via Instagram (@gtech_dsa) to help students crack placements.',
+      tech: ['React', 'Tailwind CSS', 'Lucide Icons', 'Jest', 'CRA'],
+      github: 'https://github.com/subhash-22-codes/Dsa_Placement_series', // if repo public add link here
+      demo: 'https://gtechdsa.netlify.app',
+      images: ['/images/gtech1.png', '/images/gtech2.png', '/images/gtech3.png','/images/gtech4.png', '/images/gtech5.png'],
+      category: 'frontend',
+      featured: true
     }
+
   ];
 
   const filters = [
