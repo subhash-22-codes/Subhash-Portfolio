@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Globe, Database, Settings } from 'lucide-react';
+import { Code, Globe, Database, Settings, CheckSquare } from 'lucide-react';
 
 // ✅ Import all skill icons so Vite resolves them for deployment
 import reactIcon from '../assets/skills/react.png';
@@ -50,7 +50,7 @@ const Skills: React.FC = () => {
     { key: 'backend', name: 'Backend', icon: Database, color: 'from-green-400 to-emerald-400' },
     { key: 'database', name: 'Database', icon: Database, color: 'from-purple-400 to-pink-400' },
     { key: 'tools', name: 'Tools', icon: Settings, color: 'from-orange-400 to-red-400' },
-    { key: 'testing', name: 'Testing', icon: Code, color: 'from-yellow-400 to-amber-400' }
+    { key: 'testing', name: 'Testing', icon: CheckSquare, color: 'from-yellow-400 to-amber-400' }
   ];
 
   const skillData: Skill[] = [
