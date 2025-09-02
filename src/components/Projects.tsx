@@ -60,7 +60,7 @@ const Projects: React.FC = () => {
       id: 4,
       title: 'MemeGame',
       description: 'Multiplayer meme challenge game where players join rooms, chat, and take turns as Judge. The Judge provides a funny sentence, others pick memes, and the Judge secretly scores them. Supports multiple rounds, rotating judges, dynamic scoring, and final leaderboard with fun stats.',
-      tech: ['React', 'TypeScript', 'Vite', 'Socket.io (Real-time Multiplayer)', 'MongoDB', 'Flask', 'JWT Authentication','Zustand (State Management)','SMTP / Email Automation', 'Tailwind CSS', 'Async & background processing'],
+      tech: ['React', 'TypeScript', 'Vite', 'Socket.io', 'MongoDB', 'Flask', 'JWT Authentication','Zustand','SMTP / Email Automation', 'Tailwind CSS', 'Async & background processing'],
       github: '',
       demo: '',
       images: ['/images/meme1.png', '/images/meme2.png', '/images/meme3.png', '/images/meme4.png', '/images/meme5.png', '/images/meme6.png', '/images/meme7.png', '/images/meme8.png', '/images/meme9.png', '/images/meme10.png', '/images/meme11.png', '/images/meme12.png', '/images/meme13.png', '/images/meme14.png', '/images/meme15.png', '/images/meme16.png', '/images/meme17.png'],
@@ -109,9 +109,9 @@ const Projects: React.FC = () => {
 
   const filters = [
     { key: 'all', label: 'All Projects', icon: Code },
-    { key: 'frontend', label: 'Frontend', icon: Globe },
+    { key: 'Web', label: 'Frontend', icon: Globe },
     { key: 'fullstack', label: 'Full Stack', icon: Database },
-    { key: 'ai', label: 'AI/ML', icon: Zap },
+    { key: 'AI', label: 'AI/ML', icon: Zap },
     { key: 'game', label: 'Games', icon: Zap }
   ];
 
