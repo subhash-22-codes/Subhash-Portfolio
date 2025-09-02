@@ -30,7 +30,7 @@ import awsIcon from '../assets/skills/aws.png';
 import figmaIcon from '../assets/skills/figma.png';
 
 import pytestIcon from '../assets/skills/pytest.png';
-import jestIcon from '../assets/skills/jest.png';
+import jestIcon from '../assets/skills/Jest.png';
 
 interface Skill {
   name: string;
