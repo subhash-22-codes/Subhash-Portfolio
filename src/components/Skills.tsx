@@ -17,6 +17,7 @@ import javaIcon from '../assets/skills/Java.png';
 import fastapiIcon from '../assets/skills/FastAPI.png';
 import postmanIcon from '../assets/skills/Postman.png';
 import nodejsIcon from '../assets/skills/Node.js.png';
+import celeryIcon from '../assets/skills/celery.png';
 
 import mongoIcon from '../assets/skills/MongoDB.png';
 import postgresIcon from '../assets/skills/PostgresSQL.png';
@@ -28,9 +29,12 @@ import dockerIcon from '../assets/skills/dockermain.png';
 import awsIcon from '../assets/skills/aws.png';
 import figmaIcon from '../assets/skills/figma.png';
 
+import pytestIcon from '../assets/skills/pytest.png';
+import jestIcon from '../assets/skills/jest.png';
+
 interface Skill {
   name: string;
-  category: 'frontend' | 'backend' | 'database' | 'tools';
+  category: 'frontend' | 'backend' | 'database' | 'tools' | 'testing';
   icon: string;
   level: number;
   color: string;
@@ -45,7 +49,8 @@ const Skills: React.FC = () => {
     { key: 'frontend', name: 'Frontend', icon: Globe, color: 'from-blue-400 to-cyan-400' },
     { key: 'backend', name: 'Backend', icon: Database, color: 'from-green-400 to-emerald-400' },
     { key: 'database', name: 'Database', icon: Database, color: 'from-purple-400 to-pink-400' },
-    { key: 'tools', name: 'Tools', icon: Settings, color: 'from-orange-400 to-red-400' }
+    { key: 'tools', name: 'Tools', icon: Settings, color: 'from-orange-400 to-red-400' },
+    { key: 'testing', name: 'Testing', icon: Code, color: 'from-yellow-400 to-amber-400' }
   ];
 
   const skillData: Skill[] = [
@@ -65,6 +70,7 @@ const Skills: React.FC = () => {
     { name: 'Java', category: 'backend', icon: javaIcon, level: 75, color: '#007396' },
     { name: 'Postman', category: 'backend', icon: postmanIcon, level: 75, color: '#FF6C37' },
     { name: 'Node.js', category: 'backend', icon: nodejsIcon, level: 80, color: '#339933' },
+    { name: 'Celery', category: 'backend', icon: celeryIcon, level: 70, color: '#379683' },
 
     // Database
     { name: 'MongoDB', category: 'database', icon: mongoIcon, level: 82, color: '#47A248' },
@@ -76,7 +82,11 @@ const Skills: React.FC = () => {
     { name: 'Netlify', category: 'tools', icon: netlifyIcon, level: 80, color: '#00C7B7' },
     { name: 'Docker', category: 'tools', icon: dockerIcon, level: 71, color: '#2496ED' },
     { name: 'AWS', category: 'tools', icon: awsIcon, level: 63, color: '#FF9900' },
-    { name: 'Figma', category: 'tools', icon: figmaIcon, level: 55, color: '#F24E1E' }
+    { name: 'Figma', category: 'tools', icon: figmaIcon, level: 55, color: '#F24E1E' },
+
+    // Testing
+    { name: 'PyTest', category: 'testing', icon: pytestIcon, level: 75, color: '#4B8BBE' },
+    { name: 'Jest', category: 'testing', icon: jestIcon, level: 70, color: '#C21325' },
   ];
 
   const filteredSkills = activeCategory === 'all'
