@@ -14,12 +14,16 @@ import cssIcon from '../assets/skills/css3.png';
 import flaskIcon from '../assets/skills/Flask.png';
 import pythonIcon from '../assets/skills/Python.png';
 import javaIcon from '../assets/skills/Java.png';
+import fastapiIcon from '../assets/skills/FastAPI.png';
+import postmanIcon from '../assets/skills/Postman.png';
+import nodejsIcon from '../assets/skills/Node.js.png';
 
 import mongoIcon from '../assets/skills/MongoDB.png';
 import postgresIcon from '../assets/skills/PostgresSQL.png';
 import redisIcon from '../assets/skills/Redis.png';
 
 import gitIcon from '../assets/skills/gitlogo.png';
+import netlifyIcon from '../assets/skills/netlify.png';
 import dockerIcon from '../assets/skills/dockermain.png';
 import awsIcon from '../assets/skills/aws.png';
 import figmaIcon from '../assets/skills/figma.png';
@@ -46,18 +50,21 @@ const Skills: React.FC = () => {
 
   const skillData: Skill[] = [
     // Frontend
-    { name: 'React', category: 'frontend', icon: reactIcon, level: 90, color: '#61DAFB' },
-    { name: 'TypeScript', category: 'frontend', icon: tsIcon, level: 85, color: '#3178C6' },
-    { name: 'JavaScript', category: 'frontend', icon: jsIcon, level: 90, color: '#F7DF1E' },
-    { name: 'Tailwind CSS', category: 'frontend', icon: tailwindIcon, level: 88, color: '#06B6D4' },
+    { name: 'React', category: 'frontend', icon: reactIcon, level: 89, color: '#61DAFB' },
+    { name: 'TypeScript', category: 'frontend', icon: tsIcon, level: 78, color: '#3178C6' },
+    { name: 'JavaScript', category: 'frontend', icon: jsIcon, level: 80, color: '#F7DF1E' },
+    { name: 'Tailwind CSS', category: 'frontend', icon: tailwindIcon, level: 81, color: '#06B6D4' },
     { name: 'Vite', category: 'frontend', icon: viteIcon, level: 80, color: '#646CFF' },
-    { name: 'HTML5', category: 'frontend', icon: htmlIcon, level: 95, color: '#E34F26' },
-    { name: 'CSS3', category: 'frontend', icon: cssIcon, level: 92, color: '#1572B6' },
+    { name: 'HTML5', category: 'frontend', icon: htmlIcon, level: 91, color: '#E34F26' },
+    { name: 'CSS3', category: 'frontend', icon: cssIcon, level: 87, color: '#1572B6' },
 
     // Backend
-    { name: 'Flask', category: 'backend', icon: flaskIcon, level: 85, color: '#000000' },
-    { name: 'Python', category: 'backend', icon: pythonIcon, level: 88, color: '#3776AB' },
-    { name: 'Java', category: 'backend', icon: javaIcon, level: 75, color: '#ED8B00' },
+    { name: 'Flask', category: 'backend', icon: flaskIcon, level: 82, color: '#ffffff' },
+    { name: 'FastAPI', category: 'backend', icon: fastapiIcon, level: 78, color: '#009688' },
+    { name: 'Python', category: 'backend', icon: pythonIcon, level: 85, color: '#3776AB' },
+    { name: 'Java', category: 'backend', icon: javaIcon, level: 75, color: '#007396' },
+    { name: 'Postman', category: 'backend', icon: postmanIcon, level: 75, color: '#FF6C37' },
+    { name: 'Node.js', category: 'backend', icon: nodejsIcon, level: 80, color: '#339933' },
 
     // Database
     { name: 'MongoDB', category: 'database', icon: mongoIcon, level: 82, color: '#47A248' },
@@ -65,10 +72,11 @@ const Skills: React.FC = () => {
     { name: 'Redis', category: 'database', icon: redisIcon, level: 70, color: '#DC382D' },
 
     // Tools
-    { name: 'Git', category: 'tools', icon: gitIcon, level: 85, color: '#F05032' },
-    { name: 'Docker', category: 'tools', icon: dockerIcon, level: 75, color: '#2496ED' },
-    { name: 'AWS', category: 'tools', icon: awsIcon, level: 70, color: '#FF9900' },
-    { name: 'Figma', category: 'tools', icon: figmaIcon, level: 65, color: '#F24E1E' }
+    { name: 'Git', category: 'tools', icon: gitIcon, level: 84, color: '#F05032' },
+    { name: 'Netlify', category: 'tools', icon: netlifyIcon, level: 80, color: '#00C7B7' },
+    { name: 'Docker', category: 'tools', icon: dockerIcon, level: 71, color: '#2496ED' },
+    { name: 'AWS', category: 'tools', icon: awsIcon, level: 63, color: '#FF9900' },
+    { name: 'Figma', category: 'tools', icon: figmaIcon, level: 55, color: '#F24E1E' }
   ];
 
   const filteredSkills = activeCategory === 'all'
