@@ -16,7 +16,7 @@ import pythonIcon from '../assets/skills/Python.png';
 import javaIcon from '../assets/skills/Java.png';
 import fastapiIcon from '../assets/skills/FastAPI.png';
 import postmanIcon from '../assets/skills/Postman.png';
-import nodejsIcon from '../assets/skills/Node.js.png';
+import nodejsIcon from '../assets/skills/nodejs.png';
 import celeryIcon from '../assets/skills/celery.png';
 
 import mongoIcon from '../assets/skills/MongoDB.png';
