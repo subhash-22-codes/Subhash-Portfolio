@@ -31,6 +31,7 @@ import figmaIcon from '../assets/skills/figma.png';
 
 import pytestIcon from '../assets/skills/pytest.png';
 import jestIcon from '../assets/skills/Jest.png';
+import locustIcon from '../assets/skills/Locust.png';
 
 interface Skill {
   name: string;
@@ -87,6 +88,7 @@ const Skills: React.FC = () => {
     // Testing
     { name: 'PyTest', category: 'testing', icon: pytestIcon, level: 75, color: '#4B8BBE' },
     { name: 'Jest', category: 'testing', icon: jestIcon, level: 70, color: '#C21325' },
+    { name: 'Locust', category: 'testing', icon: locustIcon, level: 60, color: '#2E9A4C' },
   ];
 
   const filteredSkills = activeCategory === 'all'
