@@ -48,9 +48,9 @@ const Projects: React.FC = () => {
       description: 'AI-powered legal assistance platform providing real-time answers, legal quizzes, and case-based insights through an intuitive dashboard.',
       tech: ['React (JSX)', 'Flask', 'MongoDB', 'Google Generative AI', 'Chart.js', 'Tailwind CSS', 'SMTP / Email Automation','PDF Generation & Reporting', 
               'Speech Recognition & TTS', 'File Handling & Security','Multilingual Translation & NLP', 'Ant Design'], 
-        github: 'Coming soon',
-        demo: '',
-      images: ['/images/jg1.png','/images/jg2.png','/images/jg3.png','/images/jg4.png','/images/jg5.png','/images/jg6.png','/images/jg7.png','/images/jg8.png','/images/jg9.png'],
+        github: 'https://github.com/subhash-22-codes/Justice-Genie',
+        demo: 'https://justice-genie-mu.vercel.app',
+      images: ['/images/jg2.png','/images/jg3.png','/images/jg4.png','/images/jg5.png','/images/jg6.png','/images/jg7.png','/images/jg8.png','/images/jg9.png'],
       category: 'AI',
       featured: true
     },
