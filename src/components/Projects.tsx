@@ -1,432 +1,321 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Code, Globe, Database, Zap } from 'lucide-react';
+import { 
+  Github, 
+  ExternalLink, 
+  Plus, 
+  Cpu, 
+  Globe, 
+  Database, 
+  Gamepad2,
+  ChevronRight,
+  ChevronLeft,
+  Layers,
+  Terminal
+} from 'lucide-react';
 
 interface Project {
   id: number;
   title: string;
+  category: 'game' | 'Web' | 'AI' | 'fullstack';
   description: string;
   tech: string[];
   github: string;
   demo: string;
   images: string[];
-  category: 'Web' | 'fullstack' | 'AI' | 'game';
   featured: boolean;
 }
 
 const Projects: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [expandedId, setExpandedId] = useState<number | null>(5);
+  const [imgIndex, setImgIndex] = useState<Record<number, number>>({});
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const projects: Project[] = [
-      {
-      id: 1,
-      title: 'Tic Tac Toe',
-      description: 'A modern, responsive Tic Tac Toe game built with React and TypeScript. Features smooth animations, game state management, and a clean UI design.',
-      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-      github: 'https://github.com/subhash-22-codes/Tic-Tac-Toe',
-      demo: 'https://tic-tac-toe-bruh.netlify.app',
-      images: ['/images/tic1.png', '/images/tic2.png', '/images/tic3.png', '/images/tic4.png'],
-      category: 'game',
-      featured: false
-    },
-      {
-      id: 2,
-      title: 'CodeX40',
-      description: 'A curated collection of 40+ most-asked company-specific coding questions with detailed solutions and LeetCode integration.',
-      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-      github: 'https://github.com/subhash-22-codes/CodeX40',
-      demo: 'https://code40learn40.netlify.app',
-      images: ['/images/code1.png', '/images/code2.png', '/images/code3.png', '/images/code4.png'],
-      category: 'Web',
+    {
+      id: 5,
+      title: 'DataPulse',
+      category: 'fullstack',
+      description: "Enterprise-grade real-time telemetry and visualization engine. Supports multiple data sources (CSV, APIs, DB) with real-time alerts, background processing via Celery/Redis, and a modular workspace system.",
+      tech: ["React", "TypeScript", "FastAPI", "PostgreSQL", "Celery", "Redis", "Docker", "Google OAuth2"],
+      github: 'coming soon', 
+      demo: 'https://data-pulse-eight.vercel.app',   
+      images: ['/images/dp1.png', '/images/dp2.png', '/images/dp3.png', '/images/dp4.png', '/images/dp5.png', '/images/dp6.png', '/images/dp7.png', '/images/dp8.png', '/images/dp9.png', '/images/dp10.png', '/images/dp11.png', '/images/dp12.png'],
       featured: true
     },
-        {
-        id: 3,
-        title: 'Justice Genie',
-      description: 'AI-powered legal assistance platform providing real-time answers, legal quizzes, and case-based insights through an intuitive dashboard.',
-      tech: ['React (JSX)', 'Flask', 'MongoDB', 'Google Generative AI', 'Chart.js', 'Tailwind CSS', 'SMTP / Email Automation','PDF Generation & Reporting', 
-              'Speech Recognition & TTS', 'File Handling & Security','Multilingual Translation & NLP', 'Ant Design'], 
-        github: 'https://github.com/subhash-22-codes/Justice-Genie',
-        demo: 'https://justice-genie-mu.vercel.app',
-      images: ['/images/jg2.png','/images/jg3.png','/images/jg4.png','/images/jg5.png','/images/jg6.png','/images/jg7.png','/images/jg8.png','/images/jg9.png'],
+    {
+      id: 3,
+      title: 'Justice Genie',
       category: 'AI',
+      description: "AI-powered legal assistance platform providing real-time answers, legal quizzes, and case-based insights. Features PDF generation, multilingual NLP, speech recognition, and automated email reporting.",
+      tech: ["React", "Flask", "MongoDB", "Google GenAI", "Chart.js", "Tailwind", "NLP", "SMTP"],
+      github: 'https://github.com/subhash-22-codes/Justice-Genie',
+      demo: 'https://justice-genie-mu.vercel.app',
+      images: ['/images/jg2.png', '/images/jg3.png', '/images/jg4.png', '/images/jg5.png', '/images/jg6.png', '/images/jg7.png', '/images/jg8.png', '/images/jg9.png'],
       featured: true
     },
-      {
+    {
       id: 4,
       title: 'MemeGame',
-      description: 'Multiplayer meme challenge game where players join rooms, chat, and take turns as Judge. The Judge provides a funny sentence, others pick memes, and the Judge secretly scores them. Supports multiple rounds, rotating judges, dynamic scoring, and final leaderboard with fun stats.',
-      tech: ['React', 'TypeScript', 'Vite', 'Socket.io', 'MongoDB', 'Flask', 'JWT Authentication','Zustand','SMTP / Email Automation', 'Tailwind CSS', 'Async & background processing'],
+      category: 'game',
+      description: "Real-time multiplayer meme challenge engine. Players join rooms, chat, and take turns as Judge. Features rotating judges, dynamic scoring, JWT-secured pipelines, and background async processing.",
+      tech: ["React", "Socket.io", "Node.js", "MongoDB", "Flask", "Zustand", "JWT", "Tailwind"],
       github: '',
       demo: '',
       images: ['/images/meme1.png', '/images/meme2.png', '/images/meme3.png', '/images/meme4.png', '/images/meme5.png', '/images/meme6.png', '/images/meme7.png', '/images/meme8.png', '/images/meme9.png', '/images/meme10.png', '/images/meme11.png', '/images/meme12.png', '/images/meme13.png', '/images/meme14.png', '/images/meme15.png', '/images/meme16.png', '/images/meme17.png'],
-      category: 'game',
       featured: false
-    },
-   {
-  id: 5,
-  title: 'DataPulse',
-      description: "Full-stack real-time data monitoring and visualization platform with support for multiple data sources (CSV uploads, simulated APIs, local DB). Includes real-time alerts, background processing, and a modular workspace system.",
-      tech:[
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "FastAPI",
-    "SQLAlchemy",
-    "Pydantic",
-    "Alembic",
-    "PostgreSQL",
-    "Celery",
-    "Redis",
-    "Google OAuth2",
-    "JWT Auth",
-    "SMTP",
-    "Docker"
-  ],
-      github: '',
-      demo: '',
-      images: ['/images/dp1.png', '/images/dp2.png', '/images/dp3.png', '/images/dp4.png', '/images/dp5.png', '/images/dp6.png', '/images/dp7.png', '/images/dp8.png', '/images/dp9.png', '/images/dp10.png', '/images/dp11.png', '/images/dp12.png'],
-      category: 'fullstack',
-      featured: true
     },
     {
       id: 6,
       title: 'GTech DSA Series',
-      description: 'An educational web app used by 5k+ learners for structured DSA practice. Features 30 handpicked LeetCode-style problems organized into 15 days with 10+ core patterns like Sliding Window, Two Pointers, Kadane’s Algorithm, and Binary Search. Actively shared via Instagram (@gtech_dsa) to help students crack placements.',
-      tech: ['React', 'Tailwind CSS', 'Lucide Icons', 'Jest', 'CRA'],
-      github: 'https://github.com/subhash-22-codes/Dsa_Placement_series', // if repo public add link here
-      demo: 'https://gtechdsa.netlify.app',
-      images: ['/images/gtech1.png', '/images/gtech2.png', '/images/gtech3.png','/images/gtech4.png', '/images/gtech5.png'],
       category: 'Web',
+      description: "Educational distribution platform supporting 5k+ learners. Optimized for high-traffic content delivery with 30+ structured LeetCode patterns and daily practice roadmaps.",
+      tech: ["React", "Tailwind CSS", "Lucide Icons", "Jest", "CRA"],
+      github: 'https://github.com/subhash-22-codes/Dsa_Placement_series',
+      demo: 'https://gtechdsa.netlify.app',
+      images: ['/images/gtech1.png', '/images/gtech2.png', '/images/gtech3.png', '/images/gtech4.png', '/images/gtech5.png'],
       featured: true
+    },
+    {
+      id: 2,
+      title: 'CodeX40',
+      category: 'Web',
+      description: "Technical repository of 40+ optimized algorithmic solutions. Integrated LeetCode patterns with detailed solution breakdowns and performance-first frontend rendering.",
+      tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+      github: 'https://github.com/subhash-22-codes/CodeX40',
+      demo: 'https://code40learn40.netlify.app',
+      images: ['/images/code1.png', '/images/code2.png', '/images/code3.png', '/images/code4.png'],
+      featured: true
+    },
+    {
+      id: 1,
+      title: 'Tic Tac Toe',
+      category: 'game',
+      description: "Modern responsive gaming interface with state management and clean UI animations. A study in component architecture and TypeScript strict typing.",
+      tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+      github: 'https://github.com/subhash-22-codes/Tic-Tac-Toe',
+      demo: 'https://tic-tac-toe-bruh.netlify.app',
+      images: ['/images/tic1.png', '/images/tic2.png', '/images/tic3.png', '/images/tic4.png'],
+      featured: false
     }
-
   ];
 
-  const filters = [
-    { key: 'all', label: 'All Projects', icon: Code },
-    { key: 'Web', label: 'Frontend', icon: Globe },
-    { key: 'fullstack', label: 'Full Stack', icon: Database },
-    { key: 'AI', label: 'AI/ML', icon: Zap },
-    { key: 'game', label: 'Games', icon: Zap }
-  ];
+  const handleNextImg = (e: React.MouseEvent, projectId: number, total: number) => {
+    e.stopPropagation();
+    setImgIndex(prev => ({ ...prev, [projectId]: ((prev[projectId] || 0) + 1) % total }));
+  };
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const handlePrevImg = (e: React.MouseEvent, projectId: number, total: number) => {
+    e.stopPropagation();
+    setImgIndex(prev => ({ ...prev, [projectId]: ((prev[projectId] || 0) - 1 + total) % total }));
+  };
 
-  const nextImage = () => {
-    if (selectedProject) {
-      setCurrentImageIndex((prev) => 
-        prev === selectedProject.images.length - 1 ? 0 : prev + 1
-      );
+  const getCategoryIcon = (cat: string) => {
+    switch(cat) {
+      case 'AI': return <Cpu size={14} className="text-emerald-400" />;
+      case 'game': return <Gamepad2 size={14} className="text-purple-400" />;
+      case 'fullstack': return <Database size={14} className="text-blue-400" />;
+      default: return <Globe size={14} className="text-orange-400" />;
     }
-  };
-
-  const prevImage = () => {
-    if (selectedProject) {
-      setCurrentImageIndex((prev) => 
-        prev === 0 ? selectedProject.images.length - 1 : prev - 1
-      );
-    }
-  };
-
-  const openProject = (project: Project) => {
-    setSelectedProject(project);
-    setCurrentImageIndex(0);
-  };
-
-  const closeProject = () => {
-    setSelectedProject(null);
-    setCurrentImageIndex(0);
   };
 
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section id="projects" className="relative min-h-screen bg-[#020202] text-[#fdfdfd] py-12 lg:py-24 overflow-hidden selection:bg-emerald-500/30">
+      
+      {/* Background Grid (Matched to Hero/About) */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)] bg-[size:4rem_4rem] lg:bg-[size:6rem_6rem] pointer-events-none" />
+      
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-24 relative z-10">
         
-        {/* Header */}
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins">
-            <span className="text-accent-primary">Featured</span> Projects
-          </h2>
-          <p className="text-xl text-text-secondary max-w-3xl mx-auto font-poppins">
-            A showcase of my latest work, featuring modern web applications, 
-            AI-powered solutions, and innovative digital experiences.
-          </p>
-        </motion.div>
-
-        {/* Filters */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-4 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {filters.map(({ key, label, icon: Icon }) => (
-            <motion.button
-              key={key}
-              onClick={() => setActiveFilter(key)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                activeFilter === key
-                  ? 'bg-accent-primary text-bg-primary'
-                  : 'glass-card hover:bg-glass-highlight'
-              }`}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Icon className="w-4 h-4" />
-              {label}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        {/* Projects Grid */}
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="project-card group cursor-pointer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              onClick={() => openProject(project)}
-            >
-              {/* Project Image */}
-              <div className="relative overflow-hidden rounded-t-2xl">
-                <img
-                  src={project.images[0]}
-                  alt={project.title}
-                  className="w-full h-48 sm:h-56 md:h-64 object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                
-                {/* Featured Badge */}
-                {project.featured && (
-                  <div className="absolute top-4 left-4 bg-accent-primary text-bg-primary px-3 py-1 rounded-full text-xs font-semibold">
-                    Featured
-                  </div>
-                )}
-                
-                {/* Category Badge */}
-                <div className="absolute top-4 right-4 glass px-3 py-1 rounded-full text-xs font-medium">
-                  {project.category}
-                </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-text-primary group-hover:text-accent-primary transition-colors font-poppins">
-                  {project.title}
-                </h3>
-                <p className="text-text-secondary text-sm mb-4 line-clamp-3 font-poppins">
-                  {project.description}
-                </p>
-                
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 bg-glass rounded-md text-xs font-medium text-text-secondary font-poppins"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tech.length > 4 && (
-                    <span className="px-2 py-1 bg-glass rounded-md text-xs font-medium text-text-secondary font-poppins">
-                      +{project.tech.length - 4}
-                    </span>
-                  )}
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  {project.github !== 'Coming soon' && project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-glass rounded-lg text-sm font-medium hover:bg-glass-highlight transition-colors font-poppins"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Github className="w-4 h-4" />
-                      Code
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-accent-primary text-bg-primary rounded-lg text-sm font-medium hover:bg-accent-secondary transition-colors font-poppins"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-      {selectedProject && (
-          <motion.div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeProject}
+        {/* HEADER */}
+        <div className="mb-16 lg:mb-24 space-y-4 border-l-2 border-zinc-900 pl-6 md:pl-10">
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-3"
           >
-            <motion.div
-              className="glass-strong max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-              {/* Modal Header */}
-              <div className="p-6 border-b border-glass-border">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-2xl font-bold text-accent-primary font-poppins">{selectedProject.title}</h3>
-                <button
-                    onClick={closeProject}
-                    className="p-2 rounded-lg hover:bg-glass-highlight transition-colors"
-                >
-                    <X className="w-6 h-6" />
-                </button>
-                </div>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-6">
-              {/* Image Gallery */}
-              <div className="relative mb-6">
-                  <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden bg-gray-900">
-                  <img
-                    src={selectedProject.images[currentImageIndex]}
-                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                      className="w-full h-full object-contain object-center"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                  />
-                  
-                    {/* Navigation Arrows */}
-                  {selectedProject.images.length > 1 && (
-                    <>
-                      <button
-                        onClick={prevImage}
-                          className="absolute left-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors z-10"
-                      >
-                          <ChevronLeft className="w-6 h-6" />
-                      </button>
-                      <button
-                        onClick={nextImage}
-                          className="absolute right-4 top-1/2 transform -translate-y-1/2 glass p-2 rounded-full hover:bg-glass-highlight transition-colors z-10"
-                      >
-                          <ChevronRight className="w-6 h-6" />
-                      </button>
-                    </>
-                  )}
-                </div>
-
-                  {/* Image Indicators */}
-                {selectedProject.images.length > 1 && (
-                  <div className="flex justify-center gap-2 mt-4">
-                    {selectedProject.images.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                          className={`w-2 h-2 rounded-full transition-colors ${
-                            index === currentImageIndex ? 'bg-accent-primary' : 'bg-glass-border'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-
-                {/* Project Details */}
-                <div className="space-y-6">
-                  <p className="text-text-secondary leading-relaxed font-poppins">
-                {selectedProject.description}
-              </p>
-
-                  {/* Tech Stack */}
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3 font-poppins">Technologies Used</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tech.map((tech) => (
-                    <span
-                      key={tech}
-                          className="px-3 py-1 bg-glass rounded-lg text-sm font-medium font-poppins"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-4 pt-4">
-                    {selectedProject.github !== 'Coming soon' && selectedProject.github && (
-                <a
-                  href={selectedProject.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 bg-glass rounded-xl font-medium hover:bg-glass-highlight transition-colors font-poppins"
-                >
-                        <Github className="w-5 h-5" />
-                  View Code
-                </a>
-                    )}
-                    {selectedProject.demo && (
-                <a
-                  href={selectedProject.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 bg-accent-primary text-bg-primary rounded-xl font-medium hover:bg-accent-secondary transition-colors font-poppins"
-                >
-                        <ExternalLink className="w-5 h-5" />
-                  Live Demo
-                </a>
-                    )}
-              </div>
-            </div>
-          </div>
-            </motion.div>
+            <Layers size={16} className="text-zinc-500" />
+            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] text-zinc-600">Dev_Log: 2024-25</span>
           </motion.div>
-      )}
-      </AnimatePresence>
+
+          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.8] text-white opacity-90">
+            Selected<br/><span className="text-zinc-800">Works</span>
+          </h2>
+        </div>
+
+        {/* ACCORDION */}
+        <div className="flex flex-col">
+          {projects.map((project, idx) => {
+            
+            const isHovered = hoveredProject === project.id;
+            const isDimmed = hoveredProject !== null && !isHovered && expandedId !== project.id;
+
+            return (
+              <div 
+                key={project.id} 
+                className={`
+                  group border-b border-zinc-900/60 transition-all duration-500 ease-in-out
+                  ${expandedId === project.id ? 'bg-zinc-900/20' : 'hover:bg-zinc-900/10'}
+                  ${isDimmed ? 'opacity-30 blur-[1px]' : 'opacity-100'} 
+                `}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
+                <button
+                  onClick={() => setExpandedId(expandedId === project.id ? null : project.id)}
+                  className="w-full flex flex-col md:flex-row items-start md:items-center justify-between py-8 md:py-12 text-left relative gap-4 md:gap-0"
+                >
+                  {/* Active Indicator Line */}
+                  <motion.div 
+                    initial={{ height: 0 }}
+                    animate={{ height: expandedId === project.id ? '100%' : '0%' }}
+                    className="absolute left-0 top-0 w-1 bg-emerald-500"
+                  />
+
+                  <div className="flex items-start md:items-center gap-6 md:gap-12 pl-4 md:pl-6 w-full">
+                    <span className={`font-mono text-xs transition-colors w-8 pt-1.5 md:pt-0 ${expandedId === project.id ? 'text-emerald-500' : 'text-zinc-700 group-hover:text-zinc-500'}`}>
+                      0{idx + 1}
+                    </span>
+                    
+                    <div className="space-y-3 md:space-y-2 flex-1">
+                      <h3 className={`text-3xl sm:text-4xl md:text-6xl font-bold tracking-tighter uppercase transition-all duration-500 ${expandedId === project.id ? 'text-white md:translate-x-4' : 'text-zinc-400 group-hover:text-zinc-200'}`}>
+                        {project.title}
+                      </h3>
+                      
+                      {/* Tags - Always visible on mobile, faded on desktop until active/hover */}
+                      <div className={`flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-widest transition-all duration-500 ${expandedId === project.id ? 'opacity-100 md:translate-x-4' : 'opacity-60 md:opacity-0 md:group-hover:opacity-60'}`}>
+                        <span className="flex items-center gap-2 text-zinc-400 bg-zinc-900/50 px-2 py-1 rounded border border-zinc-800">
+                          {getCategoryIcon(project.category)}
+                          {project.category === 'fullstack' ? 'FULL_STACK' : project.category}
+                        </span>
+                        {project.featured && (
+                          <span className="text-emerald-400 border border-emerald-500/20 px-2 py-1 rounded bg-emerald-500/5">
+                            FEATURED
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Accordion Icon */}
+                  <div className={`absolute right-0 top-8 md:top-auto md:relative mr-2 md:mr-6 p-3 rounded-full border transition-all duration-300 ${expandedId === project.id ? 'bg-white border-white text-black rotate-180' : 'border-zinc-800 text-zinc-600 group-hover:border-zinc-600'}`}>
+                    <Plus size={18} className={`transition-transform duration-300 ${expandedId === project.id ? 'rotate-45' : ''}`} />
+                  </div>
+                </button>
+
+                <AnimatePresence>
+                  {expandedId === project.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: "circOut" }}
+                      className="overflow-hidden bg-[#080808]/50 border-t border-zinc-900/50"
+                    >
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 py-10 px-4 md:px-12">
+                        
+                        {/* Left: Specs */}
+                        <div className="lg:col-span-5 space-y-8 md:space-y-10 order-2 lg:order-1">
+                          <div className="space-y-4 md:space-y-6">
+                            <div className="flex items-center gap-2 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                              <Terminal size={12} />
+                              <span>/ System_Brief</span>
+                            </div>
+                            <p className="text-zinc-300 leading-relaxed font-light text-base md:text-lg">
+                              {project.description}
+                            </p>
+                          </div>
+
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                              <Layers size={12} />
+                              <span>/ Tech_Matrix</span>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                {project.tech.map((t) => (
+                                  <span key={t} className="px-3 py-1.5 bg-zinc-900/80 text-zinc-400 rounded text-[10px] sm:text-[11px] font-mono border border-zinc-800/80 hover:border-emerald-500/30 hover:text-emerald-400 transition-colors cursor-default">
+                                    {t}
+                                  </span>
+                                ))}
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-zinc-900/50">
+                            {project.github && project.github !== 'coming soon' && (
+                              <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 px-6 py-4 bg-zinc-900 text-white rounded flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all font-mono text-xs uppercase tracking-wider group/btn">
+                                <Github size={16} className="group-hover/btn:text-emerald-400 transition-colors"/> 
+                                <span>Repo_Access</span>
+                              </a>
+                            )}
+                            {project.demo && (
+                              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex-1 px-6 py-4 bg-white text-black rounded flex items-center justify-center gap-3 hover:bg-zinc-200 transition-all font-mono text-xs uppercase tracking-wider font-bold">
+                                <ExternalLink size={16} /> 
+                                <span>Live_Deploy</span>
+                              </a>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Right: Gallery */}
+                        <div className="lg:col-span-7 order-1 lg:order-2">
+                            <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900/50 aspect-video group/image shadow-2xl">
+                              <AnimatePresence mode='wait'>
+                                <motion.img 
+                                  key={imgIndex[project.id] || 0}
+                                  src={project.images[imgIndex[project.id] || 0]} 
+                                  initial={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
+                                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                                  exit={{ opacity: 0, scale: 1.05 }}
+                                  transition={{ duration: 0.4 }}
+                                  alt={project.title} 
+                                  className="w-full h-full object-contain bg-[#050505]"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).style.display = 'none';
+                                  }}
+                                />
+                              </AnimatePresence>
+                              
+                              {/* Desktop Controls (Overlay) */}
+                              {project.images.length > 1 && (
+                                <div className="hidden md:flex absolute inset-0 justify-between items-center px-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+                                  <button onClick={(e) => handlePrevImg(e, project.id, project.images.length)} className="p-3 bg-black/50 hover:bg-emerald-500 hover:text-black text-white rounded-full backdrop-blur-md transition-all border border-white/10">
+                                    <ChevronLeft size={20} />
+                                  </button>
+                                  <button onClick={(e) => handleNextImg(e, project.id, project.images.length)} className="p-3 bg-black/50 hover:bg-emerald-500 hover:text-black text-white rounded-full backdrop-blur-md transition-all border border-white/10">
+                                    <ChevronRight size={20} />
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Mobile Controls & Counter */}
+                            <div className="mt-4 flex justify-between items-center px-1">
+                              <div className="flex gap-1.5 flex-wrap">
+                                {project.images.map((_, i) => (
+                                  <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === (imgIndex[project.id] || 0) ? 'w-8 bg-emerald-500' : 'w-2 bg-zinc-800'}`} />
+                                ))}
+                              </div>
+                              
+                              {/* Mobile Buttons */}
+                              {project.images.length > 1 && (
+                                <div className="flex md:hidden gap-3">
+                                    <button onClick={(e) => handlePrevImg(e, project.id, project.images.length)} className="p-2.5 text-zinc-400 active:text-white bg-zinc-900 rounded-lg border border-zinc-800"><ChevronLeft size={18}/></button>
+                                    <button onClick={(e) => handleNextImg(e, project.id, project.images.length)} className="p-2.5 text-zinc-400 active:text-white bg-zinc-900 rounded-lg border border-zinc-800"><ChevronRight size={18}/></button>
+                                </div>
+                              )}
+                            </div>
+                        </div>
+
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 };

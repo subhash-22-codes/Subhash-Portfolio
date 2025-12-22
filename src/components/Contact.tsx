@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Send, 
+  Terminal, 
+  Github, 
+  Linkedin, 
+  CheckCircle2, 
+  Copy,
+  ArrowRight,
+} from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
-import Lottie from "lottie-react";
-import animationData from "../assets/animations/buy-online.json";
 import { FaXTwitter } from 'react-icons/fa6';
 
 const Contact: React.FC = () => {
@@ -14,6 +23,7 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (state.succeeded) {
@@ -27,337 +37,254 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: 'Email',
-      value: 'subashyagantisubbu@gmail.com',
-      link: 'mailto:subashyagantisubbu@gmail.com',
-      color: 'text-accent-primary'
-    },
-    {
-      icon: Phone,
-      title: 'Phone',
-      value: '+91 9848074591',
-      link: 'tel:+919848074591',
-      color: 'text-accent-secondary'
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      value: 'India, Hyderabad',
-      link: 'https://maps.google.com',
-      color: 'text-accent-tertiary'
-    }
-  ];
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('subashyagantisubbu@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const socialLinks = [
-    {
-      icon: Github,
-      href: 'https://github.com/subhash-22-codes',
-      label: 'GitHub',
-      color: 'hover:bg-gray-900 hover:text-white hover:border-gray-900',
-      brandColor: '#24292e'
-    },
-    {
-      icon: Linkedin,
-      href: 'https://www.linkedin.com/in/subhash-yaganti-a8b3b626a/',
-      label: 'LinkedIn',
-      color: 'hover:bg-blue-600 hover:text-white hover:border-blue-600',
-      brandColor: '#0077b5'
-    },
-    {
-      icon: FaXTwitter,
-      href: 'https://x.com/SYaganti44806',
-      label: 'Twitter',
-      color: 'hover:bg-black hover:text-white hover:border-black',
-      brandColor: '#000000'
-    },
-    {
-      icon: ExternalLink,
-      href: '',
-      label: 'Portfolio',
-      color: 'hover:bg-accent-primary hover:text-bg-primary hover:border-accent-primary',
-      brandColor: '#64ffda'
-    }
+    { icon: Github, href: 'https://github.com/subhash-22-codes', label: 'GITHUB_REPO' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/subhash-yaganti-a8b3b626a/', label: 'LINKEDIN_ID' },
+    { icon: FaXTwitter, href: 'https://x.com/SYaganti44806', label: 'TWITTER_X' },
   ];
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20 relative">
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
-        
-        {/* Header */}
-        <motion.div 
-          className="text-center mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 font-poppins">
-            Get In <span className="text-accent-primary">Touch</span>
-          </h2>
-          <p className="text-lg sm:text-xl text-text-secondary max-w-3xl mx-auto font-poppins px-4">
-            Ready to start your next project? Let's discuss how I can help bring your ideas to life.
-          </p>
-        </motion.div>
+    <section id="contact" className="relative py-12 lg:py-24 bg-[#020202] text-[#f4f4f5] overflow-hidden selection:bg-emerald-500/20">
+      
+      {/* Background Grid (Unified) */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)] bg-[size:4rem_4rem] lg:bg-[size:6rem_6rem] pointer-events-none" />
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
-          
-          {/* Contact Information */}
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-24 relative z-10">
+        
+        {/* HEADER */}
+        <div className="mb-12 lg:mb-24 border-l-2 border-zinc-900 pl-4 sm:pl-6 md:pl-10">
           <motion.div 
-            className="space-y-6 sm:space-y-8 order-2 lg:order-1"
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            className="flex flex-wrap items-center gap-3 mb-2"
           >
-            {/* Contact Info Cards */}
-            <div className="space-y-4 sm:space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.a
-                  key={info.title}
-                  href={info.link}
-                  target={info.title === 'Location' ? '_blank' : undefined}
-                  rel={info.title === 'Location' ? 'noopener noreferrer' : undefined}
-                  className="glass-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4 group cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                >
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-glass flex items-center justify-center group-hover:bg-accent-primary/10 transition-colors flex-shrink-0`}>
-                    <info.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${info.color}`} />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-xs sm:text-sm text-text-muted font-poppins">{info.title}</div>
-                    <div className="text-sm sm:text-base text-white font-medium font-poppins break-words">{info.value}</div>
-                  </div>
-                </motion.a>
-              ))}
+            {/* Your indicator content goes here */}
+          </motion.div>
+
+          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tighter text-white uppercase leading-[0.85] break-words">
+            Get_In<span className="text-zinc-800">.</span>Touch
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+          
+          {/* LEFT: Connection Details */}
+          <div className="space-y-10 md:space-y-12">
+            <div className="space-y-6">
+              <p className="text-lg sm:text-xl md:text-2xl text-zinc-400 leading-relaxed font-light max-w-xl">
+                Engineering <span className="text-zinc-100 font-medium">high-scale systems</span> requires clear communication. 
+                I am currently open for architectural roles and freelance backend development.
+              </p>
             </div>
 
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-white font-poppins">
-                Connect With Me
-              </h3>
-              <div className="flex gap-3 sm:gap-4 flex-wrap">
-                {socialLinks.map((social, index) => (
-                  <motion.a
+            {/* Direct Uplink (Email Box) */}
+            <div className="group relative bg-[#080808] border border-zinc-900 rounded-3xl p-6 md:p-8 hover:border-zinc-700 transition-all">
+              <button 
+                onClick={handleCopyEmail}
+                className="absolute top-4 right-4 text-zinc-600 hover:text-white transition-colors p-2 hover:bg-zinc-900 rounded-lg"
+                title="Copy Email"
+              >
+                {copied ? <CheckCircle2 size={18} className="text-emerald-500" /> : <Copy size={18} />}
+              </button>
+              
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-zinc-600 font-mono text-[10px] uppercase tracking-widest">
+                  <Mail size={12} /> Primary_Uplink
+                </div>
+                <div className="text-sm sm:text-lg md:text-2xl font-mono text-zinc-100 break-all font-bold">
+                  subashyagantisubbu@gmail.com
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+               <div className="p-5 bg-[#080808] border border-zinc-900 rounded-2xl flex items-center gap-4 hover:border-zinc-800 transition-colors">
+                  <div className="p-3 bg-zinc-900 rounded-xl text-emerald-500"><Phone size={20} /></div>
+                  <div>
+                    <div className="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Voice_Line</div>
+                    <div className="text-zinc-200 text-sm font-bold mt-1">+91 9848074591</div>
+                  </div>
+               </div>
+               <div className="p-5 bg-[#080808] border border-zinc-900 rounded-2xl flex items-center gap-4 hover:border-zinc-800 transition-colors">
+                  <div className="p-3 bg-zinc-900 rounded-xl text-emerald-500"><MapPin size={20} /></div>
+                  <div>
+                    <div className="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Base_Station</div>
+                    <div className="text-zinc-200 text-sm font-bold mt-1">Hyderabad, India</div>
+                  </div>
+               </div>
+            </div>
+
+            {/* Social Matrix */}
+            <div className="space-y-4">
+              <div className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">Social_Protocols</div>
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map((social) => (
+                  <a 
                     key={social.label}
-                    href={social.href}
-                    target="_blank"
+                    href={social.href} 
+                    target="_blank" 
                     rel="noopener noreferrer"
-                    className={`social-link ${social.color} w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 ease-in-out`}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                    whileHover={{ 
-                      scale: 1.15, 
-                      y: -6,
-                      transition: { duration: 0.2 }
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    aria-label={social.label}
-                    style={{
-                      '--brand-color': social.brandColor
-                    } as React.CSSProperties}
+                    className="flex-1 min-w-[120px] flex items-center justify-center gap-2 py-4 border border-zinc-800 bg-[#080808] rounded-xl text-zinc-500 hover:text-white hover:border-zinc-600 transition-all group"
                   >
-                    <social.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </motion.a>
+                    <social.icon size={18} />
+                    <span className="font-mono text-[10px] uppercase tracking-wider hidden sm:inline-block">{social.label}</span>
+                    <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all hidden sm:block text-emerald-500" />
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
+          </div>
 
-            {/* Additional Info */}
-            <motion.div
-              className="glass-card p-4 sm:p-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-accent-primary font-poppins">
-                Let's Work Together
-              </h3>
-              <p className="text-text-secondary text-xs sm:text-sm leading-relaxed font-poppins">
-                I'm always open to discussing new opportunities, interesting projects, 
-                and creative ideas. Whether you have a question or just want to say hi, 
-                I'll try my best to get back to you!
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div 
-            className="contact-form order-1 lg:order-2"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            {!state.succeeded ? (
-              <>
-                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-accent-primary font-poppins">
-                  Send Message
-                </h3>
-                
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
-                    >
-                      <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="input-modern w-full"
-                        placeholder="Your name"
-                      />
-                    </motion.div>
-                    
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                      <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="input-modern w-full"
-                        placeholder="your.email@example.com"
-                      />
-                      <ValidationError prefix="Email" field="email" errors={state.errors} />
-                    </motion.div>
-                  </div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
+          {/* RIGHT: Transmission Form */}
+          <div className="bg-[#080808] p-1 rounded-3xl md:rounded-[2.5rem] border border-zinc-900 relative overflow-hidden mt-8 lg:mt-0 shadow-2xl">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent opacity-50" />
+              
+              <AnimatePresence mode="wait">
+                {/* SUCCESS STATE: TERMINAL LOG */}
+                {state.succeeded ? (
+                  <motion.div 
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4 }}
+                    className="h-full min-h-[500px] flex flex-col items-center justify-center p-8 md:p-12 bg-[#0a0a0a] rounded-[2.3rem]"
                   >
-                    <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
-                      Subject *
-                    </label>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="input-modern w-full"
-                      placeholder="Project inquiry"
-                    />
-                  </motion.div>
+                      <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6 border border-emerald-500/20">
+                         <CheckCircle2 size={32} className="text-emerald-500" />
+                      </div>
+                      
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">Transmission_Complete</h3>
+                      
+                      {/* Terminal Log */}
+                      <div className="w-full max-w-sm bg-black border border-zinc-900 rounded-xl p-6 font-mono text-xs text-zinc-400 space-y-3 mb-8 text-left shadow-inner">
+                         <div className="flex justify-between">
+                            <span>&gt; Status:</span>
+                            <span className="text-emerald-500">200 OK</span>
+                         </div>
+                         <div className="flex justify-between">
+                            <span>&gt; Protocol:</span>
+                            <span>HTTPS/Secure</span>
+                         </div>
+                         <div className="flex justify-between">
+                            <span>&gt; Packet_ID:</span>
+                            <span>#{Math.floor(Math.random() * 99999)}</span>
+                         </div>
+                         <div className="border-t border-zinc-800 pt-3 mt-3 text-zinc-500 italic">
+                            &gt; Message logged. Expecting response sequence shortly...
+                         </div>
+                      </div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                  >
-                    <label className="block text-xs sm:text-sm font-medium mb-2 text-text-secondary font-poppins">
-                      Message *
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={4}
-                      className="input-modern w-full resize-none"
-                      placeholder="Tell me about your project..."
-                    />
-                    <ValidationError prefix="Message" field="message" errors={state.errors} />
-                  </motion.div>
+                      <button 
+                        onClick={() => window.location.reload()}
+                        className="px-8 py-4 bg-zinc-900 text-white rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-zinc-800 transition-all border border-zinc-800"
+                      >
+                        Reset_Uplink
+                      </button>
+                   </motion.div>
+                ) : (
+                   /* FORM STATE */
+                   <motion.form 
+                     key="form"
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     exit={{ opacity: 0 }}
+                     onSubmit={handleSubmit} 
+                     className="h-full flex flex-col justify-between p-6 md:p-10 lg:p-12 space-y-8 bg-[#0a0a0a] rounded-[2.3rem]"
+                   >
+                     <div className="space-y-8">
+                       <div className="flex items-center gap-2 text-zinc-500 font-mono text-[10px] uppercase tracking-widest border-b border-zinc-900 pb-4">
+                          <Terminal size={14} /> Initialize_Message_Sequence
+                       </div>
 
-                  <motion.button
-                    type="submit"
-                    disabled={state.submitting}
-                    className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-3 sm:py-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {state.submitting ? (
-                      <>
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 sm:w-5 sm:h-5" />
-                        Send Message
-                      </>
-                    )}
-                  </motion.button>
+                       {/* NOTE: 'text-base' (16px) is enforced on all inputs below.
+                         This prevents iOS/iPhone from auto-zooming when clicking the fields.
+                       */}
 
-                  {/* Submit Error */}
-                  {Array.isArray(state.errors) && state.errors.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-center py-3 px-4 rounded-lg bg-red-500 bg-opacity-10 text-red-400 text-xs sm:text-sm font-poppins"
-                    >
-                      ❌ Failed to send message. Please check the fields and try again.
-                    </motion.div>
-                  )}
-                </form>
-              </>
-            ) : (
-              <motion.div
-                className="text-center py-6 sm:py-8"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Lottie
-                  animationData={animationData}
-                  loop={true}
-                  autoplay={true}
-                  className="w-32 h-32 sm:w-40 sm:h-40 md:w-52 md:h-52 mx-auto mb-4 sm:mb-6"
-                />
-                <CheckCircle className="w-12 h-12 sm:w-16 sm:h-16 text-accent-primary mx-auto mb-3 sm:mb-4" />
-                <h4 className="text-lg sm:text-xl font-semibold mb-2 text-white font-poppins">
-                  Thank you for reaching out! 💌
-                </h4>
-                <p className="text-text-secondary font-poppins text-sm sm:text-base">
-                  I've received your message and will get back to you soon. Your interest means a lot — really!
-                </p>
-                <p className="text-text-muted text-xs sm:text-sm italic mt-3 sm:mt-4 font-poppins">
-                  Explore my portfolio or connect with me on socials while you wait!
-                </p>
-              </motion.div>
-            )}
-          </motion.div>
+                       <div className="space-y-2">
+                         <label className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest ml-1">User_ID</label>
+                         <input 
+                           type="text" 
+                           name="name"
+                           required
+                           value={formData.name}
+                           onChange={handleInputChange}
+                           placeholder="Enter your name"
+                           className="w-full bg-zinc-950 border border-zinc-900 rounded-xl px-4 py-4 text-white placeholder:text-zinc-800 focus:outline-none focus:border-emerald-500/50 transition-all font-mono text-base"
+                         />
+                       </div>
+
+                       <div className="space-y-2">
+                         <label className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest ml-1">Return_Address</label>
+                         <input 
+                           type="email" 
+                           name="email"
+                           required
+                           value={formData.email}
+                           onChange={handleInputChange}
+                           placeholder="name@company.com"
+                           className="w-full bg-zinc-950 border border-zinc-900 rounded-xl px-4 py-4 text-white placeholder:text-zinc-800 focus:outline-none focus:border-emerald-500/50 transition-all font-mono text-base"
+                         />
+                         <ValidationError prefix="Email" field="email" errors={state.errors} />
+                       </div>
+
+                       <div className="space-y-2">
+                         <label className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest ml-1">Subject_Line</label>
+                         <input 
+                           type="text" 
+                           name="subject"
+                           required
+                           value={formData.subject}
+                           onChange={handleInputChange}
+                           placeholder="Project Inquiry / Collaboration"
+                           className="w-full bg-zinc-950 border border-zinc-900 rounded-xl px-4 py-4 text-white placeholder:text-zinc-800 focus:outline-none focus:border-emerald-500/50 transition-all font-mono text-base"
+                         />
+                       </div>
+
+                       <div className="space-y-2">
+                         <label className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest ml-1">Data_Packet</label>
+                         <textarea 
+                           name="message"
+                           required
+                           rows={4}
+                           value={formData.message}
+                           onChange={handleInputChange}
+                           placeholder="Enter your message parameters..."
+                           className="w-full bg-zinc-950 border border-zinc-900 rounded-xl px-4 py-4 text-white placeholder:text-zinc-800 focus:outline-none focus:border-emerald-500/50 transition-all font-mono text-base resize-none"
+                         />
+                         <ValidationError prefix="Message" field="message" errors={state.errors} />
+                       </div>
+                     </div>
+
+                     <button 
+                       type="submit"
+                       disabled={state.submitting}
+                       className="w-full bg-white text-black font-bold py-5 rounded-xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 group disabled:opacity-50"
+                     >
+                       {state.submitting ? (
+                         <span className="font-mono text-xs uppercase tracking-widest animate-pulse">Transmitting...</span>
+                       ) : (
+                         <>
+                           <span className="font-mono text-xs uppercase tracking-widest">INITIATE_TRANSMISSION</span>
+                           <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                         </>
+                       )}
+                     </button>
+                     
+                     {state.errors && <p className="text-red-500 text-xs text-center font-mono">Transmission Error. Check Inputs.</p>}
+                   </motion.form>
+                )}
+              </AnimatePresence>
+          </div>
+
         </div>
       </div>
     </section>
