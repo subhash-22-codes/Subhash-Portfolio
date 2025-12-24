@@ -102,7 +102,10 @@ const Resume: React.FC = () => {
       category: 'Competition',
       description: 'Secured 3rd place at HackAPTS 2025, a premier state-level hackathon for AP & TS students. Solved challenging real-world DSA problems under the theme of Innovation and Problem Solving.',
       impact: 'Ranked in the top 1% among 300+ participants.',
-      certificateLink: 'https://anits.pod.ai/pages/certificate/skgYfC',
+      link: 'https://anits.pod.ai/pages/certificate/skgYfC',
+      certificateLink: '/certificates/HackAPTS_Certificate.pdf',
+      linkType: "external",
+      hasLink: true,
       hasCredentials: true,
       profileImage: '/images/hackapts.jpg'
     },
