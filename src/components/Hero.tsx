@@ -42,8 +42,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[100dvh] flex flex-col justify-start md:justify-center bg-[#0a0a0a] text-white overflow-hidden px-6 sm:px-12 md:px-20 pt-28 pb-16 md:py-0">
-      {/* Texture Layer */}
+  
+<section className="relative min-h-[95svh] md:min-h-[100dvh] flex flex-col justify-center bg-[#0a0a0a] text-white overflow-hidden px-6 sm:px-12 md:px-20 py-10 md:py-0">
+
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       <div className="max-w-6xl mx-auto w-full space-y-8 sm:space-y-10 relative z-10">
