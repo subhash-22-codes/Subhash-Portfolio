@@ -1,175 +1,243 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Fingerprint, 
-  Cpu, 
-  Database, 
-  Layers, 
-  CheckCircle2, 
-  GraduationCap,
-  ArrowUpRight 
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const About: React.FC = () => {
-  // Engineering Profile Data
+  // PREMIUM MOTION: Slower durations (1.8s - 2.0s) for the "Weighted" feel
+  const revealLeft = {
+    initial: { opacity: 0, x: -40 },
+    whileInView: { 
+      opacity: 1, x: 0, 
+      transition: { duration: 2.0, ease: [0.16, 1, 0.3, 1], delay: 0.2 } 
+    },
+    exit: { opacity: 0, x: -20, transition: { duration: 0.8 } }
+  };
+
+  const revealRight = {
+    initial: { opacity: 0, x: 40 },
+    whileInView: { 
+      opacity: 1, x: 0, 
+      transition: { duration: 2.0, ease: [0.16, 1, 0.3, 1], delay: 0.4 } 
+    },
+    exit: { opacity: 0, x: 20, transition: { duration: 0.8 } }
+  };
+
+  const revealUp = {
+    initial: { opacity: 0, y: 40 },
+    whileInView: { 
+      opacity: 1, y: 0, 
+      transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1] } 
+    },
+    exit: { opacity: 0, y: 20, transition: { duration: 0.8 } }
+  };
+
+  const revealScale = {
+    initial: { opacity: 0, scale: 0.95, y: 20 },
+    whileInView: { 
+      opacity: 1, scale: 1, y: 0, 
+      transition: { duration: 3.0, ease: [0.16, 1, 0.3, 1] } 
+    },
+    exit: { opacity: 0, scale: 0.95, y: 10, transition: { duration: 0.8 } }
+  };
+
   const techStack = [
-    { category: "Back_End", details: "Python (FastAPI / Django), SQL Optimization" },
-    { category: "Front_End", details: "React + Vite, TypeScript, Tailwind CSS" },
-    { category: "Data_Systems", details: "PostgreSQL, MongoDB, Schema Design" },
-    { category: "Architecture", details: "Distributed Systems & API Logic" }
+    { category: "The Engine", details: "Python (FastAPI / Django), SQL Optimization" },
+    { category: "The Interface", details: "React + Vite, TypeScript, Tailwind CSS" },
+    { category: "Data Architecture", details: "PostgreSQL, MongoDB, Schema Design" },
+    { category: "Logic", details: "Distributed Systems & API Design" }
   ];
 
   return (
-    <section id="about" className="relative min-h-screen bg-[#020202] text-[#fdfdfd] selection:bg-zinc-500/30 py-12 lg:py-24 overflow-hidden">
-      
-      {/* 1. Structural Engineering Grid (EXACT MATCH TO HERO) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)] bg-[size:4rem_4rem] lg:bg-[size:6rem_6rem] pointer-events-none" />
+   <section id="about" className="relative bg-[#0a0a0a] text-white overflow-hidden px-6 md:px-16 py-12 md:py-24">
+      {/* Background Texture Overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      {/* Container aligned exactly with Hero for seamless scroll */}
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-24 relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* HEADER: Professional Identity */}
-        <div className="mb-12 lg:mb-20 space-y-4 border-l-2 border-zinc-900 pl-6 md:pl-10">
-          <motion.div 
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-3"
-          >
-            <Fingerprint size={16} className="text-zinc-500" />
-            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] text-zinc-600">Identity_Ref: 2026_GRAD</span>
-          </motion.div>
-          
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter text-white leading-[0.9] uppercase"
-          >
-            About<span className="text-zinc-800">.</span>Me
-          </motion.h2>
-        </div>
+        {/* SECTION HEADER: Deep Scale Reveal */}
+        <motion.div 
+          variants={revealScale}
+          initial="initial"
+          whileInView="whileInView"
+          exit="exit"
+          viewport={{ once: false, amount: 0.2 }}
+          className="mb-20"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <span className="w-12 h-[1px] bg-white/20"></span>
+            <span className="font-sans text-[11px] tracking-[0.4em] uppercase text-white/50">My Journey</span>
+          </div>
+          <h2 className="font-serif text-7xl md:text-9xl tracking-tightest leading-none">
+            About <span className="text-white/30 italic">Me.</span>
+          </h2>
+        </motion.div>
 
-        {/* FLUID BENTO GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* A. PRIMARY PROFILE (Academic Excellence) */}
+          {/* LEFT COLUMN: THE STORY (Weighted Slide from Left) */}
           <motion.div 
-            className="lg:col-span-8 bg-[#080808] border border-zinc-900 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 lg:p-14 hover:border-zinc-800 transition-colors duration-500 flex flex-col justify-between group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            variants={revealLeft}
+            initial="initial"
+            whileInView="whileInView"
+            exit="exit"
+            viewport={{ once: false, amount: 0.2 }}
+            className="lg:col-span-7 space-y-12"
           >
-            <div className="space-y-8 sm:space-y-12">
-              {/* Header Flex: College + GPA */}
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-10">
-                <div className="space-y-3 sm:space-y-4 flex-1">
-                  <div className="flex items-center gap-3 text-zinc-500">
-                    <GraduationCap size={22} className="text-zinc-400" />
-                    <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-zinc-500 line-clamp-1">
-                      Malla Reddy College of Eng. & Tech
-                    </span>
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-                    B.Tech in Computer Science
-                  </h3>
-                  <div className="inline-block px-3 py-1 bg-zinc-900/50 rounded-full border border-zinc-800/50">
-                     <p className="text-zinc-400 font-mono text-[10px] sm:text-xs uppercase tracking-wide">Expected: 2026</p>
-                  </div>
-                </div>
-                
-                {/* GPA Display - Consistent with Hero Visuals */}
-                <div className="w-full md:w-auto bg-gradient-to-br from-zinc-900 to-black border border-zinc-800 p-6 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center shadow-2xl relative overflow-hidden group-hover:border-zinc-700 transition-colors">
-                  <div className="absolute top-0 right-0 p-3 opacity-20">
-                     <CheckCircle2 size={40} />
-                  </div>
-                  <span className="text-zinc-500 text-[9px] uppercase tracking-[0.2em] mb-1">Cumulative_GPA</span>
-                  <span className="text-white font-mono font-bold text-4xl sm:text-5xl tracking-tighter">9.03</span>
-                </div>
-              </div>
-
-              {/* Bio Description */}
-              <p className="text-zinc-400 text-lg sm:text-xl lg:text-2xl leading-relaxed font-medium tracking-tight max-w-4xl border-l-2 border-zinc-800 pl-6">
-                I specialize in <span className="text-zinc-100">Pythonic backend architectures</span> and high-performance React systems. 
-                My focus is building <span className="text-zinc-100">scalable data logic</span> that translates into seamless, 
-                performant user experiences.
+            <div className="space-y-6">
+              <h3 className="font-sans text-2xl md:text-3xl font-medium text-white">
+                I'm a student who loves building the parts of apps you <span className="italic font-serif text-white/50 text-4xl">don't see</span>.
+              </h3>
+              <p className="font-sans text-lg text-white/50 leading-relaxed max-w-2xl">
+                Currently finishing my degree at <span className="text-white underline decoration-white/20 underline-offset-4">Malla Reddy College of Engineering & Technology</span>. 
+                I focus on making sure the "engine" of a website is fast, secure, and ready to grow. I don't just write code; I design systems that solve real problems.
               </p>
             </div>
 
-            {/* Competency Table */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 pt-12 mt-12 border-t border-zinc-900">
-              {techStack.map((spec, i) => (
-                <div key={i} className="space-y-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    <CheckCircle2 size={14} className="text-emerald-500/80" />
-                    <span className="text-[10px] font-mono uppercase text-zinc-600 tracking-widest">{spec.category}</span>
-                  </div>
-                  <div className="text-zinc-300 font-medium text-sm sm:text-base leading-snug">{spec.details}</div>
-                </div>
+            {/* TECH STACK LIST: Each item slowly rising */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/10">
+              {techStack.map((item, index) => (
+                <motion.div 
+                  key={index} 
+                  variants={revealUp}
+                  initial="initial"
+                  whileInView="whileInView"
+                  exit="exit"
+                  viewport={{ once: false }}
+                  transition={{ delay: 0.5 + (index * 0.15) }} // Delayed start to follow the bio
+                  className="space-y-2 group"
+                >
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/30 group-hover:text-white/60 transition-colors">
+                    {item.category}
+                  </span>
+                  <p className="font-sans text-white/80 font-medium">
+                    {item.details}
+                  </p>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* B. TECHNICAL FOCUS & CTA (Side Column) */}
-          <div className="lg:col-span-4 grid grid-cols-1 gap-6 lg:gap-8 h-full">
-            
-            {/* Logic Card */}
-            <motion.div 
-              className="bg-[#080808] border border-zinc-900 rounded-3xl sm:rounded-[2.5rem] p-8 sm:p-10 flex flex-col justify-between hover:border-zinc-700 transition-all h-full min-h-[300px]"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="space-y-8">
-                <div className="flex items-center gap-3 text-zinc-600">
-                  <Database size={18} />
-                  <span className="font-mono text-[10px] uppercase tracking-widest">Logic_Specialization</span>
-                </div>
-                
-                <div className="space-y-8">
-                  <div className="group cursor-default">
-                    <h5 className="text-white font-bold text-lg sm:text-xl group-hover:text-zinc-400 transition-colors tracking-tight">Backend Architecture</h5>
-                    <p className="text-[11px] text-zinc-600 font-mono uppercase mt-2">Scalable Systems & API Design</p>
-                  </div>
-                  <div className="w-12 h-[1px] bg-zinc-800" />
-                  <div className="group cursor-default">
-                    <h5 className="text-white font-bold text-lg sm:text-xl group-hover:text-zinc-400 transition-colors tracking-tight">Full Stack Flow</h5>
-                    <p className="text-[11px] text-zinc-600 font-mono uppercase mt-2">Vite + React Integration</p>
-                  </div>
-                </div>
-              </div>
+          {/* RIGHT COLUMN: THE LEDGER (Human-Centric & Minimalist) */}
+<div className="lg:col-span-5 self-center">
+  <div className="space-y-20 md:pl-12">
+    
+    {/* 1. EDUCATION & PERFORMANCE */}
+    <motion.div 
+      variants={revealRight}
+      initial="initial"
+      whileInView="whileInView"
+      exit="exit"
+      viewport={{ once: false, amount: 0.2 }}
+      className="relative"
+    >
+      {/* The Single Vertical Accent Line */}
+      <div className="absolute -left-8 top-0 bottom-0 w-[1px] bg-gradient-to-b from-white/20 via-transparent to-transparent" />
+      
+      <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-white/30 block mb-6">
+        Education
+      </span>
+      
+      <div className="space-y-2">
+        <h4 className="font-sans text-2xl md:text-3xl font-light tracking-tight text-white/90">
+          Computer Science & Engineering
+        </h4>
+        <p className="font-serif italic text-white/40 text-lg">
+          Malla Reddy College of Engineering & Technology• Class of 2026
+        </p>
+      </div>
 
-              <div className="mt-12 flex items-center justify-between opacity-40">
-                <div className="flex items-center gap-2">
-                  <Cpu size={14} className="text-zinc-400" />
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-zinc-500">System_Optimization</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* CTA Card - Navigation */}
-            <motion.div 
-              whileHover={{ scale: 0.98 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-white rounded-3xl sm:rounded-[2.5rem] p-8 sm:p-10 flex flex-col justify-between cursor-pointer group hover:bg-zinc-200 transition-all shadow-xl min-h-[280px]"
-            >
-              <div className="flex justify-between items-start">
-                <div className="p-4 bg-black rounded-2xl text-white">
-                  <Layers size={24} />
-                </div>
-                <ArrowUpRight className="text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" size={32} />
-              </div>
-              <h4 className="text-black text-2xl sm:text-3xl font-bold tracking-tighter leading-[0.9] uppercase mt-auto">
-                Analyze <br /> Development <br /> Archive.
-              </h4>
-            </motion.div>
+      <div className="mt-12 flex items-end gap-8">
+        <div>
+          <p className="text-[9px] font-sans uppercase tracking-[0.3em] text-white/20 mb-3">Academic Result</p>
+          <div className="flex items-baseline gap-2">
+            <p className="text-6xl md:text-7xl font-serif italic text-white tracking-tighter">9.00</p>
+            <span className="text-white/20 font-sans text-xs mb-2">CGPA</span>
           </div>
-
+        </div>
+        
+        <div className="mb-2">
+          <p className="text-[9px] font-sans uppercase tracking-[0.3em] text-white/20 mb-2">Current Focus</p>
+          <p className="text-xs font-sans font-bold uppercase tracking-[0.15em] text-emerald-400/80 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            Active Student
+          </p>
         </div>
       </div>
+    </motion.div>
+
+    {/* 2. PHILOSOPHY & NAVIGATION */}
+    <motion.div 
+      variants={revealRight}
+      initial="initial"
+      whileInView="whileInView"
+      exit="exit"
+      viewport={{ once: false, amount: 0.2 }}
+      transition={{ delay: 0.6 }}
+      className="relative"
+    >
+      <div className="absolute -left-8 top-0 bottom-0 w-[1px] bg-gradient-to-b from-white/20 via-transparent to-transparent" />
+      
+      <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-white/30 block mb-6">
+        My Approach
+      </span>
+      
+      <h4 className="font-serif text-4xl md:text-5xl leading-[1.2] tracking-tightest mb-10 text-white/90">
+        Building apps that <br /> 
+        <span className="text-white/30 italic font-light">actually matter.</span>
+      </h4>
+
+      <button 
+  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+  className="group relative flex items-center gap-6 bg-transparent border-none p-0 cursor-pointer outline-none"
+>
+  {/* THE TEXT: Clean, Bold, and Approachable */}
+  <div className="flex flex-col items-start overflow-hidden">
+    <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 group-hover:text-white transition-all duration-700 ease-[0.16, 1, 0.3, 1]">
+      See what I’ve built
+    </span>
+    
+    {/* THE MAGIC LINE: A soft, elegant glide that an HR would love */}
+    <div className="mt-3 relative w-12 h-[1px] bg-white/10 group-hover:w-24 transition-all duration-1000 ease-[0.16, 1, 0.3, 1]">
+      {/* This creates a soft 'shimmer' that moves across the line on hover */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+        initial={{ x: '-100%' }}
+        whileHover={{ x: '100%' }}
+        transition={{ duration: 1.2, ease: "easeInOut" }}
+      />
+    </div>
+  </div>
+
+  {/* THE ICON: A simple, minimal arrow that 'floats' into place */}
+  <motion.div
+    className="text-white/20 group-hover:text-white transition-colors duration-700"
+    whileHover={{ x: 8 }}
+    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+  >
+    <ArrowRight size={18} strokeWidth={1} />
+  </motion.div>
+</button>
+    </motion.div>
+
+  </div>
+</div>
+        </div>
+      </div>
+
+      {/* Aesthetic Detail (Fades in from left very slowly) */}
+      <motion.div 
+        variants={revealLeft}
+        initial="initial"
+        whileInView="whileInView"
+        exit="exit"
+        viewport={{ once: false }}
+        transition={{ delay: 1.2 }}
+        className="absolute left-12 bottom-12 hidden lg:block opacity-20"
+      >
+        <p className="font-mono text-[9px] tracking-[0.5em] uppercase text-white origin-left whitespace-nowrap">
+          Curious — Persistent — Focused
+        </p>
+      </motion.div>
     </section>
   );
 };

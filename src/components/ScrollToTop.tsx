@@ -28,17 +28,18 @@ const ScrollToTop: React.FC = () => {
   return (
     <AnimatePresence>
       {isVisible && (
-
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-4 right-4 z-50 p-3 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition-colors"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
+          // THE FIX: p-2.5 (smaller), transparent border, lower opacity
+          className="fixed bottom-6 right-6 z-50 p-2.5 bg-white/[0.03] hover:bg-white text-white/20 hover:text-black border border-white/5 hover:border-white rounded-xl backdrop-blur-md transition-all duration-500 group outline-none"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <ChevronUp size={24} />
+          {/* Smaller, thinner icon */}
+          <ChevronUp size={18} strokeWidth={1.5} className="group-hover:-translate-y-0.5 transition-transform duration-500" />
         </motion.button>
-
       )}
     </AnimatePresence>
   );
