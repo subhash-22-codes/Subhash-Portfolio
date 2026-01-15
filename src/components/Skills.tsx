@@ -54,9 +54,9 @@ const Skills: React.FC = () => {
     exit: { opacity: 0, scale: 0.95, y: 10, transition: { duration: 0.8 } }
   };
 
-  const skillGroups = [
+    const skillGroups = [
     { 
-      title: 'The Interface', 
+      title: 'Frontend', 
       icon: <Globe size={18} strokeWidth={1.5} />, 
       skills: [
         { name: 'React', icon: reactIcon },
@@ -68,7 +68,7 @@ const Skills: React.FC = () => {
       ]
     },
     { 
-      title: 'The Logic', 
+      title: 'Backend', 
       icon: <Cpu size={18} strokeWidth={1.5} />, 
       skills: [
         { name: 'Python', icon: pythonIcon },
@@ -79,7 +79,7 @@ const Skills: React.FC = () => {
       ]
     },
     { 
-      title: 'The Storage', 
+      title: 'Databases', 
       icon: <Database size={18} strokeWidth={1.5} />, 
       skills: [
         { name: 'PostgreSQL', icon: postgresIcon },
@@ -88,7 +88,7 @@ const Skills: React.FC = () => {
       ]
     },
     { 
-      title: 'The Ecosystem', 
+      title: 'Tooling', 
       icon: <Settings size={18} strokeWidth={1.5} />, 
       skills: [
         { name: 'Docker', icon: dockerIcon },
@@ -97,7 +97,7 @@ const Skills: React.FC = () => {
       ]
     },
     { 
-      title: 'The Reliability', 
+      title: 'Testing', 
       icon: <CheckCircle2 size={18} strokeWidth={1.5} />, 
       skills: [
         { name: 'PyTest', icon: pytestIcon },
@@ -133,7 +133,7 @@ const Skills: React.FC = () => {
           </motion.div>
 
         {/* THE SKILLS LEDGER */}
-        {/* THE SKILLS LEDGER */}
+  
 <div className="space-y-12 sm:space-y-16 md:space-y-24">
   {skillGroups.map((group, groupIdx) => (
     <div key={groupIdx} className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center border-t border-white/5 pt-12 sm:pt-16 group/row relative">
@@ -146,9 +146,6 @@ const Skills: React.FC = () => {
         </div>
         <div>
           <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl tracking-tight text-white/90">{group.title}</h3>
-          <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.35em] text-white/20 mt-2 sm:mt-3">
-            Knowledge // 0{groupIdx + 1}
-          </p>
         </div>
       </motion.div>
 

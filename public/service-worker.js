@@ -6,7 +6,7 @@ self.addEventListener("install", (event) => {
         "/",            // your homepage
         "/index.html",  // main file
         "/manifest.json",
-        "/favicon.ico",
+        "/favicon.png",
         "/logo192.png", // icons (replace with yours)
         "/logo512.png",
       ]);

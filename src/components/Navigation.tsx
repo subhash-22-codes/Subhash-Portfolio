@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { Home, User, Code2, Terminal, Mail } from 'lucide-react';
+import { Home, User, Mail,Layers, Folders } from 'lucide-react';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
-  { id: 'projects', label: 'Work', icon: Code2 },
-  { id: 'skills', label: 'Skills', icon: Terminal },
+  { id: 'projects', label: 'Work', icon: Folders },
+  { id: 'skills', label: 'Skills', icon: Layers },
   { id: 'contact', label: 'Contact', icon: Mail },
 ];
 

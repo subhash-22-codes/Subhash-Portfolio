@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
         >
           <div className="flex items-center gap-4 mb-6">
             <span className="w-12 h-[1px] bg-white/20"></span>
-            <span className="font-sans text-[11px] tracking-[0.4em] uppercase text-white/50">Connectivity</span>
+            <span className="font-sans text-[11px] tracking-[0.4em] uppercase text-white/50">Get in touch</span>
           </div>
           <h2 className="font-serif text-7xl md:text-9xl tracking-tightest leading-none">
             Let's <span className="text-white/30 italic">talk.</span>
@@ -87,10 +87,11 @@ const Contact: React.FC = () => {
               className="space-y-6"
             >
               <h3 className="font-serif text-3xl md:text-4xl italic text-white/80 leading-tight">
-                "I design logic that feels effortless."
+                If you’d like to talk or work together, feel free to reach out.
+"
               </h3>
-              <p className="font-sans text-xl text-white/40 leading-relaxed font-light max-w-sm">
-                Based in Hyderabad, building high-performance systems for the next generation of web applications.
+              <p className="font-sans text-l text-white/40 leading-relaxed font-light max-w-sm">
+                Based in Hyderabad, currently building and learning through real projects.
               </p>
             </motion.div>
 
@@ -105,7 +106,7 @@ const Contact: React.FC = () => {
                 {/* Email Section */}
                 <div onClick={handleCopyEmail} className="cursor-pointer">
                   <div className="flex justify-between items-center mb-6">
-                    <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-white/20">Direct Channel</span>
+                    <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-white/20">Email</span>
                     <AnimatePresence mode="wait">
                       {copied ? (
                         <motion.div key="copied" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2 text-white/60">
@@ -206,7 +207,7 @@ const Contact: React.FC = () => {
                       rows={3} 
                       value={formData.message} 
                       onChange={handleInputChange}
-                      placeholder="Share your vision..."
+                      placeholder="Write your message..."
                       className="w-full bg-transparent border-b border-white/10 py-4 text-white outline-none focus:outline-none font-sans text-base resize-none placeholder:text-white/10 transition-all duration-500"
                     />
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-700 ease-[0.16, 1, 0.3, 1] origin-center" />

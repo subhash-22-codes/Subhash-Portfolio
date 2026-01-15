@@ -38,41 +38,49 @@ const Projects: React.FC = () => {
       id: 1,
       title: 'DataPulse',
       category: 'fullstack',
-      description: "Enterprise-grade real-time telemetry and visualization engine. Supports multiple data sources with real-time alerts and modular workspace systems.",
-      tech: ["React", "TypeScript", "FastAPI", "PostgreSQL", "Celery", "Redis"],
+      description: 'Tracks how data evolves across versions and flags schema or structural changes before they cause issues.',
+      tech: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Celery', 'Redis', 'Docker'],
       github: 'coming soon', 
       demo: 'https://data-pulse-eight.vercel.app',   
       images: ['/images/dp1.png', '/images/dp2.png'],
+      timeline: 'July 2025 - present',
+      status: 'Production-deployed, actively developed',
     },
     {
       id: 2,
       title: 'Justice Genie',
       category: 'AI',
-      description: "AI-powered legal assistance platform providing real-time answers, legal quizzes, and case-based insights using multilingual NLP.",
+      description: 'Built to help people understand legal concepts through simple explanations, quizzes, and case-based examples.',
       tech: ["React", "Flask", "MongoDB", "Google GenAI", "Chart.js"],
       github: 'https://github.com/subhash-22-codes/Justice-Genie',
       demo: 'https://justice-genie-mu.vercel.app',
-      images: ['/images/jg2.png', '/images/jg3.png'],
+      images: ['/images/jg1.png', '/images/jg4.png'],
+      timeline: 'Mar 2024 to Oct 2024',
+      status: 'Live · Maintenance'
     },
     {
       id: 3,
       title: 'MemeGame',
       category: 'game',
-      description: "Real-time multiplayer meme challenge engine. Features rotating judges, dynamic scoring, and JWT-secured pipelines.",
-      tech: ["React", "Socket.io", "Node.js", "MongoDB", "Zustand"],
+      description: 'A real-time multiplayer game where players compete using memes, with live rounds, judges, and scoring.',
+      tech: ['React', 'Socket.io', 'Flask', 'MongoDB',  'Redis', 'Zustand'],
       github: 'https://github.com/subhash-22-codes/MemeGame',
       demo: '',
-      images: ['/images/meme1.png', '/images/meme2.png'],
+      images: ['/images/meme1.png', '/images/meme3.png','/images/meme5.png','/images/meme12.png','/images/meme15.png','/images/meme16.png'],
+      timeline: 'Jan 2025 to May 2025',
+      status: 'Near release',
     },
-    {
+   {
       id: 4,
       title: 'GTech DSA Series',
       category: 'Web',
-      description: "Educational distribution platform supporting 5k+ learners with 30+ structured LeetCode patterns.",
+      description: 'A structured DSA learning site focused on problem patterns and clear explanations for interview prep.',
       tech: ["React", "Tailwind CSS", "Lucide Icons", "Jest"],
       github: 'https://github.com/subhash-22-codes/Dsa_Placement_series',
       demo: 'https://gtechdsa.netlify.app',
       images: ['/images/gtech1.png', '/images/gtech2.png'],
+      timeline: 'Nov 2024 - Dec 2024',
+      status: 'Content expanding',
     },
   ];
 
@@ -118,9 +126,28 @@ const Projects: React.FC = () => {
                 viewport={{ once: false, amount: 0.2 }}
                 className="lg:col-span-6 space-y-8 order-2 lg:order-1"
               >
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/20">0{idx + 1} //</span>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/60">{project.category}</span>
+                {/* META ROW */}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/20">
+                    0{idx + 1} //
+                  </span>
+
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/70">
+                    {project.category}
+                  </span>
+
+                  <span className="font-mono text-[10px] text-white/20">·</span>
+
+                  <span className="font-mono text-[10px] tracking-widest text-white/40">
+                    {project.timeline}
+                  </span>
+
+                  <span className="font-mono text-[10px] text-white/20">·</span>
+
+                 <span className="font-mono text-[10px] uppercase tracking-widest text-white/60">
+                    {project.status}
+                  </span>
+
                 </div>
 
                 <h3 className="font-serif text-5xl md:text-7xl tracking-tighter text-white/90">
@@ -131,32 +158,35 @@ const Projects: React.FC = () => {
                   {project.description}
                 </p>
 
-                {/* TECH STACK: Restored with detailed borders */}
+                {/* TECH STACK */}
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map(t => (
-                    <span key={t} className="text-[9px] font-mono bg-white/[0.03] border border-white/10 px-3 py-1.5 rounded-sm text-white/50 tracking-wider">
+                    <span
+                      key={t}
+                      className="text-[9px] font-mono bg-white/[0.03] border border-white/10 px-3 py-1.5 rounded-sm text-white/50 tracking-wider"
+                    >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                {/* LINKS: Restored original circular and pill styles */}
+                {/* LINKS */}
                 <div className="flex items-center gap-4 pt-4">
                   {project.demo && (
-                    <a 
-                      href={project.demo} 
-                      target="_blank" 
-                      rel="noreferrer" 
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
                       className="px-8 h-12 rounded-full bg-white text-black font-sans text-[10px] font-bold tracking-widest flex items-center gap-2 hover:bg-zinc-200 transition-all duration-500"
                     >
                       Live link <ExternalLink size={14} />
                     </a>
                   )}
                   {project.github && project.github !== 'coming soon' && (
-                    <a 
-                      href={project.github} 
-                      target="_blank" 
-                      rel="noreferrer" 
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
                       className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:bg-white hover:text-black hover:border-white transition-all duration-500"
                     >
                       <Github size={18} strokeWidth={1.5} />
@@ -164,6 +194,7 @@ const Projects: React.FC = () => {
                   )}
                 </div>
               </motion.div>
+
 
               {/* RIGHT: REFINED IMAGE BOX (Reduced Size to lg:col-span-5) */}
               <motion.div
