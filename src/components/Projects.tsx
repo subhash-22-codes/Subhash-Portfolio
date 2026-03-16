@@ -65,7 +65,7 @@ const Projects: React.FC = () => {
       description: 'A real-time multiplayer game where players compete using memes, with live rounds, judges, and scoring.',
       tech: ['React', 'Socket.io', 'Flask', 'MongoDB',  'Redis', 'Zustand'],
       github: 'https://github.com/subhash-22-codes/MemeGame',
-      demo: '',
+      demo: 'https://meme-game-six.vercel.app',
       images: ['/images/meme1.png', '/images/meme3.png','/images/meme5.png','/images/meme12.png','/images/meme15.png','/images/meme16.png'],
       timeline: 'Jan 2025 to May 2025',
       status: 'Near release',
